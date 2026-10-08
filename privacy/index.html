@@ -1,71 +1,215 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rookwise privacy policy</title>
-<link rel="icon" href="../icon-512.png">
-<style>
-:root { color-scheme: light dark; --bg:#F6F7F9; --card:#FFFFFF; --text:#1A1D23; --muted:#5B6270; --accent:#4E7F2E; --border:#E2E5EA; }
-@media (prefers-color-scheme: dark) { :root { --bg:#0F1216; --card:#181C22; --text:#E8EAEE; --muted:#9AA3B2; --accent:#8BC34A; --border:#2A3039; } }
-* { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif; }
-main { max-width:720px; margin:0 auto; padding:32px 16px 64px; }
-article { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:28px 24px; }
-h1 { font-size:1.7rem; line-height:1.25; margin:0 0 4px; }
-h2 { font-size:1.15rem; margin:28px 0 8px; color:var(--accent); }
-em { color:var(--muted); font-style:normal; font-size:.9rem; }
-ul { padding-left:1.2rem; } li { margin:6px 0; }
-a { color:var(--accent); overflow-wrap:anywhere; }
-.brand { display:flex; align-items:center; gap:10px; margin-bottom:16px; font-weight:700; }
-.brand img { width:36px; height:36px; border-radius:9px; }
-</style>
-</head>
-<body>
-<main>
-<div class="brand"><img src="../icon-512.png" alt=""> Rookwise</div>
-<article>
-<h1>Rookwise — Privacy policy</h1>
-<p><em>Last updated: 8 October 2026</em></p>
-<p>Rookwise is a chess app that works on your phone. We don't run servers that store your data and we don't show ads. Anonymous usage statistics are off unless you turn them on.</p>
-<h2>What stays on your device</h2>
-<p>Your games, analyses, puzzles, training progress, notes and settings are stored only on your phone. The chess engine (Stockfish) runs on your phone. Uninstalling the app deletes this data.</p>
-<h2>Data you choose to share with chess sites</h2>
-<ul>
-<li><strong>Lichess:</strong> if you sign in, Rookwise receives a token from Lichess (stored encrypted on your device) and uses it to read your profile, import your finished games and, only if you turn on backup, save games to a private Lichess Study. Rookwise never asks for access to games in progress.</li>
-<li><strong>Chess.com:</strong> if you link a username, Rookwise downloads that account's public games and profile from Chess.com's public API. No password is involved.</li>
-<li><strong>Live broadcasts:</strong> the Broadcasts screen loads public tournament data from Lichess and the list of live streamers from Chess.com.</li>
-</ul>
-<p>These requests go directly from your phone to Lichess or Chess.com; their own privacy policies apply.</p>
-<h2>Optional usage statistics</h2>
-<p>Usage statistics are <strong>off by default</strong>. If you choose <strong>Allow</strong> when the app asks, or turn them on in Settings, Rookwise sends anonymous usage events to Google Analytics for Firebase so we can see which features are used and where the app needs work.</p>
-<ul>
-<li><strong>What is sent:</strong> which screens and features you use (for example "game reviewed" or "puzzle solved"), the app version and language, the device model and Android version, a random app-instance ID, and an approximate country derived from your IP address.</li>
-<li><strong>What is never sent:</strong> your games, moves or PGNs, analyses, notes, puzzles, photos or screenshots, Lichess or Chess.com usernames or tokens, or your advertising ID.</li>
-<li><strong>Who receives it:</strong> Google, as our analytics provider (<a href="https://policies.google.com/privacy">Google's privacy policy</a>). The statistics are kept for 2 months.</li>
-<li><strong>Turning it off:</strong> switch it off in Settings at any time. Sending stops immediately and the app-instance ID is reset.</li>
-</ul>
-<h2>Permissions</h2>
-<ul>
-<li><strong>Camera / photos:</strong> to read a chessboard from a photo or screenshot you take or choose. Images are processed on the device and not uploaded.</li>
-<li><strong>Display over other apps, screen capture (optional overlay):</strong> to draw analysis over a stream or video you're watching. Only the board area you select is read, on the device; nothing is recorded or uploaded.</li>
-<li><strong>Usage access (optional overlay):</strong> to detect when a chess-playing app is open so engine help pauses during live games.</li>
-<li><strong>Notifications (optional):</strong> daily puzzle reminder and broadcast alerts.</li>
-<li><strong>Internet:</strong> for the Lichess and Chess.com features above and, if you turn them on, usage statistics.</li>
-</ul>
-<h2 id="delete">Delete your data</h2>
-<p>Rookwise has no accounts and no servers of its own, so there is nothing to request from us by email: you can delete everything yourself, at any time.</p>
-<ol>
-<li><strong>Usage statistics (if you turned them on):</strong> in Rookwise, open <strong>Settings</strong> and switch off <strong>Share anonymous usage statistics</strong>. Sending stops immediately and the random app-instance ID is reset, so earlier statistics can no longer be linked to you. Google deletes the statistics already collected after 2 months.</li>
-<li><strong>Games, analyses, puzzles and progress on your phone:</strong> open <strong>Profile &rarr; Data</strong> and tap <strong>Clear game library</strong> and <strong>Reset settings</strong>, or simply uninstall Rookwise, which deletes all of its data from the device.</li>
-<li><strong>Lichess and Chess.com links:</strong> on the Profile screen tap <strong>Sign out of Lichess</strong> (removes the Lichess token from your phone) or <strong>Unlink Chess.com</strong>. Games you backed up to a private Lichess Study stay in your Lichess account; delete that study on lichess.org if you no longer want it.</li>
-</ol>
-<p>Nothing is kept after these steps, except statistics already sent to Google, which are deleted after 2 months. Questions or help: <a href="mailto:rajkumar30598@gmail.com">rajkumar30598@gmail.com</a>.</p>
-<h2>Children</h2>
-<p>Rookwise does not knowingly collect personal information from children. Usage statistics are off by default and, when turned on, contain no names, accounts or game data.</p>
-<h2>Contact</h2>
-<p>Questions: <a href="mailto:rajkumar30598@gmail.com">rajkumar30598@gmail.com</a></p>
-</article>
-</main>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rookwise privacy policy</title>
+    <link rel="icon" href="../icon-512.png" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f7f9;
+        --card: #ffffff;
+        --text: #1a1d23;
+        --muted: #5b6270;
+        --accent: #4e7f2e;
+        --border: #e2e5ea;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0f1216;
+          --card: #181c22;
+          --text: #e8eaee;
+          --muted: #9aa3b2;
+          --accent: #8bc34a;
+          --border: #2a3039;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          16px/1.6 -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          Inter,
+          sans-serif;
+      }
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 32px 16px 64px;
+      }
+      article {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px 24px;
+      }
+      h1 {
+        font-size: 1.7rem;
+        line-height: 1.25;
+        margin: 0 0 4px;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin: 28px 0 8px;
+        color: var(--accent);
+      }
+      em {
+        color: var(--muted);
+        font-style: normal;
+        font-size: 0.9rem;
+      }
+      ul {
+        padding-left: 1.2rem;
+      }
+      li {
+        margin: 6px 0;
+      }
+      a {
+        color: var(--accent);
+        overflow-wrap: anywhere;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        font-weight: 700;
+      }
+      .brand img {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="brand"><img src="../icon-512.png" alt="" /> Rookwise</div>
+      <article>
+        <h1>Rookwise — Privacy policy</h1>
+        <p><em>Last updated: 8 October 2026</em></p>
+        <p>
+          Rookwise is a chess app that works on your phone. We don't run servers that store your
+          data and we don't show ads. Anonymous usage statistics are off unless you turn them on.
+        </p>
+        <h2>What stays on your device</h2>
+        <p>
+          Your games, analyses, puzzles, training progress, notes and settings are stored only on
+          your phone. The chess engine (Stockfish) runs on your phone. Uninstalling the app deletes
+          this data.
+        </p>
+        <h2>Data you choose to share with chess sites</h2>
+        <ul>
+          <li>
+            <strong>Lichess:</strong> if you sign in, Rookwise receives a token from Lichess (stored
+            encrypted on your device) and uses it to read your profile, import your finished games
+            and, only if you turn on backup, save games to a private Lichess Study. Rookwise never
+            asks for access to games in progress.
+          </li>
+          <li>
+            <strong>Chess.com:</strong> if you link a username, Rookwise downloads that account's
+            public games and profile from Chess.com's public API. No password is involved.
+          </li>
+          <li>
+            <strong>Live broadcasts:</strong> the Broadcasts screen loads public tournament data
+            from Lichess and the list of live streamers from Chess.com.
+          </li>
+        </ul>
+        <p>
+          These requests go directly from your phone to Lichess or Chess.com; their own privacy
+          policies apply.
+        </p>
+        <h2>Optional usage statistics</h2>
+        <p>
+          Usage statistics are <strong>off by default</strong>. If you choose
+          <strong>Allow</strong> when the app asks, or turn them on in Settings, Rookwise sends
+          anonymous usage events to Google Analytics for Firebase so we can see which features are
+          used and where the app needs work.
+        </p>
+        <ul>
+          <li>
+            <strong>What is sent:</strong> which screens and features you use (for example "game
+            reviewed" or "puzzle solved"), the app version and language, the device model and
+            Android version, a random app-instance ID, and an approximate country derived from your
+            IP address.
+          </li>
+          <li>
+            <strong>What is never sent:</strong> your games, moves or PGNs, analyses, notes,
+            puzzles, photos or screenshots, Lichess or Chess.com usernames or tokens, or your
+            advertising ID.
+          </li>
+          <li>
+            <strong>Who receives it:</strong> Google, as our analytics provider (<a
+              href="https://policies.google.com/privacy"
+              >Google's privacy policy</a
+            >). The statistics are kept for 2 months.
+          </li>
+          <li>
+            <strong>Turning it off:</strong> switch it off in Settings at any time. Sending stops
+            immediately and the app-instance ID is reset.
+          </li>
+        </ul>
+        <h2>Permissions</h2>
+        <ul>
+          <li>
+            <strong>Camera / photos:</strong> to read a chessboard from a photo or screenshot you
+            take or choose. Images are processed on the device and not uploaded.
+          </li>
+          <li>
+            <strong>Notifications (optional):</strong> daily puzzle reminder and broadcast alerts.
+          </li>
+          <li>
+            <strong>Internet:</strong> for the Lichess and Chess.com features above and, if you turn
+            them on, usage statistics.
+          </li>
+        </ul>
+        <h2 id="delete">Delete your data</h2>
+        <p>
+          Rookwise has no accounts and no servers of its own, so there is nothing to request from us
+          by email: you can delete everything yourself, at any time.
+        </p>
+        <ol>
+          <li>
+            <strong>Usage statistics (if you turned them on):</strong> in Rookwise, open
+            <strong>Settings</strong> and switch off
+            <strong>Share anonymous usage statistics</strong>. Sending stops immediately and the
+            random app-instance ID is reset, so earlier statistics can no longer be linked to you.
+            Google deletes the statistics already collected after 2 months.
+          </li>
+          <li>
+            <strong>Games, analyses, puzzles and progress on your phone:</strong> open
+            <strong>Profile &rarr; Data</strong> and tap <strong>Clear game library</strong> and
+            <strong>Reset settings</strong>, or simply uninstall Rookwise, which deletes all of its
+            data from the device.
+          </li>
+          <li>
+            <strong>Lichess and Chess.com links:</strong> on the Profile screen tap
+            <strong>Sign out of Lichess</strong> (removes the Lichess token from your phone) or
+            <strong>Unlink Chess.com</strong>. Games you backed up to a private Lichess Study stay
+            in your Lichess account; delete that study on lichess.org if you no longer want it.
+          </li>
+        </ol>
+        <p>
+          Nothing is kept after these steps, except statistics already sent to Google, which are
+          deleted after 2 months. Questions or help:
+          <a href="mailto:rajkumar30598@gmail.com">rajkumar30598@gmail.com</a>.
+        </p>
+        <h2>Children</h2>
+        <p>
+          Rookwise does not knowingly collect personal information from children. Usage statistics
+          are off by default and, when turned on, contain no names, accounts or game data.
+        </p>
+        <h2>Contact</h2>
+        <p>Questions: <a href="mailto:rajkumar30598@gmail.com">rajkumar30598@gmail.com</a></p>
+      </article>
+    </main>
+  </body>
 </html>
