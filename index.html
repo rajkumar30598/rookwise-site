@@ -14,6 +14,10 @@
 <meta property="og:image" content="https://rajkumar30598.github.io/rookwise-site/img/og.jpg">
 <meta property="og:url" content="https://rajkumar30598.github.io/rookwise-site/">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Rookwise","alternateName":"Rookwise: Chess Coach & Review","operatingSystem":"Android","applicationCategory":"GameApplication","description":"Learn chess, review your games like a coach, train on puzzles from your own mistakes and play the Rookwise Bot. Free, no ads, works offline.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"image":"https://rajkumar30598.github.io/rookwise-site/icon-512.png","url":"https://rajkumar30598.github.io/rookwise-site/","inLanguage":["en","hi","ta","es","pt","ru","de","fr","tr","id","it","ja","ko","bn"]}
+</script>
+<link rel="canonical" href="https://rajkumar30598.github.io/rookwise-site/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -300,15 +304,66 @@ footer .copy { margin-left: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .rv, .split .w > span { opacity: 1; transform: none; }
 }
+
+/* ── Your turn: playable puzzles ─────────────────── */
+.play { background: radial-gradient(1200px 600px at 80% 30%, rgba(129, 182, 76, .12), transparent 60%), var(--ink-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.play .grid2 { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 120px); align-items: center; }
+@media (max-width: 960px) { .play .grid2 { grid-template-columns: minmax(0, 1fr); } }
+.plist { display: grid; gap: 10px; margin-top: 36px; }
+.pitem { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 16px 18px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255, 255, 255, .02); color: var(--text); font: 600 16px var(--sans); cursor: pointer; transition: background .25s, border-color .25s, transform .25s; }
+.pitem:hover { background: rgba(255, 255, 255, .05); transform: translateX(4px); }
+.pitem[aria-current="true"] { border-color: var(--green); background: rgba(129, 182, 76, .1); }
+.pitem .n { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--ink-3); font: 700 14px var(--mono); color: var(--muted); }
+.pitem[aria-current="true"] .n { background: var(--green); color: #0E1A05; }
+.pitem .meta { flex: 1; }
+.pitem small { display: block; font: 500 13px var(--mono); color: var(--muted); margin-top: 2px; }
+.pitem .tick { opacity: 0; color: var(--green); font-size: 20px; transition: opacity .3s; }
+.pitem.solved .tick { opacity: 1; }
+.pboard-wrap { position: relative; width: min(560px, 100%); justify-self: center; }
+.ptop { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 15px; color: var(--muted); }
+.ptop .turn { width: 14px; height: 14px; border-radius: 50%; background: #F4F3EE; box-shadow: 0 0 0 2px rgba(255, 255, 255, .2); }
+.ptop b { color: var(--text); }
+.pboard { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; touch-action: none; user-select: none; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .06); cursor: pointer; }
+.pboard.shake { animation: shake .42s; }
+@keyframes shake { 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
+.pboard .sq.sel { box-shadow: inset 0 0 0 999px rgba(129, 182, 76, .55); }
+.pboard .sq.hint { animation: hintpulse 1.1s ease-in-out 3; }
+@keyframes hintpulse { 50% { box-shadow: inset 0 0 0 999px rgba(242, 179, 61, .75); } }
+.pboard .dot { position: absolute; width: 12.5%; height: 12.5%; display: grid; place-items: center; pointer-events: none; z-index: 2; }
+.pboard .dot::after { content: ""; width: 30%; height: 30%; border-radius: 50%; background: rgba(20, 30, 10, .28); }
+.pboard .dot.cap::after { width: 86%; height: 86%; background: none; border: 5px solid rgba(20, 30, 10, .28); }
+.pboard .pc.drag { z-index: 5; transition: none; filter: drop-shadow(0 12px 10px rgba(0, 0, 0, .35)); }
+.pcoach { margin-top: 18px; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: var(--ink-3); border: 1px solid var(--line); min-height: 78px; transition: border-color .3s; }
+.pcoach.good { border-color: rgba(129, 182, 76, .6); }
+.pcoach.bad { border-color: rgba(224, 91, 75, .6); }
+.pcoach .av { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; color: #fff; background: #4A4F55; transition: background .3s; }
+.pcoach .t { font-weight: 700; }
+.pcoach .s { color: var(--muted); font-size: 15px; margin-top: 2px; }
+.pbtns { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.pbtn { padding: 11px 18px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 600 15px var(--sans); cursor: pointer; transition: background .2s, border-color .2s; }
+.pbtn:hover { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .25); }
+.pbtn.primary { background: var(--green); border-color: var(--green); color: #0E1A05; }
+.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 6; }
+.confetti i { position: absolute; top: 45%; left: 50%; width: 10px; height: 14px; border-radius: 2px; animation: burst 1.3s cubic-bezier(.15, .7, .3, 1) forwards; }
+@keyframes burst { to { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; } }
+
+/* ── Polish: progress bar, spotlight ─────────────── */
+.progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 60; background: linear-gradient(90deg, var(--green), var(--green-2)); transform-origin: 0 50%; transform: scaleX(0); }
+.tile, .pgrid > div, .chapter li, .pitem { --mx: 50%; --my: 50%; }
+.tile::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s; background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, .55), transparent 45%); mix-blend-mode: soft-light; }
+.tile:hover::before { opacity: 1; }
+.t-960::before { background: radial-gradient(420px circle at var(--mx) var(--my), rgba(163, 209, 110, .28), transparent 45%); mix-blend-mode: normal; }
 </style>
 </head>
 <body>
 
+<div class="progress" id="progress" aria-hidden="true"></div>
 <nav id="nav">
   <div class="inner">
     <a class="logo" href="#top"><img src="icon-512.png" alt=""> Rookwise</a>
     <div class="links">
       <a href="#story">The app</a>
+      <a href="#try">Try a puzzle</a>
       <a href="#new">What's new</a>
       <a href="#privacy">Privacy</a>
       <a href="#faq">FAQ</a>
@@ -422,6 +477,24 @@ footer .copy { margin-left: auto; }
           <img src="img/2-bot-vs-bot.jpg" alt="">
         </div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Your turn ── -->
+<section class="play" id="try">
+  <div class="inner grid2">
+    <div>
+      <div class="label rv">Your turn</div>
+      <h2 class="split" data-split>Find the <span class="serif">winning move.</span></h2>
+      <p class="rv" style="--d:.15s;color:var(--muted);font-size:19px;max-width:520px;margin:22px 0 0">Four real puzzles, right here. Tap a piece, then its square (or drag it). This is how Rookwise turns the mistakes in your own games into training.</p>
+      <div class="plist rv" style="--d:.25s" id="plist"></div>
+    </div>
+    <div class="pboard-wrap rv" style="--d:.15s">
+      <div class="ptop"><span class="turn"></span><span><b>White to move</b> · <span id="pgoal">mate in 2</span></span></div>
+      <div class="pboard" id="pboard" role="application" aria-label="Puzzle board"></div>
+      <div class="pcoach" id="pcoach" aria-live="polite"><div class="av" id="pav">?</div><div><div class="t" id="pt">Your move.</div><div class="s" id="ps">Look for checks first.</div></div></div>
+      <div class="pbtns"><button class="pbtn" id="phint" type="button">Hint</button><button class="pbtn" id="preset" type="button">Try again</button><button class="pbtn primary" id="pnext" type="button">Next puzzle →</button></div>
     </div>
   </div>
 </section>
@@ -553,6 +626,7 @@ footer .copy { margin-left: auto; }
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -848,6 +922,184 @@ footer .copy { margin-left: auto; }
     setTimeout(() => { el.textContent = lines[++li % lines.length]; el.style.opacity = 1; }, 300);
   }, 2600);
   $('#bookline').style.transition = 'opacity .3s';
+
+  /* ── Your turn: playable puzzles (chess.js checks every move) ── */
+  const PUZZLES = [
+    { name: 'Morphy, Paris 1858', goal: 'mate in 2', fen: '4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 0 16', line: ['b3b8', 'd7b8', 'd1d8'], hint: 'Your queen can give check, even if it can be taken.', win: 'The queen sacrifice from the Opera Game.' },
+    { name: 'Back-rank mate', goal: 'mate in 1', fen: '6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1', line: ['d1d8'], hint: 'The black king is boxed in by its own pawns.', win: 'The king had no escape square: a back-rank mate.' },
+    { name: 'Smothered mate', goal: 'mate in 1', fen: '6rk/6pp/8/6N1/8/8/8/6K1 w - - 0 1', line: ['g5f7'], hint: 'Only the knight can reach a king surrounded by its own pieces.', win: 'Smothered: the king is trapped by its own pieces.' },
+    { name: "Légal's mate", goal: 'mate in 2', fen: 'r2qkbnr/ppp2ppp/2np4/4N3/2B1P3/2N4P/PPPP1PP1/R1BbK2R w KQkq - 0 7', line: ['c4f7', 'e8e7', 'c3d5'], hint: 'Start with a check on f7.', win: 'Légal’s mate: the queen was a decoy.' },
+  ];
+  const pboard = $('#pboard'), plist = $('#plist');
+  let pIndex = 0, pGame = null, pStep = 0, pBusy = false, pSel = null, pDrag = null;
+  const solved = new Set();
+  for (let r = 0; r < 8; r++) for (let f = 0; f < 8; f++) {
+    const d = document.createElement('div');
+    d.className = 'sq ' + ((r + f) % 2 ? 'd' : 'l');
+    d.style.left = f * 12.5 + '%'; d.style.top = r * 12.5 + '%';
+    d.dataset.sq = files[f] + (8 - r);
+    pboard.append(d);
+  }
+  let pPieces = new Map();
+  function pDraw() {
+    pPieces.forEach((el) => el.remove()); pPieces = new Map();
+    $$('.dot', pboard).forEach((d) => d.remove());
+    pGame.board().forEach((row, r) => row.forEach((cell, f) => {
+      if (!cell) return;
+      const sq = files[f] + (8 - r);
+      const el = document.createElement('div'); el.className = 'pc';
+      el.innerHTML = `<img src="img/pieces/${cell.color}${cell.type.toUpperCase()}.png" alt="" draggable="false">`;
+      const p = at(sq); el.style.transform = `translate(${p.x}%, ${p.y}%)`;
+      pboard.append(el); pPieces.set(sq, el);
+    }));
+  }
+  function pMark(cls, squares) {
+    $$('.sq.' + cls, pboard).forEach((s) => s.classList.remove(cls));
+    squares.forEach((sq) => $(`.sq[data-sq="${sq}"]`, pboard).classList.add(cls));
+  }
+  function pSay(kind, title, text) {
+    const c = $('#pcoach'), av = $('#pav');
+    c.classList.toggle('good', kind === 'good' || kind === 'win');
+    c.classList.toggle('bad', kind === 'bad');
+    av.style.background = kind === 'win' ? '#26C2A3' : kind === 'good' ? '#81B64C' : kind === 'bad' ? '#E05B4B' : '#4A4F55';
+    av.textContent = kind === 'win' ? '!!' : kind === 'good' ? '★' : kind === 'bad' ? '?' : '?';
+    $('#pt').textContent = title; $('#ps').textContent = text;
+  }
+  function pSelect(sq) {
+    pSel = sq;
+    $$('.dot', pboard).forEach((d) => d.remove());
+    pMark('sel', sq ? [sq] : []);
+    if (!sq) return;
+    pGame.moves({ square: sq, verbose: true }).forEach((m) => {
+      const d = document.createElement('div'); d.className = 'dot' + (m.captured ? ' cap' : '');
+      const p = at(m.to); d.style.transform = `translate(${p.x}%, ${p.y}%)`; pboard.append(d);
+    });
+  }
+  function load(i) {
+    pIndex = i; pStep = 0; pBusy = false; pSel = null;
+    const pz = PUZZLES[i];
+    pGame = new Chess(pz.fen);
+    pDraw(); pMark('hl', []); pMark('sel', []); pMark('hint', []);
+    $('#pgoal').textContent = pz.goal;
+    pSay('idle', `${pz.name} · ${pz.goal}`, 'White to move. Look for checks first.');
+    $$('.pitem', plist).forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
+  }
+  function animate(from, to) {
+    const mover = pPieces.get(from); const victim = pPieces.get(to);
+    if (victim && victim !== mover) victim.classList.add('gone');
+    if (mover) { const p = at(to); mover.classList.remove('drag'); mover.style.transform = `translate(${p.x}%, ${p.y}%)`; mover.style.zIndex = 2; }
+  }
+  function tryMove(from, to) {
+    if (pBusy) return false;
+    const pz = PUZZLES[pIndex];
+    const legal = pGame.moves({ square: from, verbose: true }).find((m) => m.to === to);
+    if (!legal) return false;
+    const want = pz.line[pStep];
+    pSelect(null);
+    if (from + to !== want.slice(0, 4)) {
+      pBusy = true;
+      animate(from, to); sound.play(legal.captured ? 'capture' : 'move');
+      pSay('bad', `${legal.san} isn't the one`, 'There’s a stronger move here. Try again.');
+      setTimeout(() => { pboard.classList.add('shake'); }, 300);
+      setTimeout(() => { pboard.classList.remove('shake'); pDraw(); pBusy = false; }, 800);
+      return true;
+    }
+    const m = pGame.move({ from, to, promotion: 'q' });
+    animate(from, to); pMark('hl', [from, to]);
+    sound.play(soundFor(m.san, !!m.captured));
+    pStep++;
+    if (pStep >= pz.line.length) {
+      solved.add(pIndex); $$('.pitem', plist)[pIndex].classList.add('solved');
+      pSay('win', `Brilliant!! ${m.san}`, pz.win + ' Rookwise makes puzzles like this from your own games.');
+      setTimeout(() => { pDraw(); confetti(); }, 430);
+      pBusy = true;
+      return true;
+    }
+    pSay('good', `Best ★ ${m.san}`, 'Now Black has only one reply…');
+    pBusy = true;
+    setTimeout(() => {
+      pDraw();
+      const reply = pz.line[pStep];
+      const r = pGame.move({ from: reply.slice(0, 2), to: reply.slice(2, 4), promotion: 'q' });
+      animate(r.from, r.to); pMark('hl', [r.from, r.to]); sound.play(soundFor(r.san, !!r.captured));
+      pStep++;
+      setTimeout(() => { pDraw(); pBusy = false; pSay('good', `${r.san}. Your move.`, 'Finish it.'); }, 450);
+    }, 900);
+    return true;
+  }
+  function confetti() {
+    if (reduce) return;
+    const box = document.createElement('div'); box.className = 'confetti';
+    const colours = ['#81B64C', '#A3D16E', '#F2B33D', '#EEEED2', '#26C2A3'];
+    for (let i = 0; i < 46; i++) {
+      const c = document.createElement('i');
+      c.style.background = colours[i % colours.length];
+      c.style.setProperty('--x', (Math.random() * 520 - 260) + 'px');
+      c.style.setProperty('--y', (Math.random() * -380 + 120) + 'px');
+      c.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
+      c.style.animationDelay = Math.random() * .12 + 's';
+      box.append(c);
+    }
+    pboard.append(box); setTimeout(() => box.remove(), 1600);
+  }
+  const squareAt = (x, y) => {
+    const r = pboard.getBoundingClientRect();
+    const f = Math.floor(((x - r.left) / r.width) * 8), rk = Math.floor(((y - r.top) / r.height) * 8);
+    return f < 0 || f > 7 || rk < 0 || rk > 7 ? null : files[f] + (8 - rk);
+  };
+  pboard.addEventListener('pointerdown', (e) => {
+    if (pBusy || !pGame) return;
+    const sq = squareAt(e.clientX, e.clientY); if (!sq) return;
+    const piece = pGame.get(sq);
+    if (pSel && pSel !== sq && (!piece || piece.color !== pGame.turn())) { if (!tryMove(pSel, sq)) pSelect(null); return; }
+    if (piece && piece.color === pGame.turn()) {
+      pSelect(sq);
+      pDrag = { sq, el: pPieces.get(sq), moved: false };
+      pboard.setPointerCapture(e.pointerId);
+    }
+  });
+  pboard.addEventListener('pointermove', (e) => {
+    if (!pDrag) return;
+    const r = pboard.getBoundingClientRect(), cell = r.width / 8;
+    pDrag.moved = true; pDrag.el.classList.add('drag');
+    pDrag.el.style.transform = `translate(${((e.clientX - r.left - cell / 2) / cell) * 100}%, ${((e.clientY - r.top - cell / 2) / cell) * 100}%)`;
+  });
+  pboard.addEventListener('pointerup', (e) => {
+    if (!pDrag) return;
+    const d = pDrag; pDrag = null;
+    if (!d.moved) return;
+    const to = squareAt(e.clientX, e.clientY);
+    if (!to || to === d.sq || !tryMove(d.sq, to)) { d.el.classList.remove('drag'); const p = at(d.sq); d.el.style.transform = `translate(${p.x}%, ${p.y}%)`; }
+  });
+  $('#phint').addEventListener('click', () => {
+    const pz = PUZZLES[pIndex]; if (pStep >= pz.line.length) return;
+    pMark('hint', [pz.line[pStep].slice(0, 2)]);
+    pSay('idle', 'Hint', pz.hint);
+  });
+  $('#preset').addEventListener('click', () => load(pIndex));
+  $('#pnext').addEventListener('click', () => load((pIndex + 1) % PUZZLES.length));
+  PUZZLES.forEach((pz, i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'pitem';
+    b.innerHTML = `<span class="n">${i + 1}</span><span class="meta">${pz.name}<small>${pz.goal}</small></span><span class="tick">✓</span>`;
+    b.addEventListener('click', () => load(i)); plist.append(b);
+  });
+  if (window.Chess) load(0); else pSay('bad', 'Puzzles need JavaScript', 'Reload the page to try them.');
+
+  /* ── Polish: reading progress, card spotlight, magnetic buttons ── */
+  const bar = $('#progress');
+  const onProgress = () => { const max = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`; };
+  addEventListener('scroll', onProgress, { passive: true }); onProgress();
+  $$('.tile').forEach((el) => el.addEventListener('pointermove', (e) => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', e.clientX - r.left + 'px'); el.style.setProperty('--my', e.clientY - r.top + 'px');
+  }));
+  if (!reduce && matchMedia('(pointer: fine)').matches) $$('.btn-green, .nav-cta, .final .btn').forEach((b) => {
+    b.addEventListener('pointermove', (e) => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px, ${(e.clientY - r.top - r.height / 2) * .28}px)`;
+    });
+    b.addEventListener('pointerleave', () => (b.style.transform = ''));
+  });
 
   /* Reel loops seamlessly: duplicate its frames once. */
   const reel = $('#reel'); [...reel.children].forEach((f) => reel.append(f.cloneNode(true)));
