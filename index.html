@@ -7,7 +7,7 @@
 <meta name="description" content="Learn chess, review your games like a coach, train on puzzles from your own mistakes and play the Rookwise Bot. Free, no ads, works offline. The engine runs on your phone.">
 <link rel="icon" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-512.png">
-<meta name="theme-color" content="#1B1F24">
+<meta name="theme-color" content="#131619">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rookwise · Your pocket chess coach">
 <meta property="og:description" content="Learn chess, review your games and train on your own mistakes. Free, no ads, offline.">
@@ -16,354 +16,760 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #1B1F24;
-  --bg-2: #22262C;
-  --surface: #2A2E35;
-  --surface-2: #343940;
-  --border: #3A3F47;
-  --text: #F2F2F0;
-  --muted: #A8A39A;
-  --brand: #81B64C;
-  --brand-dark: #5D8A31;
-  --brand-ink: #FFFFFF;
-  --shadow: 0 18px 50px rgba(0, 0, 0, .35);
-}
-:root[data-theme="light"] {
-  --bg: #F6F5F1;
-  --bg-2: #EEECE6;
-  --surface: #FFFFFF;
-  --surface-2: #F1EFEA;
-  --border: #E2DFD8;
-  --text: #1E2126;
-  --muted: #5F6670;
-  --brand: #5D8A31;
-  --brand-dark: #4A7027;
-  --shadow: 0 18px 50px rgba(30, 33, 38, .12);
-}
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #F6F5F1;
-    --bg-2: #EEECE6;
-    --surface: #FFFFFF;
-    --surface-2: #F1EFEA;
-    --border: #E2DFD8;
-    --text: #1E2126;
-    --muted: #5F6670;
-    --brand: #5D8A31;
-    --brand-dark: #4A7027;
-    --shadow: 0 18px 50px rgba(30, 33, 38, .12);
-  }
+  --ink: #131619;
+  --ink-2: #1A1E22;
+  --ink-3: #23282D;
+  --line: rgba(255, 255, 255, .09);
+  --paper: #F3F1EA;
+  --paper-2: #E9E6DC;
+  --text: #F2F1EC;
+  --muted: #9C9A93;
+  --green: #81B64C;
+  --green-2: #A3D16E;
+  --green-deep: #4B7426;
+  --light-sq: #EEEED2;
+  --dark-sq: #769656;
+  --gold: #F2B33D;
+  --pad: clamp(20px, 5vw, 72px);
+  --serif: "Instrument Serif", Georgia, serif;
+  --sans: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
+html { scroll-behavior: smooth; background: var(--ink); }
+body { margin: 0; background: var(--ink); color: var(--text); font: 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+.inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--pad); }
+.serif { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -.01em; }
+.label { font: 600 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+
+/* ── Nav ─────────────────────────────────────────── */
+nav { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .35s, border-color .35s, backdrop-filter .35s; border-bottom: 1px solid transparent; }
+nav.solid { background: rgba(19, 22, 25, .78); backdrop-filter: blur(14px) saturate(1.4); border-color: var(--line); }
+nav .inner { display: flex; align-items: center; height: 72px; gap: 28px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.02em; text-decoration: none; }
+.logo img { width: 32px; height: 32px; border-radius: 8px; }
+nav .links { display: flex; gap: 28px; margin-left: auto; font-weight: 500; font-size: 15px; }
+nav .links a { text-decoration: none; color: var(--muted); transition: color .2s; }
+nav .links a:hover { color: var(--text); }
+.nav-cta { padding: 10px 18px; border-radius: 999px; background: var(--text); color: var(--ink); font-weight: 700; font-size: 14px; text-decoration: none; transition: transform .2s; }
+.nav-cta:hover { transform: translateY(-1px); }
+@media (max-width: 860px) { nav .links { display: none; } .nav-cta { margin-left: auto; } }
+
+/* ── Buttons ─────────────────────────────────────── */
+.btn { position: relative; display: inline-flex; align-items: center; gap: 12px; padding: 18px 28px; border-radius: 999px; font: 700 17px/1 var(--sans); text-decoration: none; border: 0; cursor: pointer; overflow: hidden; transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-green { background: var(--green); color: #0E1A05; box-shadow: 0 10px 40px -10px rgba(129, 182, 76, .7); }
+.btn-green::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%); transform: translateX(-100%); animation: shine 4.5s ease-in-out infinite 1.5s; }
+@keyframes shine { 0%, 60% { transform: translateX(-100%); } 85%, 100% { transform: translateX(100%); } }
+.btn-line { color: var(--text); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .25); }
+.btn-line:hover { box-shadow: inset 0 0 0 1.5px var(--text); }
+.btn svg { width: 20px; height: 20px; }
+
+/* ── Hero ────────────────────────────────────────── */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; isolation: isolate; }
+.hero::before { /* drifting board pattern */
+  content: ""; position: absolute; inset: -200px; z-index: -2; opacity: .05;
+  background: conic-gradient(#fff 25%, transparent 0 50%, #fff 0 75%, transparent 0) 0 0 / 120px 120px;
+  animation: drift 60s linear infinite;
+  mask-image: radial-gradient(ellipse at 70% 45%, #000 0%, transparent 70%);
 }
-a { color: var(--brand); text-decoration: none; }
-a:hover { text-decoration: underline; }
-img { max-width: 100%; display: block; }
-.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+@keyframes drift { to { transform: translate(120px, 120px); } }
+.hero::after { content: ""; position: absolute; z-index: -1; width: 900px; height: 900px; right: -200px; top: -150px; background: radial-gradient(circle, rgba(129, 182, 76, .22), transparent 62%); filter: blur(10px); }
+.hero .inner > * { min-width: 0; }
+.hero .inner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 96px); align-items: center; }
+.hero h1 { margin: 22px 0 0; font-size: clamp(54px, 8.4vw, 128px); line-height: .92; letter-spacing: -.045em; font-weight: 800; }
+.hero h1 .serif { display: block; color: var(--green-2); font-size: 1.08em; letter-spacing: -.02em; line-height: .95; }
+.rotator { display: inline-grid; vertical-align: bottom; }
+.rotator span { grid-area: 1 / 1; opacity: 0; transform: translateY(40%); transition: opacity .5s, transform .6s cubic-bezier(.2, .8, .2, 1); }
+.rotator span.on { opacity: 1; transform: none; }
+.rotator span.off { opacity: 0; transform: translateY(-40%); }
+.hero p.lead { font-size: clamp(18px, 1.5vw, 21px); color: var(--muted); max-width: 560px; margin: 28px 0 36px; }
+.hero p.lead b { color: var(--text); font-weight: 600; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.note { margin-top: 18px; font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(129, 182, 76, .7); animation: pulse 2s infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(129, 182, 76, 0); } 100% { box-shadow: 0 0 0 0 rgba(129, 182, 76, 0); } }
 
-/* Nav */
-nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
-nav .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
-.logo { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 800; font-size: 20px; letter-spacing: -.3px; }
-.logo:hover { text-decoration: none; }
-.logo img { width: 34px; height: 34px; border-radius: 9px; }
-nav .links { margin-left: auto; display: flex; gap: 22px; font-weight: 600; font-size: 15px; }
-nav .links a { color: var(--muted); }
-nav .links a:hover { color: var(--text); text-decoration: none; }
-@media (max-width: 720px) { nav .links .hide-sm { display: none; } }
+/* Live board */
+.stage { position: relative; justify-self: center; width: min(600px, 100%); margin-bottom: 110px; }
+.board-wrap { display: grid; grid-template-columns: 14px 1fr; gap: 12px; }
+.evalbar { position: relative; border-radius: 4px; overflow: hidden; background: #3A3A38; }
+.evalbar i { position: absolute; left: 0; right: 0; bottom: 0; height: 50%; background: #F4F3EE; transition: height .8s cubic-bezier(.2, .8, .2, 1); }
+.board { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .06); transform: perspective(1600px) rotateY(-8deg) rotateX(4deg); transition: transform .8s; }
+.stage:hover .board { transform: perspective(1600px) rotateY(0) rotateX(0); }
+.sq { position: absolute; width: 12.5%; height: 12.5%; }
+.sq.l { background: var(--light-sq); } .sq.d { background: var(--dark-sq); }
+.sq.hl { box-shadow: inset 0 0 0 999px rgba(255, 220, 60, .42); }
+.pc { position: absolute; width: 12.5%; height: 12.5%; transition: transform .42s cubic-bezier(.3, .7, .2, 1), opacity .3s; will-change: transform; }
+.pc img { width: 100%; height: 100%; padding: 4%; filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .25)); }
+.pc.gone { opacity: 0; }
+.badge { position: absolute; width: 12.5%; height: 12.5%; pointer-events: none; z-index: 3; }
+.badge b { position: absolute; top: -14%; right: -14%; width: 46%; height: 46%; border-radius: 50%; display: grid; place-items: center; font: 800 clamp(10px, 1.3vw, 15px)/1 var(--sans); color: #fff; box-shadow: 0 4px 12px rgba(0, 0, 0, .35); animation: pop .45s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes pop { from { transform: scale(0); } }
+.coach { position: absolute; left: 26px; right: 0; bottom: -26px; transform: translateY(100%); display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: rgba(35, 40, 45, .86); backdrop-filter: blur(12px); border: 1px solid var(--line); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .7); transition: opacity .35s, transform .45s cubic-bezier(.2, .8, .2, 1); }
+.coach.swap { opacity: 0; transform: translateY(calc(100% + 8px)); }
+.coach .av { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 18px; }
+.coach .t { font-weight: 700; font-size: 16px; }
+.coach .t small { font: 500 13px var(--mono); color: var(--muted); margin-left: 6px; }
+.coach .s { color: var(--muted); font-size: 14.5px; margin-top: 2px; }
+.moves { min-width: 0; display: flex; gap: 6px; margin: 0 0 14px 26px; font: 500 13px var(--mono); color: var(--muted); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 18%); white-space: nowrap; justify-content: flex-end; }
+.moves span { padding: 4px 8px; border-radius: 6px; transition: background .3s, color .3s; flex: none; }
+.moves span.cur { background: rgba(129, 182, 76, .18); color: var(--green-2); }
+.game-cap { margin: 0 0 10px 26px; font-size: 13px; color: var(--muted); }
+.game-cap b { color: var(--text); font-weight: 600; }
+@media (max-width: 980px) {
+  .hero .inner { grid-template-columns: minmax(0, 1fr); }
+  .stage { margin-bottom: 120px; }
+  .board { transform: none; }
+}
 
-/* Buttons */
-.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 14px; font-weight: 700; font-size: 16px; border: 0; cursor: pointer; }
-.btn:hover { text-decoration: none; }
-.btn-primary { background: var(--brand); color: var(--brand-ink); box-shadow: inset 0 -4px 0 var(--brand-dark); }
-.btn-primary:hover { filter: brightness(1.06); }
-.btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
-.btn svg { width: 20px; height: 20px; flex: none; }
+/* ── Marquee ─────────────────────────────────────── */
+.marquee { position: relative; overflow: hidden; background: var(--green); color: #12200A; padding: 22px 0; transform: rotate(-1.6deg) scale(1.03); margin: 10px 0 40px; }
+.marquee .track { display: flex; width: max-content; gap: 48px; animation: slide 38s linear infinite; font: 800 clamp(26px, 3.2vw, 46px)/1 var(--sans); letter-spacing: -.03em; text-transform: uppercase; }
+.marquee .track span { display: flex; align-items: center; gap: 48px; }
+.marquee .track span::after { content: "✦"; font-size: .6em; opacity: .55; }
+.marquee .track em { font: italic 400 1.15em var(--serif); text-transform: none; letter-spacing: -.01em; }
+@keyframes slide { to { transform: translateX(-50%); } }
 
-/* Hero */
-.hero { padding: 72px 0 56px; overflow: hidden; }
-.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
-.eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: color-mix(in srgb, var(--brand) 16%, transparent); color: var(--brand); font-weight: 700; font-size: 13px; letter-spacing: .3px; }
-h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.04; letter-spacing: -1.8px; margin: 18px 0 18px; font-weight: 800; }
-h1 em { font-style: normal; color: var(--brand); }
-.lead { font-size: 19px; color: var(--muted); max-width: 540px; margin: 0 0 28px; }
-.cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.soon { font-size: 14px; color: var(--muted); margin-top: 14px; }
-.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
-.pill { padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--muted); }
-.phones { position: relative; height: 560px; }
-.phone { position: absolute; width: 250px; border-radius: 34px; padding: 9px; background: #0B0D10; box-shadow: var(--shadow); border: 1px solid #2F333A; }
-.phone img { border-radius: 26px; }
-.phone.a { right: 150px; top: 30px; transform: rotate(-6deg); }
-.phone.b { right: 0; top: 0; transform: rotate(4deg); z-index: 1; }
+/* ── Sections ────────────────────────────────────── */
+section { position: relative; padding: clamp(80px, 12vw, 160px) 0; }
+h2 { margin: 18px 0 0; font-size: clamp(40px, 6vw, 88px); line-height: .98; letter-spacing: -.04em; font-weight: 800; }
+h2 .serif { color: var(--green-2); }
+.intro { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: clamp(48px, 7vw, 96px); }
+.intro p { color: var(--muted); font-size: 19px; max-width: 520px; margin: 0; justify-self: end; }
+@media (max-width: 860px) { .intro { grid-template-columns: 1fr; } .intro p { justify-self: start; } }
+
+/* Story: sticky phone */
+.story { display: grid; grid-template-columns: 1fr minmax(280px, 400px); gap: clamp(40px, 8vw, 140px); }
+.chapters { display: flex; flex-direction: column; }
+.chapter { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--line); padding: 40px 0; opacity: .28; transition: opacity .5s; }
+.chapter.active { opacity: 1; }
+.chapter .num { font: 500 15px var(--mono); color: var(--green); }
+.chapter h3 { margin: 14px 0 16px; font-size: clamp(34px, 4.4vw, 64px); line-height: 1; letter-spacing: -.035em; font-weight: 800; }
+.chapter h3 .serif { color: var(--green-2); }
+.chapter p { margin: 0; color: var(--muted); font-size: 19px; max-width: 560px; }
+.chapter ul { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.chapter li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 14.5px; color: var(--text); background: rgba(255, 255, 255, .03); }
+.chapter .mobile-shot { display: none; }
+.sticky { position: sticky; top: 12vh; height: 76vh; display: flex; align-items: center; justify-content: center; }
+.device { position: relative; width: 100%; max-width: 360px; aspect-ratio: 1080 / 2160; border-radius: 46px; padding: 11px; background: #0A0C0E; box-shadow: 0 50px 120px -40px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .08), inset 0 0 0 2px #26292E; }
+.device .screen { position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #1B1F24; }
+.device .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity .6s, transform .9s cubic-bezier(.2, .8, .2, 1); }
+.device .screen img.on { opacity: 1; transform: none; }
+.device::after { content: ""; position: absolute; inset: -30%; z-index: -1; background: radial-gradient(circle, rgba(129, 182, 76, .18), transparent 60%); }
 @media (max-width: 900px) {
-  .hero { padding-top: 44px; }
-  .hero .wrap { grid-template-columns: 1fr; }
-  .phones { height: 470px; max-width: 420px; margin: 8px auto 0; width: 100%; }
-  .phone { width: 210px; }
-  .phone.a { left: 0; right: auto; }
-  .phone.b { right: 0; }
+  .story { grid-template-columns: 1fr; }
+  .sticky { display: none; }
+  .chapter { min-height: 0; opacity: 1; padding: 56px 0; }
+  .chapter .mobile-shot { display: block; width: 72%; max-width: 300px; margin-top: 36px; border-radius: 32px; padding: 8px; background: #0A0C0E; box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .9); }
+  .chapter .mobile-shot img { border-radius: 25px; }
 }
 
-/* Stats strip */
-.strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-2); }
-.strip .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding-top: 26px; padding-bottom: 26px; text-align: center; }
-.strip b { display: block; font-size: 28px; font-weight: 800; letter-spacing: -.5px; }
-.strip span { color: var(--muted); font-size: 14px; }
-@media (max-width: 640px) { .strip .wrap { grid-template-columns: repeat(2, 1fr); row-gap: 22px; } }
+/* ── New: bento ──────────────────────────────────── */
+.light { background: var(--paper); color: #16191C; }
+.light .label { color: var(--green-deep); }
+.light h2 .serif { color: var(--green-deep); }
+.light .intro p { color: #5B5F63; }
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+.tile { position: relative; overflow: hidden; border-radius: 28px; padding: clamp(24px, 3vw, 40px); background: #fff; box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 30px 60px -40px rgba(0, 0, 0, .35); min-height: 380px; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.tile:hover { transform: translateY(-6px); }
+.tile h3 { margin: 0 0 10px; font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -.03em; line-height: 1.02; font-weight: 800; }
+.tile p { margin: 0; color: #5B5F63; font-size: 16.5px; max-width: 420px; }
+.tile .demo { margin-top: auto; padding-top: 28px; }
+.t-960 { grid-column: span 7; background: #1E2A14; color: #F2F1EC; }
+.t-960 p { color: #B9C2AE; }
+.t-voice { grid-column: span 5; background: #EFE9FF; }
+.t-mirror { grid-column: span 5; background: #FFF4DE; }
+.t-year { grid-column: span 7; background: #E3F2F1; }
+@media (max-width: 960px) { .bento > * { grid-column: span 12 !important; } }
+.rank { display: grid; grid-template-columns: repeat(8, 1fr); border-radius: 12px; overflow: hidden; max-width: 560px; }
+.rank div { aspect-ratio: 1; display: grid; place-items: center; }
+.rank div:nth-child(odd) { background: var(--light-sq); } .rank div:nth-child(even) { background: var(--dark-sq); }
+.rank img { width: 82%; transition: transform .5s cubic-bezier(.3, 1.4, .5, 1), opacity .3s; }
+.rank img.flip { transform: translateY(-30%) scale(.6); opacity: 0; }
+.pos960 { margin-top: 12px; font: 500 13px var(--mono); color: #B9C2AE; }
+.voice-ui { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; background: #fff; box-shadow: 0 10px 30px -15px rgba(70, 40, 160, .4); max-width: 420px; }
+.mic { flex: none; width: 44px; height: 44px; border-radius: 50%; background: #8E6CEF; display: grid; place-items: center; }
+.mic svg { width: 22px; height: 22px; color: #fff; }
+.typed { font: 600 20px var(--mono); color: #2A1F4F; min-height: 1.3em; }
+.typed::after { content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 3px; vertical-align: -3px; background: #8E6CEF; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.wave { display: flex; gap: 4px; align-items: center; height: 40px; margin-top: 18px; }
+.wave i { width: 5px; border-radius: 3px; background: #8E6CEF; opacity: .75; animation: wave 1.1s ease-in-out infinite; }
+@keyframes wave { 0%, 100% { height: 8px; } 50% { height: 38px; } }
+.mirror { display: flex; align-items: center; gap: 22px; }
+.mirror .side { flex: 1; text-align: center; padding: 18px 10px; border-radius: 18px; background: #fff; font-size: 14px; color: #5B5F63; }
+.mirror .side img { width: 64px; margin: 0 auto 8px; }
+.mirror .side b { display: block; color: #16191C; font-size: 15px; }
+.mirror .vs { font: italic 400 34px var(--serif); color: #C58B12; }
+.mirror .bookline { margin-top: 16px; font: 500 14px var(--mono); color: #7A5A12; }
+.bars { display: flex; align-items: flex-end; gap: 8px; height: 170px; }
+.bars i { flex: 1; border-radius: 8px 8px 3px 3px; background: #20A39E; height: 6%; transition: height 1.2s cubic-bezier(.2, .8, .2, 1); }
+.bars i.peak { background: #F2B33D; }
+.months { display: flex; gap: 8px; margin-top: 8px; font: 500 12px var(--mono); color: #5B5F63; }
+.months span { flex: 1; text-align: center; }
+.yearline { display: flex; gap: 28px; margin-top: 18px; }
+.yearline b { display: block; font-size: 30px; letter-spacing: -.03em; }
+.yearline span { font-size: 13px; color: #5B5F63; }
 
-/* Sections */
-section { padding: 84px 0; }
-.section-head { max-width: 680px; margin: 0 0 40px; }
-h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.1; letter-spacing: -1px; margin: 10px 0 12px; font-weight: 800; }
-.section-head p { color: var(--muted); font-size: 18px; margin: 0; }
+/* ── Numbers ─────────────────────────────────────── */
+.numbers { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.numbers div { padding: clamp(36px, 5vw, 64px) var(--pad); border-left: 1px solid var(--line); }
+.numbers div:first-child { border-left: 0; }
+.numbers b { display: block; font-size: clamp(48px, 7vw, 104px); line-height: 1; letter-spacing: -.05em; font-weight: 800; }
+.numbers b .serif { color: var(--green-2); }
+.numbers > div > span { display: block; margin-top: 12px; color: var(--muted); font-size: 16px; }
+@media (max-width: 860px) { .numbers { grid-template-columns: 1fr 1fr; } .numbers div:nth-child(3) { border-left: 0; } .numbers div:nth-child(n+3) { border-top: 1px solid var(--line); } }
 
-/* Feature cards */
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
-.card { position: relative; padding: 24px; border-radius: 20px; background: linear-gradient(160deg, color-mix(in srgb, var(--c) 20%, var(--surface)) 0%, var(--surface) 60%); border: 1px solid color-mix(in srgb, var(--c) 28%, var(--border)); }
-.card .ic { width: 48px; height: 48px; border-radius: 14px; background: var(--c); display: grid; place-items: center; margin-bottom: 16px; }
-.card .ic svg { width: 26px; height: 26px; color: #fff; }
-.card h3 { margin: 0 0 8px; font-size: 20px; letter-spacing: -.3px; }
-.card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
-.card li { margin: 4px 0; }
-.new { position: absolute; top: 18px; right: 18px; font-size: 11px; font-weight: 800; letter-spacing: .6px; padding: 4px 8px; border-radius: 6px; background: var(--brand); color: #fff; }
+/* ── Screens marquee ─────────────────────────────── */
+.screens { padding-top: 0; overflow: hidden; }
+.reel { display: flex; gap: 28px; width: max-content; animation: slide 70s linear infinite; padding: 20px 0 30px; }
+.reel:hover { animation-play-state: paused; }
+.reel figure { margin: 0; width: clamp(200px, 19vw, 270px); flex: none; }
+.reel .frame { border-radius: 34px; padding: 9px; background: #0A0C0E; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .07); transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.reel figure:nth-child(even) .frame { transform: translateY(36px); }
+.reel figure:hover .frame { transform: translateY(-8px) scale(1.02); }
+.reel img { border-radius: 26px; }
+.reel figcaption { margin-top: 18px; font-size: 15px; font-weight: 600; text-align: center; color: var(--muted); }
+.reel figure:nth-child(even) figcaption { margin-top: 54px; }
 
-/* Screenshot rail */
-.rail { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 20px 22px; margin: 0 -20px; scrollbar-width: thin; }
-.shot { flex: none; width: 236px; margin: 0; scroll-snap-align: start; }
-.shot .frame { border-radius: 30px; padding: 8px; background: #0B0D10; border: 1px solid #2F333A; box-shadow: var(--shadow); }
-.shot img { border-radius: 23px; }
-.shot p { margin: 12px 4px 0; font-weight: 600; font-size: 15px; }
-.shot small { display: block; color: var(--muted); font-weight: 500; font-size: 13px; }
+/* ── Privacy ─────────────────────────────────────── */
+.privacy { background: var(--ink-2); border-top: 1px solid var(--line); }
+.privacy .big { font-size: clamp(38px, 5.6vw, 84px); line-height: 1.02; letter-spacing: -.04em; font-weight: 800; max-width: 1200px; margin: 18px 0 64px; }
+.privacy .big .serif { color: var(--green-2); }
+.privacy .big .dim { color: #4A4F55; transition: color .6s; }
+.privacy .big.lit .dim { color: var(--text); }
+.pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
+.pgrid div { padding: 36px 32px 0 0; }
+.pgrid b { display: block; font-size: 20px; margin-bottom: 8px; }
+.pgrid p { margin: 0; color: var(--muted); font-size: 16px; }
+.pgrid a { color: var(--green-2); }
+@media (max-width: 860px) { .pgrid { grid-template-columns: 1fr; } }
 
-/* Privacy */
-.privacy { background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.privacy .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
-@media (max-width: 900px) { .privacy .wrap { grid-template-columns: 1fr; } }
-.checks { display: grid; gap: 14px; }
-.check { display: flex; gap: 14px; padding: 18px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); }
-.check svg { width: 24px; height: 24px; flex: none; color: var(--brand); margin-top: 2px; }
-.check b { display: block; }
-.check span { color: var(--muted); font-size: 15px; }
-
-/* FAQ */
-details { border-bottom: 1px solid var(--border); padding: 18px 0; }
-details:first-of-type { border-top: 1px solid var(--border); }
-summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+/* ── FAQ ─────────────────────────────────────────── */
+.faq { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(40px, 8vw, 120px); }
+@media (max-width: 900px) { .faq { grid-template-columns: 1fr; } }
+details { border-top: 1px solid var(--line); }
+details:last-child { border-bottom: 1px solid var(--line); }
+summary { list-style: none; cursor: pointer; padding: 26px 0; display: flex; justify-content: space-between; gap: 20px; font-size: clamp(19px, 1.6vw, 23px); font-weight: 600; letter-spacing: -.01em; }
 summary::-webkit-details-marker { display: none; }
-summary::after { content: "+"; color: var(--brand); font-size: 22px; line-height: 1; }
-details[open] summary::after { content: "−"; }
-details p { color: var(--muted); margin: 10px 0 0; }
+summary i { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--line); position: relative; transition: transform .35s, background .35s; }
+summary i::before, summary i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: var(--text); transform: translate(-50%, -50%); }
+summary i::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .35s; }
+details[open] summary i { background: var(--green); border-color: var(--green); }
+details[open] summary i::after { transform: translate(-50%, -50%) rotate(0); }
+details .a { color: var(--muted); padding: 0 50px 28px 0; margin: 0; font-size: 17px; animation: fade .4s; }
+@keyframes fade { from { opacity: 0; transform: translateY(-6px); } }
 
-/* Final CTA */
-.final { text-align: center; }
-.final .box { padding: 56px 24px; border-radius: 28px; background: linear-gradient(135deg, #8DC255 0%, #5D8A31 100%); color: #fff; }
-.final h2 { color: #fff; }
-.final p { color: rgba(255, 255, 255, .88); font-size: 18px; max-width: 560px; margin: 0 auto 26px; }
-.final .btn-primary { background: #fff; color: #3F6420; box-shadow: inset 0 -4px 0 #DDE8D1; }
+/* ── Final CTA ───────────────────────────────────── */
+.final { position: relative; overflow: hidden; background: var(--green); color: #0F1B06; text-align: center; padding: clamp(100px, 14vw, 200px) 0; isolation: isolate; }
+.final::before { content: ""; position: absolute; inset: -100px; z-index: -1; opacity: .12; background: conic-gradient(#0F1B06 25%, transparent 0 50%, #0F1B06 0 75%, transparent 0) 0 0 / 140px 140px; animation: drift 50s linear infinite reverse; }
+.final h2 { font-size: clamp(52px, 9vw, 150px); margin: 0 auto; max-width: 1200px; }
+.final h2 .serif { color: #0F1B06; }
+.final p { font-size: 20px; max-width: 560px; margin: 26px auto 40px; color: #23401A; }
+.final .btn { background: #0F1B06; color: var(--green-2); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .6); }
 
-footer { padding: 36px 0 48px; color: var(--muted); font-size: 14px; }
-footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
-footer .links { display: flex; gap: 20px; flex-wrap: wrap; }
-footer .links a { color: var(--muted); }
+footer { padding: 48px 0 56px; color: var(--muted); font-size: 14.5px; }
+footer .inner { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 36px; }
+footer .links { display: flex; flex-wrap: wrap; gap: 24px; }
+footer .links a { text-decoration: none; }
+footer .links a:hover { color: var(--text); }
 footer .copy { margin-left: auto; }
-@media (max-width: 640px) { footer .copy { margin-left: 0; } }
+@media (max-width: 700px) { footer .copy { margin-left: 0; } }
+
+/* ── Reveal on scroll ────────────────────────────── */
+.rv { opacity: 0; transform: translateY(40px); transition: opacity .9s cubic-bezier(.2, .8, .2, 1), transform .9s cubic-bezier(.2, .8, .2, 1); transition-delay: var(--d, 0s); }
+.rv.in { opacity: 1; transform: none; }
+.split .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 .04em .16em; margin: 0 -.04em -.16em; }
+.split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i) * 60ms); }
+.split.in .w > span { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv, .split .w > span { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
+<nav id="nav">
+  <div class="inner">
     <a class="logo" href="#top"><img src="icon-512.png" alt=""> Rookwise</a>
     <div class="links">
-      <a class="hide-sm" href="#features">Features</a>
-      <a class="hide-sm" href="#screens">Screens</a>
+      <a href="#story">The app</a>
+      <a href="#new">What's new</a>
       <a href="#privacy">Privacy</a>
       <a href="#faq">FAQ</a>
     </div>
+    <a class="nav-cta" href="#join">Get early access</a>
   </div>
 </nav>
 
+<!-- ── Hero ── -->
 <header class="hero" id="top">
-  <div class="wrap">
+  <div class="inner">
     <div>
-      <span class="eyebrow">Free · No ads · Works offline</span>
-      <h1>Your pocket<br><em>chess coach.</em></h1>
-      <p class="lead">Learn the game from zero, review every game like a coach, and turn your own mistakes into puzzles. A strong engine runs right on your phone, so your games never leave it.</p>
-      <div class="cta">
-        <a class="btn btn-primary" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">
+      <div class="label rv">Chess coach · Android</div>
+      <h1 class="split" data-split>Your pocket <span class="serif">chess coach.</span></h1>
+      <p class="lead rv" style="--d:.35s">
+        <span class="rotator" aria-live="polite"><span class="on">Learn the rules from zero.</span><span>Review every game like a coach.</span><span>Turn your mistakes into puzzles.</span><span>Play a bot that plays like you.</span></span><br>
+        A strong engine runs <b>on your phone</b>. Free, no ads, works offline.
+      </p>
+      <div class="cta-row rv" style="--d:.5s">
+        <a class="btn btn-green" id="join" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.4.3-.6.8-.6 1.4v16.8c0 .6.2 1.1.6 1.4l9.6-9.8-9.6-9.8Zm10.6 10.8 2.6 2.6-11.3 6.5 8.7-9.1Zm0-2-8.7-9.1 11.3 6.5-2.6 2.6Zm3.9-1.6 3.1 1.8c.9.5.9 1.8 0 2.3l-3.1 1.8-2.9-2.9 2.9-3Z"/></svg>
           Join the early test
         </a>
-        <a class="btn btn-ghost" href="#features">See what it does</a>
+        <a class="btn btn-line" href="#story">Take the tour ↓</a>
       </div>
-      <p class="soon">Coming soon to Google Play. Testers get it first, for free.</p>
-      <div class="pills">
-        <span class="pill">44 lessons</span>
-        <span class="pill">Game review</span>
-        <span class="pill">Puzzles from your games</span>
-        <span class="pill">14 languages</span>
-      </div>
+      <div class="note rv" style="--d:.6s"><span class="dot"></span> Testing on Google Play now. Testers get it first, free.</div>
     </div>
-    <div class="phones" aria-hidden="true">
-      <div class="phone a"><img src="img/3-game-review.jpg" alt=""></div>
-      <div class="phone b"><img src="img/1-learn.jpg" alt=""></div>
+
+    <div class="stage rv" style="--d:.2s" aria-label="A famous game replayed with the Rookwise coach">
+      <div class="game-cap"><b>The Opera Game</b> · Morphy, Paris 1858</div>
+      <div class="moves" id="moves"></div>
+      <div class="board-wrap">
+        <div class="evalbar"><i id="evalfill"></i></div>
+        <div class="board" id="board"></div>
+      </div>
+      <div class="coach" id="coach">
+        <div class="av" id="coach-av" style="background:#81B64C">♞</div>
+        <div><div class="t" id="coach-t">Every move, rated.</div><div class="s" id="coach-s">Watch the Rookwise coach call one of the most famous games ever played.</div></div>
+      </div>
     </div>
   </div>
 </header>
 
-<div class="strip">
-  <div class="wrap">
-    <div><b>44</b><span>chess lessons</span></div>
-    <div><b>~3200</b><span>top bot strength</span></div>
-    <div><b>0</b><span>ads, accounts or limits</span></div>
-    <div><b>14</b><span>languages</span></div>
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold &amp; voice</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
+    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold &amp; voice</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
   </div>
 </div>
 
-<section id="features">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Everything in one app</span>
-      <h2>Learn, play, review, improve.</h2>
-      <p>From your very first move to fixing the mistakes that cost you games.</p>
+<!-- ── Story ── -->
+<section id="story">
+  <div class="inner">
+    <div class="intro">
+      <div>
+        <div class="label rv">The app</div>
+        <h2 class="split" data-split>From your first move <span class="serif">to your best game.</span></h2>
+      </div>
+      <p class="rv" style="--d:.2s">Five things Rookwise does for you, all on your phone and all free.</p>
     </div>
-    <div class="grid">
-      <article class="card" style="--c:#F59E0B">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
-        <h3>Learn chess from zero</h3>
-        <ul><li>44 short lessons, from how the pieces move to simple endgames</li><li>Practise on the board with hints and stars</li><li>Read aloud in your language</li></ul>
+
+    <div class="story">
+      <div class="chapters">
+        <article class="chapter" data-shot="0">
+          <span class="num">01 — Learn</span>
+          <h3>Start from <span class="serif">zero.</span></h3>
+          <p>44 short lessons take you from how the pieces move to forks, famous mates and simple endgames. Practise on the board, earn stars, and climb from Pawn to King.</p>
+          <ul><li>Read aloud in your language</li><li>Practice rounds</li><li>Middlegame &amp; endgame units</li></ul>
+          <div class="mobile-shot"><img src="img/6-learn-course.jpg" alt="The Learn chess course" loading="lazy"></div>
+        </article>
+        <article class="chapter" data-shot="1">
+          <span class="num">02 — Review</span>
+          <h3>A coach for <span class="serif">every move.</span></h3>
+          <p>Import your Lichess and Chess.com games. Every move is rated from Brilliant to Blunder, with accuracy, key moments and the move that punishes each mistake.</p>
+          <ul><li>Game report</li><li>"Why is this bad?"</li><li>Retry your mistakes</li></ul>
+          <div class="mobile-shot"><img src="img/3-game-review.jpg" alt="Game review with key moments" loading="lazy"></div>
+        </article>
+        <article class="chapter" data-shot="2">
+          <span class="num">03 — Train</span>
+          <h3>Your mistakes, <span class="serif">now puzzles.</span></h3>
+          <p>Every blunder in your games becomes a puzzle, repeated until you've mastered it. Plus a daily puzzle, Puzzle Rush, an opening trainer built from your own lines and classic endgames.</p>
+          <ul><li>Daily streak &amp; widget</li><li>Opening explorer</li><li>12 famous traps</li></ul>
+          <div class="mobile-shot"><img src="img/4-lesson.jpg" alt="A lesson on forks" loading="lazy"></div>
+        </article>
+        <article class="chapter" data-shot="3">
+          <span class="num">04 — Play</span>
+          <h3>A bot that <span class="serif">teaches back.</span></h3>
+          <p>From beginner to around 3200, in four styles. Live hints, an evaluation bar and a coach that rates your moves while you play. Blunder check stops you before the bot punishes a slip.</p>
+          <ul><li>Chess960 &amp; odds</li><li>Blindfold &amp; voice</li><li>Pass and play</li></ul>
+          <div class="mobile-shot"><img src="img/5-play-with-coach.jpg" alt="Playing the bot with the coach" loading="lazy"></div>
+        </article>
+        <article class="chapter" data-shot="4">
+          <span class="num">05 — Watch</span>
+          <h3>Bot vs Bot, <span class="serif">explained.</span></h3>
+          <p>Two Rookwise Bots, each with its own strength and style, play at your pace. Every move rated, the better one shown. Guess the best move before they play it.</p>
+          <ul><li>0.5 to 10 seconds a move</li><li>Pause &amp; step through</li><li>Live broadcasts too</li></ul>
+          <div class="mobile-shot"><img src="img/2-bot-vs-bot.jpg" alt="Bot vs Bot" loading="lazy"></div>
+        </article>
+      </div>
+      <div class="sticky" aria-hidden="true">
+        <div class="device"><div class="screen" id="screen">
+          <img class="on" src="img/6-learn-course.jpg" alt="">
+          <img src="img/3-game-review.jpg" alt="">
+          <img src="img/4-lesson.jpg" alt="">
+          <img src="img/5-play-with-coach.jpg" alt="">
+          <img src="img/2-bot-vs-bot.jpg" alt="">
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── New ── -->
+<section class="light" id="new">
+  <div class="inner">
+    <div class="intro">
+      <div>
+        <div class="label rv">New in Rookwise</div>
+        <h2 class="split" data-split>Fresh ways <span class="serif">to play.</span></h2>
+      </div>
+      <p class="rv" style="--d:.2s">Four new modes for players who want something different from the same old game.</p>
+    </div>
+    <div class="bento">
+      <article class="tile t-960 rv">
+        <h3>Chess960</h3>
+        <p>A new start position every game: no opening theory, just chess. Castle by moving your king onto its rook. The bot and coach know the rules too.</p>
+        <div class="demo"><div class="rank" id="rank"></div><div class="pos960" id="pos960">Position 518 · the standard setup</div></div>
       </article>
-      <article class="card" style="--c:#3B82F6">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
-        <h3>Game review like a coach</h3>
-        <ul><li>Every move rated, from Brilliant to Blunder</li><li>Accuracy, key moments and the move that punishes a mistake</li><li>Import from Lichess and Chess.com</li></ul>
+      <article class="tile t-voice rv" style="--d:.1s">
+        <h3>Blindfold &amp; voice</h3>
+        <p>Hide the pieces and play from memory. Say your move, and hear the bot's reply.</p>
+        <div class="demo">
+          <div class="voice-ui"><div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div><div class="typed" id="typed"></div></div>
+          <div class="wave" aria-hidden="true"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.28s"></i><i style="animation-delay:.18s"></i></div>
+        </div>
       </article>
-      <article class="card" style="--c:#06B6D4">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4v3a2 2 0 1 0 4 0V3h3v7h-3a2 2 0 1 0 0 4h3v7h-7v-3a2 2 0 1 0-4 0v3H3v-7h3a2 2 0 1 0 0-4H3V3h7Z"/></svg></div>
-        <h3>Puzzles from your own games</h3>
-        <ul><li>Your mistakes become puzzles until you've mastered them</li><li>Daily puzzle with a streak and a home-screen widget</li><li>Puzzle Rush, themes and a puzzle rating</li></ul>
+      <article class="tile t-mirror rv">
+        <h3>Mirror bot</h3>
+        <p>Play the one opponent who knows your openings best: you. It learns your lines from your own games and plays at your strength.</p>
+        <div class="demo">
+          <div class="mirror"><div class="side"><img src="img/pieces/wK.png" alt=""><b>You</b>1.e4 · Italian</div><div class="vs">vs</div><div class="side"><img src="img/pieces/bK.png" alt=""><b>Also you</b>your repertoire</div></div>
+          <div class="bookline" id="bookline">Book: 1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
+        </div>
       </article>
-      <article class="card" style="--c:#81B64C">
-        <span class="new">NEW</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01M12 12h.01"/></svg></div>
-        <h3>Play the Rookwise Bot</h3>
-        <ul><li>Beginner to ~3200, four playing styles, a coach on every move</li><li>Chess960 and odds games</li><li>Mirror bot: play an opponent with your own openings</li></ul>
-      </article>
-      <article class="card" style="--c:#8E6CEF">
-        <span class="new">NEW</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div>
-        <h3>Blindfold and voice</h3>
-        <ul><li>Hide the pieces and play from memory</li><li>Say your move: "knight f3", "castle kingside"</li><li>The bot's moves read aloud</li></ul>
-      </article>
-      <article class="card" style="--c:#E6A23C">
-        <span class="new">NEW</span>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
-        <h3>Insights and your year in chess</h3>
-        <ul><li>Strengths and weaknesses by phase and opening</li><li>A yearly recap with a card to share</li><li>Daily goals and 23 achievements</li></ul>
-      </article>
-      <article class="card" style="--c:#14B8A6">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
-        <h3>Train your openings</h3>
-        <ul><li>A trainer built from the lines you actually play</li><li>Opening explorer for your own games</li><li>12 famous traps and 12 classic endgames</li></ul>
-      </article>
-      <article class="card" style="--c:#64748B">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-        <h3>Bot vs Bot</h3>
-        <ul><li>Watch two bots play, each with its own style</li><li>Your pace: pause and step through</li><li>Guess the best move before the bot plays it</li></ul>
-      </article>
-      <article class="card" style="--c:#EF4444">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <h3>Analysis tools</h3>
-        <ul><li>A strong on-device engine with up to three lines</li><li>Scan a board from a photo or screenshot</li><li>Follow top tournaments live</li></ul>
+      <article class="tile t-year rv" style="--d:.1s">
+        <h3>Your year in chess</h3>
+        <p>Games, score, accuracy, your favourite opening and best win, with a card to share.</p>
+        <div class="demo">
+          <div class="bars" id="bars"><i data-h="22"></i><i data-h="35"></i><i data-h="28"></i><i data-h="44"></i><i data-h="38"></i><i data-h="52"></i><i data-h="47"></i><i data-h="60"></i><i data-h="56"></i><i data-h="100" class="peak"></i><i data-h="70"></i><i data-h="64"></i></div>
+          <div class="months"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
+        </div>
       </article>
     </div>
   </div>
 </section>
 
-<section id="screens" style="padding-top:0">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">A look inside</span>
-      <h2>Made for learning, built to feel good.</h2>
-      <p>Dark and light themes, 11 boards, 10 piece sets and 7 accent colours.</p>
+<!-- ── Numbers ── -->
+<div class="numbers">
+  <div class="rv"><b><span data-count="44">0</span></b><span>chess lessons</span></div>
+  <div class="rv" style="--d:.1s"><b>~<span data-count="3200">0</span></b><span>top bot strength</span></div>
+  <div class="rv" style="--d:.2s"><b><span class="serif">zero</span></b><span>ads, accounts or limits</span></div>
+  <div class="rv" style="--d:.3s"><b><span data-count="14">0</span></b><span>languages</span></div>
+</div>
+
+<!-- ── Screens ── -->
+<section class="screens" id="screens">
+  <div class="inner">
+    <div class="intro" style="margin-top:clamp(80px,12vw,160px)">
+      <div>
+        <div class="label rv">A look inside</div>
+        <h2 class="split" data-split>Built to feel <span class="serif">good.</span></h2>
+      </div>
+      <p class="rv" style="--d:.2s">Dark and light themes, 11 boards, 10 piece sets and 7 accent colours. Hover to pause.</p>
     </div>
-    <div class="rail" role="list">
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/1-learn.jpg" alt="The Learn tab with Bot vs Bot and the chess course" loading="lazy"></div><p>Learn tab<small>Course, drills and Bot vs Bot</small></p></figure>
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/3-game-review.jpg" alt="A game report with accuracy and key moments" loading="lazy"></div><p>Game review<small>Accuracy and key moments</small></p></figure>
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/5-play-with-coach.jpg" alt="Playing the bot with hints and the coach" loading="lazy"></div><p>Play with a coach<small>Hints, eval bar, verdicts</small></p></figure>
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/4-lesson.jpg" alt="A lesson about forks" loading="lazy"></div><p>Lessons<small>Arrows, coach and tips</small></p></figure>
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/2-bot-vs-bot.jpg" alt="Two bots playing, every move rated" loading="lazy"></div><p>Bot vs Bot<small>Every move rated</small></p></figure>
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/6-learn-course.jpg" alt="The chess course with levels and stars" loading="lazy"></div><p>Your course<small>Level, XP and stars</small></p></figure>
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/7-analyze.jpg" alt="Analysis with engine lines" loading="lazy"></div><p>Analyze<small>Up to three engine lines</small></p></figure>
-      <figure class="shot" role="listitem"><div class="frame"><img src="img/8-home.jpg" alt="The home screen" loading="lazy"></div><p>Home<small>Everything one tap away</small></p></figure>
-    </div>
+  </div>
+  <div class="reel" id="reel">
+    <figure><div class="frame"><img src="img/1-learn.jpg" alt="Learn tab" loading="lazy"></div><figcaption>Learn</figcaption></figure>
+    <figure><div class="frame"><img src="img/3-game-review.jpg" alt="Game review" loading="lazy"></div><figcaption>Game review</figcaption></figure>
+    <figure><div class="frame"><img src="img/5-play-with-coach.jpg" alt="Play with a coach" loading="lazy"></div><figcaption>Play with a coach</figcaption></figure>
+    <figure><div class="frame"><img src="img/4-lesson.jpg" alt="Lesson" loading="lazy"></div><figcaption>Lessons</figcaption></figure>
+    <figure><div class="frame"><img src="img/2-bot-vs-bot.jpg" alt="Bot vs Bot" loading="lazy"></div><figcaption>Bot vs Bot</figcaption></figure>
+    <figure><div class="frame"><img src="img/6-learn-course.jpg" alt="Course" loading="lazy"></div><figcaption>Your course</figcaption></figure>
+    <figure><div class="frame"><img src="img/7-analyze.jpg" alt="Analyze" loading="lazy"></div><figcaption>Analyze</figcaption></figure>
+    <figure><div class="frame"><img src="img/8-home.jpg" alt="Home" loading="lazy"></div><figcaption>Home</figcaption></figure>
   </div>
 </section>
 
+<!-- ── Privacy ── -->
 <section class="privacy" id="privacy">
-  <div class="wrap">
-    <div class="section-head" style="margin:0">
-      <span class="eyebrow">Private by design</span>
-      <h2>Your games stay on your phone.</h2>
-      <p>No account, no ads, no server of ours holding your data. <a href="privacy/">Read the privacy policy</a>.</p>
-    </div>
-    <div class="checks">
-      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>The engine runs on your phone</b><span>Analysis works offline. Games, puzzles and notes are stored on the device.</span></div></div>
-      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Fair play built in</b><span>Rookwise is for learning and review. Engine help pauses while a live-play chess app is open.</span></div></div>
-      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Anonymous statistics, your choice</b><span>Which screens are used, never your games or accounts. On by default; one switch turns them off.</span></div></div>
+  <div class="inner">
+    <div class="label rv">Private by design</div>
+    <p class="big" id="bigline">Your games <span class="dim">stay on</span> <span class="serif">your phone.</span> <span class="dim">No account. No ads. No server of ours holding your data.</span></p>
+    <div class="pgrid">
+      <div class="rv"><b>The engine is on the device</b><p>Analysis works offline. Games, puzzles and notes never leave your phone unless you back them up yourself.</p></div>
+      <div class="rv" style="--d:.1s"><b>Fair play built in</b><p>Rookwise is for learning and review. Engine help pauses while a live-play chess app is open.</p></div>
+      <div class="rv" style="--d:.2s"><b>Anonymous statistics</b><p>Which screens are used, never your games or accounts. On by default, one switch turns them off. <a href="privacy/">Privacy policy →</a></p></div>
     </div>
   </div>
 </section>
 
+<!-- ── FAQ ── -->
 <section id="faq">
-  <div class="wrap" style="max-width:820px">
-    <div class="section-head">
-      <span class="eyebrow">Questions</span>
-      <h2>Good to know.</h2>
+  <div class="inner faq">
+    <div>
+      <div class="label rv">Questions</div>
+      <h2 class="split" data-split>Good <span class="serif">to know.</span></h2>
     </div>
-    <details open><summary>Is Rookwise free?</summary><p>Yes. No ads, no subscriptions and no limits. Every feature is included.</p></details>
-    <details><summary>When can I get it?</summary><p>Rookwise is in testing on Google Play. Send a quick email with "Join the early test" and you'll get an invite to install it before the public release.</p></details>
-    <details><summary>Does it work without internet?</summary><p>Yes. Lessons, puzzles, game review, the bot and analysis all run on your phone. Importing games and live broadcasts need a connection.</p></details>
-    <details><summary>Can I use it with my Lichess or Chess.com account?</summary><p>Yes. Sign in to Lichess or link a Chess.com username, and your finished games are imported for review and turned into puzzles.</p></details>
-    <details><summary>Can it help me during an online game?</summary><p>No, and that's on purpose. Rookwise is for learning and reviewing finished games, and it never asks Lichess for access to games in progress.</p></details>
-    <details><summary>Is there an iPhone version?</summary><p>Not yet. Rookwise launches on Android first.</p></details>
+    <div class="rv">
+      <details open><summary>Is Rookwise free?<i></i></summary><p class="a">Yes. No ads, no subscriptions, no limits. Every feature is included.</p></details>
+      <details><summary>When can I get it?<i></i></summary><p class="a">Rookwise is in testing on Google Play. Tap "Join the early test" and send the email, and you'll get an invite before the public release.</p></details>
+      <details><summary>Does it work without internet?<i></i></summary><p class="a">Yes. Lessons, puzzles, game review, the bot and analysis all run on your phone. Importing games and live broadcasts need a connection.</p></details>
+      <details><summary>Does it work with Lichess and Chess.com?<i></i></summary><p class="a">Sign in to Lichess or link a Chess.com username, and your finished games are imported for review and turned into puzzles.</p></details>
+      <details><summary>Can it help me during an online game?<i></i></summary><p class="a">No, on purpose. Rookwise is for learning and reviewing finished games, and it never asks Lichess for access to games in progress.</p></details>
+      <details><summary>Is there an iPhone version?<i></i></summary><p class="a">Not yet. Rookwise launches on Android first.</p></details>
+    </div>
   </div>
 </section>
 
-<section class="final" style="padding-top:0">
-  <div class="wrap">
-    <div class="box">
-      <h2>Ready for your next game?</h2>
-      <p>Join the early test on Google Play and help shape Rookwise before it launches.</p>
-      <a class="btn btn-primary" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">Join the early test</a>
-    </div>
+<!-- ── Final ── -->
+<section class="final">
+  <div class="inner">
+    <h2 class="split" data-split>Your move<span class="serif">.</span></h2>
+    <p class="rv">Join the early test on Google Play and help shape Rookwise before it launches.</p>
+    <a class="btn rv" style="--d:.15s" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">Join the early test →</a>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
+  <div class="inner">
     <a class="logo" href="#top"><img src="icon-512.png" alt=""> Rookwise</a>
     <div class="links">
       <a href="privacy/">Privacy policy</a>
       <a href="privacy/#delete">Delete your data</a>
       <a href="mailto:rajkumar30598@gmail.com">Contact</a>
     </div>
-    <span class="copy">© 2026 Rookwise · Chess engine: Stockfish (GPLv3)</span>
+    <span class="copy">© 2026 Rookwise · Engine: Stockfish (GPLv3)</span>
   </div>
 </footer>
 
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  /* Nav turns solid once you scroll. */
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('solid', scrollY > 40);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* Headlines rise word by word. */
+  $$('[data-split]').forEach((el) => {
+    let i = 0;
+    const walk = (node) => {
+      [...node.childNodes].forEach((child) => {
+        if (child.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.append(part); return; }
+            const w = document.createElement('span'); w.className = 'w';
+            const s = document.createElement('span'); s.textContent = part; s.style.setProperty('--i', i++);
+            w.append(s); frag.append(w);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === 1) walk(child);
+      });
+    };
+    walk(el); el.classList.add('split');
+  });
+
+  /* Reveal on scroll; counters count up; the year bars grow. */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+      $$('[data-count]', e.target).forEach(countUp);
+      if (e.target.id === 'bars') growBars();
+    });
+  }, { threshold: .18, rootMargin: '0px 0px -6% 0px' });
+  $$('.rv, [data-split], .numbers > div, #bars').forEach((el) => io.observe(el));
+
+  function countUp(el) {
+    const target = +el.dataset.count;
+    if (reduce) { el.textContent = target; return; }
+    const t0 = performance.now(), dur = 1400;
+    const tick = (t) => {
+      const p = Math.min(1, (t - t0) / dur), eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  function growBars() { $$('#bars i').forEach((b, k) => setTimeout(() => (b.style.height = b.dataset.h + '%'), k * 70)); }
+
+  /* Privacy line lights up when it's in view. */
+  new IntersectionObserver(([e]) => e.isIntersecting && $('#bigline').classList.add('lit'), { threshold: .6 }).observe($('#bigline'));
+
+  /* Rotating line in the hero. */
+  const rot = $$('.rotator span');
+  let r = 0;
+  if (!reduce) setInterval(() => {
+    rot[r].classList.remove('on'); rot[r].classList.add('off');
+    const prev = r; setTimeout(() => rot[prev].classList.remove('off'), 600);
+    r = (r + 1) % rot.length; rot[r].classList.add('on');
+  }, 2800);
+
+  /* Sticky phone follows the chapter in view. */
+  const shots = $$('#screen img'), chapters = $$('.chapter');
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      chapters.forEach((c) => c.classList.toggle('active', c === e.target));
+      shots.forEach((s, k) => s.classList.toggle('on', k === +e.target.dataset.shot));
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  chapters.forEach((c) => cio.observe(c));
+
+  /* ── The Opera Game, replayed with coach callouts ── */
+  const GAME = [["e4","e2","e4","rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR"],["e5","e7","e5","rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR"],["Nf3","g1","f3","rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R"],["d6","d7","d6","rnbqkbnr/ppp2ppp/3p4/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R"],["d4","d2","d4","rnbqkbnr/ppp2ppp/3p4/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R"],["Bg4","c8","g4","rn1qkbnr/ppp2ppp/3p4/4p3/3PP1b1/5N2/PPP2PPP/RNBQKB1R"],["dxe5","d4","e5","rn1qkbnr/ppp2ppp/3p4/4P3/4P1b1/5N2/PPP2PPP/RNBQKB1R"],["Bxf3","g4","f3","rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5b2/PPP2PPP/RNBQKB1R"],["Qxf3","d1","f3","rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5Q2/PPP2PPP/RNB1KB1R"],["dxe5","d6","e5","rn1qkbnr/ppp2ppp/8/4p3/4P3/5Q2/PPP2PPP/RNB1KB1R"],["Bc4","f1","c4","rn1qkbnr/ppp2ppp/8/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R"],["Nf6","g8","f6","rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R"],["Qb3","f3","b3","rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R"],["Qe7","d8","e7","rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R"],["Nc3","b1","c3","rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R"],["c6","c7","c6","rn2kb1r/pp2qppp/2p2n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R"],["Bg5","c1","g5","rn2kb1r/pp2qppp/2p2n2/4p1B1/2B1P3/1QN5/PPP2PPP/R3K2R"],["b5","b7","b5","rn2kb1r/p3qppp/2p2n2/1p2p1B1/2B1P3/1QN5/PPP2PPP/R3K2R"],["Nxb5","c3","b5","rn2kb1r/p3qppp/2p2n2/1N2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R"],["cxb5","c6","b5","rn2kb1r/p3qppp/5n2/1p2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R"],["Bxb5+","c4","b5","rn2kb1r/p3qppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R"],["Nbd7","b8","d7","r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R"],["O-O-O","e1","c1","r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R"],["Rd8","a8","d8","3rkb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R"],["Rxd7","d1","d7","3rkb1r/p2Rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R"],["Rxd7","d8","d7","4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R"],["Rd1","h1","d1","4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Qe6","e7","e6","4kb1r/p2r1ppp/4qn2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Bxd7+","b5","d7","4kb1r/p2B1ppp/4qn2/4p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Nxd7","f6","d7","4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Qb8+","b3","b8","1Q2kb1r/p2n1ppp/4q3/4p1B1/4P3/8/PPP2PPP/2KR4"],["Nxb8","d7","b8","1n2kb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2KR4"],["Rd8#","d1","d8","1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5"]];
+  // Coach callouts at the moments that decided the game; eval is White's share of the bar.
+  const CALLS = {
+    0: ['#A3A3A3', 'Book', '1. e4', 'An open game. Rookwise knows the opening by name.'],
+    8: ['#A3A3A3', 'Book', '5. Qxf3', 'Philidor Defence: Black gave up the bishop pair early.'],
+    12: ['#81B64C', 'Best', '7. Qb3', 'Double attack on b7 and f7. Black is already in trouble.'],
+    18: ['#1BADA6', 'Great', '10. Nxb5', 'A knight for two pawns to rip the queenside open.'],
+    22: ['#81B64C', 'Best', '12. O-O-O', 'Every white piece joins the attack.'],
+    24: ['#1BADA6', 'Great', '13. Rxd7', 'Rook for knight: the pin on d7 is everything.'],
+    30: ['#26C2A3', 'Brilliant !!', '16. Qb8+', 'The queen sacrifice. The knight has to take…'],
+    32: ['#E05B4B', 'Checkmate', '17. Rd8#', 'Morphy finishes with his last two pieces. Rookwise rates every move like this.'],
+  };
+  const EVAL = [52,52,54,55,58,56,60,59,62,61,64,63,70,68,72,71,74,75,80,78,84,83,86,85,90,88,92,91,95,94,99,99,100];
+  const BADGE = { 18: ['!', '#1BADA6'], 24: ['!', '#1BADA6'], 30: ['!!', '#26C2A3'], 32: ['#', '#E05B4B'] };
+
+  const board = $('#board'), movesEl = $('#moves'), evalFill = $('#evalfill'), coach = $('#coach');
+  const files = 'abcdefgh';
+  const at = (sq) => ({ x: files.indexOf(sq[0]) * 100, y: (8 - +sq[1]) * 100 });
+  for (let r = 0; r < 8; r++) for (let f = 0; f < 8; f++) {
+    const d = document.createElement('div');
+    d.className = 'sq ' + ((r + f) % 2 ? 'd' : 'l');
+    d.style.left = f * 12.5 + '%'; d.style.top = r * 12.5 + '%';
+    d.dataset.sq = files[f] + (8 - r);
+    board.append(d);
+  }
+  let pieces = new Map();
+  function draw(fen) {
+    pieces.forEach((el) => el.remove()); pieces = new Map();
+    fen.split('/').forEach((row, r) => {
+      let f = 0;
+      for (const ch of row) {
+        if (/\d/.test(ch)) { f += +ch; continue; }
+        const sq = files[f] + (8 - r);
+        const el = document.createElement('div'); el.className = 'pc';
+        const color = ch === ch.toUpperCase() ? 'w' : 'b';
+        el.innerHTML = `<img src="img/pieces/${color}${ch.toUpperCase()}.png" alt="">`;
+        const p = at(sq); el.style.transform = `translate(${p.x}%, ${p.y}%)`;
+        board.append(el); pieces.set(sq, el); f++;
+      }
+    });
+  }
+  function highlight(from, to) {
+    $$('.sq.hl', board).forEach((s) => s.classList.remove('hl'));
+    if (from) [from, to].forEach((sq) => $(`.sq[data-sq="${sq}"]`, board).classList.add('hl'));
+  }
+  function badge(sq, mark) {
+    $$('.badge', board).forEach((b) => b.remove());
+    if (!mark) return;
+    const b = document.createElement('div'); b.className = 'badge';
+    const p = at(sq); b.style.transform = `translate(${p.x}%, ${p.y}%)`;
+    b.innerHTML = `<b style="background:${mark[1]}">${mark[0]}</b>`; board.append(b);
+  }
+  function say(call) {
+    coach.classList.add('swap');
+    setTimeout(() => {
+      $('#coach-av').style.background = call[0];
+      $('#coach-av').textContent = call[1] === 'Checkmate' ? '#' : call[1].startsWith('Brilliant') ? '!!' : call[1] === 'Great' ? '!' : call[1] === 'Book' ? '♞' : '★';
+      $('#coach-t').innerHTML = `${call[1]} <small>${call[2]}</small>`;
+      $('#coach-s').textContent = call[3];
+      coach.classList.remove('swap');
+    }, 300);
+  }
+  function renderMoves(ply) {
+    movesEl.innerHTML = '';
+    GAME.slice(Math.max(0, ply - 7), ply + 1).forEach((m, k, arr) => {
+      const idx = Math.max(0, ply - 7) + k;
+      const s = document.createElement('span');
+      s.textContent = (idx % 2 === 0 ? `${idx / 2 + 1}. ` : '') + m[0];
+      if (k === arr.length - 1) s.className = 'cur';
+      movesEl.append(s);
+    });
+  }
+
+  const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+  let ply = -1, timer;
+  function step() {
+    ply++;
+    if (ply >= GAME.length) { ply = -1; draw(START); highlight(); badge(); evalFill.style.height = '50%'; movesEl.innerHTML = ''; timer = setTimeout(step, 1200); return; }
+    const [san, from, to, fen] = GAME[ply];
+    const mover = pieces.get(from), victim = pieces.get(to);
+    if (victim && victim !== mover) victim.classList.add('gone');
+    if (mover) { const p = at(to); mover.style.transform = `translate(${p.x}%, ${p.y}%)`; mover.style.zIndex = 2; }
+    if (san === 'O-O-O') { const rook = pieces.get('a1'); if (rook) { const p = at('d1'); rook.style.transform = `translate(${p.x}%, ${p.y}%)`; } }
+    highlight(from, to); renderMoves(ply);
+    evalFill.style.height = EVAL[ply] + '%';
+    setTimeout(() => { draw(fen); badge(to, BADGE[ply]); }, 450);
+    if (CALLS[ply]) say(CALLS[ply]);
+    const pause = ply === GAME.length - 1 ? 5200 : CALLS[ply] ? 2300 : 900;
+    timer = setTimeout(step, pause);
+  }
+  draw(START);
+  if (reduce) { ply = GAME.length - 1; draw(GAME[ply][3]); highlight('d1', 'd8'); badge('d8', BADGE[32]); evalFill.style.height = '100%'; renderMoves(ply); say(CALLS[32]); }
+  else {
+    // Only play while the board is on screen.
+    let running = false;
+    new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !running) { running = true; timer = setTimeout(step, 900); }
+      else if (!e.isIntersecting && running) { running = false; clearTimeout(timer); }
+    }).observe(board);
+  }
+
+  /* ── Chess960: a new back rank every few seconds ── */
+  function rank960(n) {
+    const rank = Array(8).fill(null); let x = n;
+    rank[(x % 4) * 2 + 1] = 'B'; x = Math.floor(x / 4);
+    rank[(x % 4) * 2] = 'B'; x = Math.floor(x / 4);
+    const empty = () => rank.map((p, i) => (p ? -1 : i)).filter((i) => i >= 0);
+    rank[empty()[x % 6]] = 'Q'; x = Math.floor(x / 6);
+    const KN = ['NN---','N-N--','N--N-','N---N','-NN--','-N-N-','-N--N','--NN-','--N-N','---NN'][x];
+    empty().forEach((sq, i) => { if (KN[i] === 'N') rank[sq] = 'N'; });
+    const e = empty(); rank[e[0]] = 'R'; rank[e[1]] = 'K'; rank[e[2]] = 'R';
+    return rank;
+  }
+  const rankEl = $('#rank');
+  for (let i = 0; i < 8; i++) { const d = document.createElement('div'); d.innerHTML = '<img alt="">'; rankEl.append(d); }
+  const setRank = (n) => {
+    $$('img', rankEl).forEach((img, i) => {
+      const p = rank960(n)[i];
+      img.classList.add('flip');
+      setTimeout(() => { img.src = `img/pieces/w${p}.png`; img.classList.remove('flip'); }, 200 + i * 60);
+    });
+    $('#pos960').textContent = n === 518 ? 'Position 518 · the standard setup' : `Position ${n} of 960`;
+  };
+  setRank(518);
+  if (!reduce) setInterval(() => setRank(Math.floor(Math.random() * 960)), 3200);
+
+  /* ── Voice: moves "spoken" into the bar ── */
+  const phrases = ['knight f3', 'e takes d5', 'castle kingside', 'queen to h5, check', 'bishop takes c6'];
+  const typed = $('#typed'); let ph = 0;
+  function speak() {
+    const text = phrases[ph++ % phrases.length]; let i = 0;
+    typed.textContent = '';
+    const t = setInterval(() => { typed.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(t); setTimeout(speak, 1700); } }, 70);
+  }
+  if (reduce) typed.textContent = phrases[0]; else speak();
+
+  /* ── Mirror bot: your repertoire, line by line ── */
+  const lines = ['Book: 1.e4 e5 2.Nf3 Nc6 3.Bc4', 'Book: 1.e4 c5 2.Nf3 d6 3.d4', 'Book: 1.d4 d5 2.c4 e6 3.Nc3', 'Out of book · now at your level'];
+  let li = 0;
+  if (!reduce) setInterval(() => {
+    const el = $('#bookline'); el.style.opacity = 0;
+    setTimeout(() => { el.textContent = lines[++li % lines.length]; el.style.opacity = 1; }, 300);
+  }, 2600);
+  $('#bookline').style.transition = 'opacity .3s';
+
+  /* Reel loops seamlessly: duplicate its frames once. */
+  const reel = $('#reel'); [...reel.children].forEach((f) => reel.append(f.cloneNode(true)));
+})();
+</script>
 </body>
 </html>
