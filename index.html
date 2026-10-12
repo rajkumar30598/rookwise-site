@@ -3,23 +3,367 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rookwise</title>
+<title>Rookwise · Your pocket chess coach</title>
+<meta name="description" content="Learn chess, review your games like a coach, train on puzzles from your own mistakes and play the Rookwise Bot. Free, no ads, works offline. The engine runs on your phone.">
 <link rel="icon" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="theme-color" content="#1B1F24">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rookwise · Your pocket chess coach">
+<meta property="og:description" content="Learn chess, review your games and train on your own mistakes. Free, no ads, offline.">
+<meta property="og:image" content="https://rajkumar30598.github.io/rookwise-site/img/og.jpg">
+<meta property="og:url" content="https://rajkumar30598.github.io/rookwise-site/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root { color-scheme: light dark; --bg:#F6F7F9; --text:#1A1D23; --accent:#4E7F2E; }
-@media (prefers-color-scheme: dark) { :root { --bg:#0F1216; --text:#E8EAEE; --accent:#8BC34A; } }
-body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; background:var(--bg); color:var(--text); font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-align:center; padding:16px; box-sizing:border-box; }
-img { width:96px; height:96px; border-radius:22px; }
-h1 { margin:12px 0 4px; }
-a { color:var(--accent); }
+:root {
+  --bg: #1B1F24;
+  --bg-2: #22262C;
+  --surface: #2A2E35;
+  --surface-2: #343940;
+  --border: #3A3F47;
+  --text: #F2F2F0;
+  --muted: #A8A39A;
+  --brand: #81B64C;
+  --brand-dark: #5D8A31;
+  --brand-ink: #FFFFFF;
+  --shadow: 0 18px 50px rgba(0, 0, 0, .35);
+}
+:root[data-theme="light"] {
+  --bg: #F6F5F1;
+  --bg-2: #EEECE6;
+  --surface: #FFFFFF;
+  --surface-2: #F1EFEA;
+  --border: #E2DFD8;
+  --text: #1E2126;
+  --muted: #5F6670;
+  --brand: #5D8A31;
+  --brand-dark: #4A7027;
+  --shadow: 0 18px 50px rgba(30, 33, 38, .12);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F6F5F1;
+    --bg-2: #EEECE6;
+    --surface: #FFFFFF;
+    --surface-2: #F1EFEA;
+    --border: #E2DFD8;
+    --text: #1E2126;
+    --muted: #5F6670;
+    --brand: #5D8A31;
+    --brand-dark: #4A7027;
+    --shadow: 0 18px 50px rgba(30, 33, 38, .12);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+img { max-width: 100%; display: block; }
+.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+/* Nav */
+nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+nav .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 800; font-size: 20px; letter-spacing: -.3px; }
+.logo:hover { text-decoration: none; }
+.logo img { width: 34px; height: 34px; border-radius: 9px; }
+nav .links { margin-left: auto; display: flex; gap: 22px; font-weight: 600; font-size: 15px; }
+nav .links a { color: var(--muted); }
+nav .links a:hover { color: var(--text); text-decoration: none; }
+@media (max-width: 720px) { nav .links .hide-sm { display: none; } }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 14px; font-weight: 700; font-size: 16px; border: 0; cursor: pointer; }
+.btn:hover { text-decoration: none; }
+.btn-primary { background: var(--brand); color: var(--brand-ink); box-shadow: inset 0 -4px 0 var(--brand-dark); }
+.btn-primary:hover { filter: brightness(1.06); }
+.btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+
+/* Hero */
+.hero { padding: 72px 0 56px; overflow: hidden; }
+.hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: color-mix(in srgb, var(--brand) 16%, transparent); color: var(--brand); font-weight: 700; font-size: 13px; letter-spacing: .3px; }
+h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.04; letter-spacing: -1.8px; margin: 18px 0 18px; font-weight: 800; }
+h1 em { font-style: normal; color: var(--brand); }
+.lead { font-size: 19px; color: var(--muted); max-width: 540px; margin: 0 0 28px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.soon { font-size: 14px; color: var(--muted); margin-top: 14px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.pill { padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--muted); }
+.phones { position: relative; height: 560px; }
+.phone { position: absolute; width: 250px; border-radius: 34px; padding: 9px; background: #0B0D10; box-shadow: var(--shadow); border: 1px solid #2F333A; }
+.phone img { border-radius: 26px; }
+.phone.a { right: 150px; top: 30px; transform: rotate(-6deg); }
+.phone.b { right: 0; top: 0; transform: rotate(4deg); z-index: 1; }
+@media (max-width: 900px) {
+  .hero { padding-top: 44px; }
+  .hero .wrap { grid-template-columns: 1fr; }
+  .phones { height: 470px; max-width: 420px; margin: 8px auto 0; width: 100%; }
+  .phone { width: 210px; }
+  .phone.a { left: 0; right: auto; }
+  .phone.b { right: 0; }
+}
+
+/* Stats strip */
+.strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-2); }
+.strip .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding-top: 26px; padding-bottom: 26px; text-align: center; }
+.strip b { display: block; font-size: 28px; font-weight: 800; letter-spacing: -.5px; }
+.strip span { color: var(--muted); font-size: 14px; }
+@media (max-width: 640px) { .strip .wrap { grid-template-columns: repeat(2, 1fr); row-gap: 22px; } }
+
+/* Sections */
+section { padding: 84px 0; }
+.section-head { max-width: 680px; margin: 0 0 40px; }
+h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.1; letter-spacing: -1px; margin: 10px 0 12px; font-weight: 800; }
+.section-head p { color: var(--muted); font-size: 18px; margin: 0; }
+
+/* Feature cards */
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+.card { position: relative; padding: 24px; border-radius: 20px; background: linear-gradient(160deg, color-mix(in srgb, var(--c) 20%, var(--surface)) 0%, var(--surface) 60%); border: 1px solid color-mix(in srgb, var(--c) 28%, var(--border)); }
+.card .ic { width: 48px; height: 48px; border-radius: 14px; background: var(--c); display: grid; place-items: center; margin-bottom: 16px; }
+.card .ic svg { width: 26px; height: 26px; color: #fff; }
+.card h3 { margin: 0 0 8px; font-size: 20px; letter-spacing: -.3px; }
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+.card li { margin: 4px 0; }
+.new { position: absolute; top: 18px; right: 18px; font-size: 11px; font-weight: 800; letter-spacing: .6px; padding: 4px 8px; border-radius: 6px; background: var(--brand); color: #fff; }
+
+/* Screenshot rail */
+.rail { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 20px 22px; margin: 0 -20px; scrollbar-width: thin; }
+.shot { flex: none; width: 236px; margin: 0; scroll-snap-align: start; }
+.shot .frame { border-radius: 30px; padding: 8px; background: #0B0D10; border: 1px solid #2F333A; box-shadow: var(--shadow); }
+.shot img { border-radius: 23px; }
+.shot p { margin: 12px 4px 0; font-weight: 600; font-size: 15px; }
+.shot small { display: block; color: var(--muted); font-weight: 500; font-size: 13px; }
+
+/* Privacy */
+.privacy { background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.privacy .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
+@media (max-width: 900px) { .privacy .wrap { grid-template-columns: 1fr; } }
+.checks { display: grid; gap: 14px; }
+.check { display: flex; gap: 14px; padding: 18px; border-radius: 16px; background: var(--surface); border: 1px solid var(--border); }
+.check svg { width: 24px; height: 24px; flex: none; color: var(--brand); margin-top: 2px; }
+.check b { display: block; }
+.check span { color: var(--muted); font-size: 15px; }
+
+/* FAQ */
+details { border-bottom: 1px solid var(--border); padding: 18px 0; }
+details:first-of-type { border-top: 1px solid var(--border); }
+summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--brand); font-size: 22px; line-height: 1; }
+details[open] summary::after { content: "−"; }
+details p { color: var(--muted); margin: 10px 0 0; }
+
+/* Final CTA */
+.final { text-align: center; }
+.final .box { padding: 56px 24px; border-radius: 28px; background: linear-gradient(135deg, #8DC255 0%, #5D8A31 100%); color: #fff; }
+.final h2 { color: #fff; }
+.final p { color: rgba(255, 255, 255, .88); font-size: 18px; max-width: 560px; margin: 0 auto 26px; }
+.final .btn-primary { background: #fff; color: #3F6420; box-shadow: inset 0 -4px 0 #DDE8D1; }
+
+footer { padding: 36px 0 48px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
+footer .links { display: flex; gap: 20px; flex-wrap: wrap; }
+footer .links a { color: var(--muted); }
+footer .copy { margin-left: auto; }
+@media (max-width: 640px) { footer .copy { margin-left: 0; } }
 </style>
 </head>
 <body>
-<main>
-<img src="icon-512.png" alt="">
-<h1>Rookwise</h1>
-<p>Your pocket chess coach.</p>
-<p><a href="privacy/">Privacy policy</a> · <a href="mailto:rajkumar30598@gmail.com">Contact</a></p>
-</main>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="icon-512.png" alt=""> Rookwise</a>
+    <div class="links">
+      <a class="hide-sm" href="#features">Features</a>
+      <a class="hide-sm" href="#screens">Screens</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Free · No ads · Works offline</span>
+      <h1>Your pocket<br><em>chess coach.</em></h1>
+      <p class="lead">Learn the game from zero, review every game like a coach, and turn your own mistakes into puzzles. A strong engine runs right on your phone, so your games never leave it.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.4.3-.6.8-.6 1.4v16.8c0 .6.2 1.1.6 1.4l9.6-9.8-9.6-9.8Zm10.6 10.8 2.6 2.6-11.3 6.5 8.7-9.1Zm0-2-8.7-9.1 11.3 6.5-2.6 2.6Zm3.9-1.6 3.1 1.8c.9.5.9 1.8 0 2.3l-3.1 1.8-2.9-2.9 2.9-3Z"/></svg>
+          Join the early test
+        </a>
+        <a class="btn btn-ghost" href="#features">See what it does</a>
+      </div>
+      <p class="soon">Coming soon to Google Play. Testers get it first, for free.</p>
+      <div class="pills">
+        <span class="pill">44 lessons</span>
+        <span class="pill">Game review</span>
+        <span class="pill">Puzzles from your games</span>
+        <span class="pill">14 languages</span>
+      </div>
+    </div>
+    <div class="phones" aria-hidden="true">
+      <div class="phone a"><img src="img/3-game-review.jpg" alt=""></div>
+      <div class="phone b"><img src="img/1-learn.jpg" alt=""></div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div><b>44</b><span>chess lessons</span></div>
+    <div><b>~3200</b><span>top bot strength</span></div>
+    <div><b>0</b><span>ads, accounts or limits</span></div>
+    <div><b>14</b><span>languages</span></div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Everything in one app</span>
+      <h2>Learn, play, review, improve.</h2>
+      <p>From your very first move to fixing the mistakes that cost you games.</p>
+    </div>
+    <div class="grid">
+      <article class="card" style="--c:#F59E0B">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
+        <h3>Learn chess from zero</h3>
+        <ul><li>44 short lessons, from how the pieces move to simple endgames</li><li>Practise on the board with hints and stars</li><li>Read aloud in your language</li></ul>
+      </article>
+      <article class="card" style="--c:#3B82F6">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
+        <h3>Game review like a coach</h3>
+        <ul><li>Every move rated, from Brilliant to Blunder</li><li>Accuracy, key moments and the move that punishes a mistake</li><li>Import from Lichess and Chess.com</li></ul>
+      </article>
+      <article class="card" style="--c:#06B6D4">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4v3a2 2 0 1 0 4 0V3h3v7h-3a2 2 0 1 0 0 4h3v7h-7v-3a2 2 0 1 0-4 0v3H3v-7h3a2 2 0 1 0 0-4H3V3h7Z"/></svg></div>
+        <h3>Puzzles from your own games</h3>
+        <ul><li>Your mistakes become puzzles until you've mastered them</li><li>Daily puzzle with a streak and a home-screen widget</li><li>Puzzle Rush, themes and a puzzle rating</li></ul>
+      </article>
+      <article class="card" style="--c:#81B64C">
+        <span class="new">NEW</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 9h.01M9 15h.01M15 15h.01M12 12h.01"/></svg></div>
+        <h3>Play the Rookwise Bot</h3>
+        <ul><li>Beginner to ~3200, four playing styles, a coach on every move</li><li>Chess960 and odds games</li><li>Mirror bot: play an opponent with your own openings</li></ul>
+      </article>
+      <article class="card" style="--c:#8E6CEF">
+        <span class="new">NEW</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div>
+        <h3>Blindfold and voice</h3>
+        <ul><li>Hide the pieces and play from memory</li><li>Say your move: "knight f3", "castle kingside"</li><li>The bot's moves read aloud</li></ul>
+      </article>
+      <article class="card" style="--c:#E6A23C">
+        <span class="new">NEW</span>
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+        <h3>Insights and your year in chess</h3>
+        <ul><li>Strengths and weaknesses by phase and opening</li><li>A yearly recap with a card to share</li><li>Daily goals and 23 achievements</li></ul>
+      </article>
+      <article class="card" style="--c:#14B8A6">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></div>
+        <h3>Train your openings</h3>
+        <ul><li>A trainer built from the lines you actually play</li><li>Opening explorer for your own games</li><li>12 famous traps and 12 classic endgames</li></ul>
+      </article>
+      <article class="card" style="--c:#64748B">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <h3>Bot vs Bot</h3>
+        <ul><li>Watch two bots play, each with its own style</li><li>Your pace: pause and step through</li><li>Guess the best move before the bot plays it</li></ul>
+      </article>
+      <article class="card" style="--c:#EF4444">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Analysis tools</h3>
+        <ul><li>A strong on-device engine with up to three lines</li><li>Scan a board from a photo or screenshot</li><li>Follow top tournaments live</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="screens" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">A look inside</span>
+      <h2>Made for learning, built to feel good.</h2>
+      <p>Dark and light themes, 11 boards, 10 piece sets and 7 accent colours.</p>
+    </div>
+    <div class="rail" role="list">
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/1-learn.jpg" alt="The Learn tab with Bot vs Bot and the chess course" loading="lazy"></div><p>Learn tab<small>Course, drills and Bot vs Bot</small></p></figure>
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/3-game-review.jpg" alt="A game report with accuracy and key moments" loading="lazy"></div><p>Game review<small>Accuracy and key moments</small></p></figure>
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/5-play-with-coach.jpg" alt="Playing the bot with hints and the coach" loading="lazy"></div><p>Play with a coach<small>Hints, eval bar, verdicts</small></p></figure>
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/4-lesson.jpg" alt="A lesson about forks" loading="lazy"></div><p>Lessons<small>Arrows, coach and tips</small></p></figure>
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/2-bot-vs-bot.jpg" alt="Two bots playing, every move rated" loading="lazy"></div><p>Bot vs Bot<small>Every move rated</small></p></figure>
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/6-learn-course.jpg" alt="The chess course with levels and stars" loading="lazy"></div><p>Your course<small>Level, XP and stars</small></p></figure>
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/7-analyze.jpg" alt="Analysis with engine lines" loading="lazy"></div><p>Analyze<small>Up to three engine lines</small></p></figure>
+      <figure class="shot" role="listitem"><div class="frame"><img src="img/8-home.jpg" alt="The home screen" loading="lazy"></div><p>Home<small>Everything one tap away</small></p></figure>
+    </div>
+  </div>
+</section>
+
+<section class="privacy" id="privacy">
+  <div class="wrap">
+    <div class="section-head" style="margin:0">
+      <span class="eyebrow">Private by design</span>
+      <h2>Your games stay on your phone.</h2>
+      <p>No account, no ads, no server of ours holding your data. <a href="privacy/">Read the privacy policy</a>.</p>
+    </div>
+    <div class="checks">
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>The engine runs on your phone</b><span>Analysis works offline. Games, puzzles and notes are stored on the device.</span></div></div>
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Fair play built in</b><span>Rookwise is for learning and review. Engine help pauses while a live-play chess app is open.</span></div></div>
+      <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Anonymous statistics, your choice</b><span>Which screens are used, never your games or accounts. On by default; one switch turns them off.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:820px">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2>Good to know.</h2>
+    </div>
+    <details open><summary>Is Rookwise free?</summary><p>Yes. No ads, no subscriptions and no limits. Every feature is included.</p></details>
+    <details><summary>When can I get it?</summary><p>Rookwise is in testing on Google Play. Send a quick email with "Join the early test" and you'll get an invite to install it before the public release.</p></details>
+    <details><summary>Does it work without internet?</summary><p>Yes. Lessons, puzzles, game review, the bot and analysis all run on your phone. Importing games and live broadcasts need a connection.</p></details>
+    <details><summary>Can I use it with my Lichess or Chess.com account?</summary><p>Yes. Sign in to Lichess or link a Chess.com username, and your finished games are imported for review and turned into puzzles.</p></details>
+    <details><summary>Can it help me during an online game?</summary><p>No, and that's on purpose. Rookwise is for learning and reviewing finished games, and it never asks Lichess for access to games in progress.</p></details>
+    <details><summary>Is there an iPhone version?</summary><p>Not yet. Rookwise launches on Android first.</p></details>
+  </div>
+</section>
+
+<section class="final" style="padding-top:0">
+  <div class="wrap">
+    <div class="box">
+      <h2>Ready for your next game?</h2>
+      <p>Join the early test on Google Play and help shape Rookwise before it launches.</p>
+      <a class="btn btn-primary" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">Join the early test</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="icon-512.png" alt=""> Rookwise</a>
+    <div class="links">
+      <a href="privacy/">Privacy policy</a>
+      <a href="privacy/#delete">Delete your data</a>
+      <a href="mailto:rajkumar30598@gmail.com">Contact</a>
+    </div>
+    <span class="copy">© 2026 Rookwise · Chess engine: Stockfish (GPLv3)</span>
+  </div>
+</footer>
+
 </body>
 </html>
