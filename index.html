@@ -414,8 +414,8 @@ footer .copy { margin-left: auto; }
 
 <div class="marquee" aria-hidden="true">
   <div class="track">
-    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold &amp; voice</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
-    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold &amp; voice</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
+    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold mode</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
+    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold mode</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
   </div>
 </div>
 
@@ -457,7 +457,7 @@ footer .copy { margin-left: auto; }
           <span class="num">04 — Play</span>
           <h3>A bot that <span class="serif">teaches back.</span></h3>
           <p>From beginner to around 3200, in four styles. Live hints, an evaluation bar and a coach that rates your moves while you play. Blunder check stops you before the bot punishes a slip.</p>
-          <ul><li>Chess960 &amp; odds</li><li>Blindfold &amp; voice</li><li>Pass and play</li></ul>
+          <ul><li>Chess960 &amp; odds</li><li>Blindfold &amp; read-aloud</li><li>Pass and play</li></ul>
           <div class="mobile-shot"><img src="img/5-play-with-coach.jpg" alt="Playing the bot with the coach" loading="lazy"></div>
         </article>
         <article class="chapter" data-shot="4">
@@ -516,10 +516,10 @@ footer .copy { margin-left: auto; }
         <div class="demo"><div class="rank" id="rank"></div><div class="pos960" id="pos960">Position 518 · the standard setup</div></div>
       </article>
       <article class="tile t-voice rv" style="--d:.1s">
-        <h3>Blindfold &amp; voice</h3>
-        <p>Hide the pieces and play from memory. Say your move, and hear the bot's reply.</p>
+        <h3>Blindfold &amp; read-aloud</h3>
+        <p>Hide the pieces and play from memory. The bot's moves are read aloud, so you can follow the game without looking.</p>
         <div class="demo">
-          <div class="voice-ui"><div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"/><path d="M19 11a7 7 0 0 1-14 0M12 18v3"/></svg></div><div class="typed" id="typed"></div></div>
+          <div class="voice-ui"><div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></div><div class="typed" id="typed"></div></div>
           <div class="wave" aria-hidden="true"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.28s"></i><i style="animation-delay:.18s"></i></div>
         </div>
       </article>
@@ -904,8 +904,8 @@ footer .copy { margin-left: auto; }
   setRank(518);
   if (!reduce) setInterval(() => setRank(Math.floor(Math.random() * 960)), 3200);
 
-  /* ── Voice: moves "spoken" into the bar ── */
-  const phrases = ['knight f3', 'e takes d5', 'castle kingside', 'queen to h5, check', 'bishop takes c6'];
+  /* ── Read-aloud: the bot's moves, as the phone's voice says them ── */
+  const phrases = ['Knight takes e5', 'Queen h5, check', 'Castles kingside', 'Bishop takes c6', 'Rook d8, checkmate'];
   const typed = $('#typed'); let ph = 0;
   function speak() {
     const text = phrases[ph++ % phrases.length]; let i = 0;
