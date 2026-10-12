@@ -120,7 +120,14 @@ nav .links a:hover { color: var(--text); }
 .moves { min-width: 0; display: flex; gap: 6px; margin: 0 0 14px 26px; font: 500 13px var(--mono); color: var(--muted); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 18%); white-space: nowrap; justify-content: flex-end; }
 .moves span { padding: 4px 8px; border-radius: 6px; transition: background .3s, color .3s; flex: none; }
 .moves span.cur { background: rgba(129, 182, 76, .18); color: var(--green-2); }
-.game-cap { margin: 0 0 10px 26px; font-size: 13px; color: var(--muted); }
+.game-cap { margin: 0 0 10px 26px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+.game-cap .t { flex: 1; }
+.sound { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px 7px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .04); color: var(--muted); font: 600 13px var(--sans); cursor: pointer; transition: color .2s, background .2s, border-color .2s; }
+.sound:hover { color: var(--text); border-color: rgba(255, 255, 255, .25); }
+.sound svg { width: 16px; height: 16px; }
+.sound .on { display: none; }
+.sound[aria-pressed="true"] { color: #0E1A05; background: var(--green); border-color: var(--green); }
+.sound[aria-pressed="true"] .on { display: block; } .sound[aria-pressed="true"] .off { display: none; }
 .game-cap b { color: var(--text); font-weight: 600; }
 @media (max-width: 980px) {
   .hero .inner { grid-template-columns: minmax(0, 1fr); }
@@ -331,7 +338,12 @@ footer .copy { margin-left: auto; }
     </div>
 
     <div class="stage rv" style="--d:.2s" aria-label="A famous game replayed with the Rookwise coach">
-      <div class="game-cap"><b>The Opera Game</b> · Morphy, Paris 1858</div>
+      <div class="game-cap"><span class="t"><b>The Opera Game</b> · Morphy, Paris 1858</span>
+        <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Board sound">
+          <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m23 9-6 6M17 9l6 6"/></svg>
+          <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+          <span>Sound</span>
+        </button></div>
       <div class="moves" id="moves"></div>
       <div class="board-wrap">
         <div class="evalbar"><i id="evalfill"></i></div>
@@ -695,6 +707,74 @@ footer .copy { margin-left: auto; }
     });
   }
 
+  /* ── Board sounds, synthesized: a wooden tap per move (no audio files) ── */
+  const sound = (() => {
+    let ctx = null, noise = null, on = false;
+    try { on = localStorage.getItem('rw-sound') === '1'; } catch {}
+    const ensure = () => {
+      if (!ctx) {
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
+        noise = ctx.createBuffer(1, ctx.sampleRate * 0.2, ctx.sampleRate);
+        const d = noise.getChannelData(0);
+        for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      }
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    };
+    // One piece set down on a wooden board: a filtered click for the contact, a low
+    // resonant "thock" for the board's body, both gone within about a tenth of a second.
+    function knock(t, { pitch = 1, gain = 1, bright = 1 } = {}) {
+      const c = ctx, out = c.createGain();
+      out.gain.value = 0.9 * gain; out.connect(c.destination);
+      const n = c.createBufferSource(); n.buffer = noise;
+      const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1800 * bright * pitch; bp.Q.value = 1.4;
+      const ng = c.createGain();
+      ng.gain.setValueAtTime(0.0001, t); ng.gain.exponentialRampToValueAtTime(0.55, t + 0.002); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+      n.connect(bp).connect(ng).connect(out); n.start(t); n.stop(t + 0.06);
+      [[210, 0.6, 0.11], [470, 0.28, 0.07], [1150, 0.12, 0.04]].forEach(([f, g, len]) => {
+        const o = c.createOscillator(), og = c.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(f * pitch * 1.18, t); o.frequency.exponentialRampToValueAtTime(f * pitch, t + 0.02);
+        og.gain.setValueAtTime(0.0001, t); og.gain.exponentialRampToValueAtTime(g, t + 0.003); og.gain.exponentialRampToValueAtTime(0.0001, t + len);
+        o.connect(og).connect(out); o.start(t); o.stop(t + len + 0.02);
+      });
+    }
+    function ping(t, f, g = 0.12, len = 0.35) {
+      const c = ctx, o = c.createOscillator(), og = c.createGain();
+      o.type = 'triangle'; o.frequency.value = f;
+      og.gain.setValueAtTime(0.0001, t); og.gain.exponentialRampToValueAtTime(g, t + 0.01); og.gain.exponentialRampToValueAtTime(0.0001, t + len);
+      o.connect(og).connect(c.destination); o.start(t); o.stop(t + len + 0.05);
+    }
+    const kinds = {
+      move: (t) => knock(t),
+      capture: (t) => { knock(t, { pitch: 1.08, gain: 0.75, bright: 1.25 }); knock(t + 0.05, { pitch: 0.92, gain: 1.05 }); },
+      castle: (t) => { knock(t); knock(t + 0.11, { pitch: 1.1, gain: 0.85 }); },
+      check: (t) => { knock(t, { bright: 1.15 }); ping(t + 0.02, 988, 0.08, 0.28); },
+      mate: (t) => { knock(t, { pitch: 0.85, gain: 1.1 }); [523, 659, 784].forEach((f, k) => ping(t + 0.08 + k * 0.09, f, 0.09, 0.7)); },
+    };
+    return {
+      get on() { return on; },
+      set(value) {
+        on = value;
+        try { localStorage.setItem('rw-sound', on ? '1' : '0'); } catch {}
+        if (on) { ensure(); kinds.move(ctx.currentTime + 0.02); }
+      },
+      play(kind) {
+        if (!on) return;
+        try { ensure(); if (kinds[kind]) kinds[kind](ctx.currentTime + 0.005); } catch {}
+      },
+    };
+  })();
+  // Browsers start audio only after a tap: unlock it on the first one if sound was left on.
+  const unlock = () => { if (sound.on) sound.play('none'); removeEventListener('pointerdown', unlock); removeEventListener('keydown', unlock); };
+  addEventListener('pointerdown', unlock); addEventListener('keydown', unlock);
+  const soundBtn = $('#sound');
+  const showSound = () => soundBtn.setAttribute('aria-pressed', String(sound.on));
+  showSound();
+  soundBtn.addEventListener('click', () => { sound.set(!sound.on); showSound(); });
+  const soundFor = (san, captured) =>
+    san.endsWith('#') ? 'mate' : san.startsWith('O-O') ? 'castle' : san.endsWith('+') ? 'check' : captured ? 'capture' : 'move';
+
   const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
   let ply = -1, timer;
   function step() {
@@ -706,6 +786,8 @@ footer .copy { margin-left: auto; }
     if (mover) { const p = at(to); mover.style.transform = `translate(${p.x}%, ${p.y}%)`; mover.style.zIndex = 2; }
     if (san === 'O-O-O') { const rook = pieces.get('a1'); if (rook) { const p = at('d1'); rook.style.transform = `translate(${p.x}%, ${p.y}%)`; } }
     highlight(from, to); renderMoves(ply);
+    // The sound lands with the piece, as in the app.
+    setTimeout(() => sound.play(soundFor(san, !!victim && victim !== mover)), 380);
     evalFill.style.height = EVAL[ply] + '%';
     setTimeout(() => { draw(fen); badge(to, BADGE[ply]); }, 450);
     if (CALLS[ply]) say(CALLS[ply]);
