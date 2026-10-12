@@ -4,619 +4,464 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rookwise · Your pocket chess coach</title>
-<meta name="description" content="Learn chess, review your games like a coach, train on puzzles from your own mistakes and play the Rookwise Bot. Free, no ads, works offline. The engine runs on your phone.">
+<meta name="description" content="Learn chess from zero, review your games like a coach and train on puzzles from your own mistakes. Free, no ads, works offline. The engine runs on your phone.">
 <link rel="icon" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-512.png">
-<meta name="theme-color" content="#131619">
+<meta name="theme-color" content="#FBF7EE">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rookwise · Your pocket chess coach">
 <meta property="og:description" content="Learn chess, review your games and train on your own mistakes. Free, no ads, offline.">
 <meta property="og:image" content="https://rajkumar30598.github.io/rookwise-site/img/og.jpg">
 <meta property="og:url" content="https://rajkumar30598.github.io/rookwise-site/">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://rajkumar30598.github.io/rookwise-site/">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Rookwise","alternateName":"Rookwise: Chess Coach & Review","operatingSystem":"Android","applicationCategory":"GameApplication","description":"Learn chess, review your games like a coach, train on puzzles from your own mistakes and play the Rookwise Bot. Free, no ads, works offline.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"image":"https://rajkumar30598.github.io/rookwise-site/icon-512.png","url":"https://rajkumar30598.github.io/rookwise-site/","inLanguage":["en","hi","ta","es","pt","ru","de","fr","tr","id","it","ja","ko","bn"]}
 </script>
-<link rel="canonical" href="https://rajkumar30598.github.io/rookwise-site/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #131619;
-  --ink-2: #1A1E22;
-  --ink-3: #23282D;
-  --line: rgba(255, 255, 255, .09);
-  --paper: #F3F1EA;
-  --paper-2: #E9E6DC;
-  --text: #F2F1EC;
-  --muted: #9C9A93;
-  --green: #81B64C;
-  --green-2: #A3D16E;
-  --green-deep: #4B7426;
-  --light-sq: #EEEED2;
-  --dark-sq: #769656;
-  --gold: #F2B33D;
-  --pad: clamp(20px, 5vw, 72px);
-  --serif: "Instrument Serif", Georgia, serif;
-  --sans: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --bg: #FBF7EE;
+  --bg-2: #F4EEDF;
+  --card: #FFFFFF;
+  --ink: #1F2328;
+  --ink-2: #4B5058;
+  --muted: #7A7F87;
+  --line: #ECE5D4;
+  --green: #6FA83D;
+  --green-hi: #81B64C;
+  --green-dk: #4E7F25;
+  --green-soft: #E5F2D6;
+  --amber: #FFB020; --amber-soft: #FFF0CC;
+  --sky: #2F9BF0; --sky-soft: #DDEFFF;
+  --teal: #13B5A6; --teal-soft: #D5F4EF;
+  --violet: #8B6CF0; --violet-soft: #ECE5FF;
+  --coral: #FF6B57; --coral-soft: #FFE3DD;
+  --light-sq: #EEEED2; --dark-sq: #769656;
+  --shadow: 0 30px 60px -30px rgba(60, 50, 20, .35);
+  --phone-shadow: 0 50px 90px -40px rgba(40, 50, 20, .55);
+  --display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --pad: clamp(18px, 5vw, 64px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15181B; --bg-2: #1B1F23; --card: #22272C; --ink: #F3F1EA; --ink-2: #C9C6BD; --muted: #9A978F; --line: #2E343A;
+    --green-soft: #26331B; --amber-soft: #3A2E12; --sky-soft: #142B3D; --teal-soft: #11312D; --violet-soft: #272140; --coral-soft: #3A1E1A;
+    --shadow: 0 30px 60px -30px rgba(0, 0, 0, .7); --phone-shadow: 0 50px 90px -40px rgba(0, 0, 0, .9);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15181B; --bg-2: #1B1F23; --card: #22272C; --ink: #F3F1EA; --ink-2: #C9C6BD; --muted: #9A978F; --line: #2E343A;
+  --green-soft: #26331B; --amber-soft: #3A2E12; --sky-soft: #142B3D; --teal-soft: #11312D; --violet-soft: #272140; --coral-soft: #3A1E1A;
+  --shadow: 0 30px 60px -30px rgba(0, 0, 0, .7); --phone-shadow: 0 50px 90px -40px rgba(0, 0, 0, .9);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--ink); }
-body { margin: 0; background: var(--ink); color: var(--text); font: 17px/1.55 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { color: inherit; }
 img { display: block; max-width: 100%; }
-.inner { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 var(--pad); }
-.serif { font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -.01em; }
-.label { font: 600 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+.wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--pad); }
+h1, h2, h3 { font-family: var(--display); letter-spacing: -.025em; margin: 0; }
 
-/* ── Nav ─────────────────────────────────────────── */
-nav { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .35s, border-color .35s, backdrop-filter .35s; border-bottom: 1px solid transparent; }
-nav.solid { background: rgba(19, 22, 25, .78); backdrop-filter: blur(14px) saturate(1.4); border-color: var(--line); }
-nav .inner { display: flex; align-items: center; height: 72px; gap: 28px; }
-.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.02em; text-decoration: none; }
-.logo img { width: 32px; height: 32px; border-radius: 8px; }
-nav .links { display: flex; gap: 28px; margin-left: auto; font-weight: 500; font-size: 15px; }
-nav .links a { text-decoration: none; color: var(--muted); transition: color .2s; }
-nav .links a:hover { color: var(--text); }
-.nav-cta { padding: 10px 18px; border-radius: 999px; background: var(--text); color: var(--ink); font-weight: 700; font-size: 14px; text-decoration: none; transition: transform .2s; }
-.nav-cta:hover { transform: translateY(-1px); }
-@media (max-width: 860px) { nav .links { display: none; } .nav-cta { margin-left: auto; } }
-
-/* ── Buttons ─────────────────────────────────────── */
-.btn { position: relative; display: inline-flex; align-items: center; gap: 12px; padding: 18px 28px; border-radius: 999px; font: 700 17px/1 var(--sans); text-decoration: none; border: 0; cursor: pointer; overflow: hidden; transition: transform .25s cubic-bezier(.2, .8, .2, 1), box-shadow .25s; }
-.btn:hover { transform: translateY(-2px); }
-.btn-green { background: var(--green); color: #0E1A05; box-shadow: 0 10px 40px -10px rgba(129, 182, 76, .7); }
-.btn-green::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%); transform: translateX(-100%); animation: shine 4.5s ease-in-out infinite 1.5s; }
-@keyframes shine { 0%, 60% { transform: translateX(-100%); } 85%, 100% { transform: translateX(100%); } }
-.btn-line { color: var(--text); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .25); }
-.btn-line:hover { box-shadow: inset 0 0 0 1.5px var(--text); }
+/* Buttons: chunky, like the app */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 26px; border-radius: 16px; font: 700 17px/1 var(--body); text-decoration: none; border: 0; cursor: pointer; transition: transform .15s, box-shadow .15s, filter .2s; }
+.btn-go { background: var(--green-hi); color: #fff; box-shadow: 0 5px 0 var(--green-dk); }
+.btn-go:hover { filter: brightness(1.05); transform: translateY(-1px); box-shadow: 0 6px 0 var(--green-dk); }
+.btn-go:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--green-dk); }
+.btn-soft { background: var(--card); color: var(--ink); box-shadow: 0 5px 0 var(--line), inset 0 0 0 2px var(--line); }
+.btn-soft:hover { transform: translateY(-1px); }
+.btn-soft:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--line), inset 0 0 0 2px var(--line); }
 .btn svg { width: 20px; height: 20px; }
 
-/* ── Hero ────────────────────────────────────────── */
-.hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; isolation: isolate; }
-.hero::before { /* drifting board pattern */
-  content: ""; position: absolute; inset: -200px; z-index: -2; opacity: .05;
-  background: conic-gradient(#fff 25%, transparent 0 50%, #fff 0 75%, transparent 0) 0 0 / 120px 120px;
-  animation: drift 60s linear infinite;
-  mask-image: radial-gradient(ellipse at 70% 45%, #000 0%, transparent 70%);
-}
-@keyframes drift { to { transform: translate(120px, 120px); } }
-.hero::after { content: ""; position: absolute; z-index: -1; width: 900px; height: 900px; right: -200px; top: -150px; background: radial-gradient(circle, rgba(129, 182, 76, .22), transparent 62%); filter: blur(10px); }
-.hero .inner > * { min-width: 0; }
-.hero .inner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 96px); align-items: center; }
-.hero h1 { margin: 22px 0 0; font-size: clamp(54px, 8.4vw, 128px); line-height: .92; letter-spacing: -.045em; font-weight: 800; }
-.hero h1 .serif { display: block; color: var(--green-2); font-size: 1.08em; letter-spacing: -.02em; line-height: .95; }
-.rotator { display: inline-grid; vertical-align: bottom; }
-.rotator span { grid-area: 1 / 1; opacity: 0; transform: translateY(40%); transition: opacity .5s, transform .6s cubic-bezier(.2, .8, .2, 1); }
-.rotator span.on { opacity: 1; transform: none; }
-.rotator span.off { opacity: 0; transform: translateY(-40%); }
-.hero p.lead { font-size: clamp(18px, 1.5vw, 21px); color: var(--muted); max-width: 560px; margin: 28px 0 36px; }
-.hero p.lead b { color: var(--text); font-weight: 600; }
-.cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-.note { margin-top: 18px; font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(129, 182, 76, .7); animation: pulse 2s infinite; }
-@keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(129, 182, 76, 0); } 100% { box-shadow: 0 0 0 0 rgba(129, 182, 76, 0); } }
+/* Nav */
+nav { position: sticky; top: 0; z-index: 40; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(12px); transition: box-shadow .3s; }
+nav.raised { box-shadow: 0 1px 0 var(--line); }
+nav .wrap { display: flex; align-items: center; height: 72px; gap: 26px; }
+.logo { display: flex; align-items: center; gap: 10px; font: 800 22px var(--display); text-decoration: none; letter-spacing: -.02em; }
+.logo img { width: 36px; height: 36px; border-radius: 10px; }
+nav .links { display: flex; gap: 26px; margin-left: auto; font-weight: 600; font-size: 15.5px; color: var(--ink-2); }
+nav .links a { text-decoration: none; }
+nav .links a:hover { color: var(--green-dk); }
+nav .btn { padding: 11px 18px; font-size: 15px; border-radius: 12px; box-shadow: 0 4px 0 var(--green-dk); }
+@media (max-width: 820px) { nav .links { display: none; } nav .btn { margin-left: auto; } }
 
-/* Live board */
-.stage { position: relative; justify-self: center; width: min(600px, 100%); margin-bottom: 110px; }
-.board-wrap { display: grid; grid-template-columns: 14px 1fr; gap: 12px; }
-.evalbar { position: relative; border-radius: 4px; overflow: hidden; background: #3A3A38; }
-.evalbar i { position: absolute; left: 0; right: 0; bottom: 0; height: 50%; background: #F4F3EE; transition: height .8s cubic-bezier(.2, .8, .2, 1); }
-.board { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .06); transform: perspective(1600px) rotateY(-8deg) rotateX(4deg); transition: transform .8s; }
-.stage:hover .board { transform: perspective(1600px) rotateY(0) rotateX(0); }
+/* Hero */
+.hero { position: relative; padding: clamp(36px, 6vw, 72px) 0 clamp(64px, 9vw, 120px); overflow: hidden; isolation: isolate; }
+.hero::before, .hero::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; }
+.hero::before { width: 620px; height: 620px; right: -120px; top: -60px; background: radial-gradient(circle at 40% 40%, var(--green-soft), transparent 68%); }
+.hero::after { width: 380px; height: 380px; left: -140px; bottom: -80px; background: radial-gradient(circle, var(--amber-soft), transparent 70%); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(30px, 5vw, 70px); align-items: center; }
+@media (max-width: 900px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); } }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--card); box-shadow: 0 2px 0 var(--line), inset 0 0 0 1.5px var(--line); font-weight: 600; font-size: 14px; color: var(--ink-2); }
+.badge b { color: var(--green-dk); }
+.hero h1 { font-size: clamp(44px, 6.6vw, 84px); line-height: 1; font-weight: 800; margin: 22px 0 20px; }
+.hl { position: relative; white-space: nowrap; color: var(--green-dk); }
+.hl svg { position: absolute; left: -2%; bottom: -.16em; width: 104%; height: .32em; overflow: visible; }
+.hl path { stroke: var(--amber); stroke-width: 9; fill: none; stroke-linecap: round; stroke-dasharray: 420; stroke-dashoffset: 420; animation: draw 1.1s .5s cubic-bezier(.6, .1, .3, 1) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.hero p.sub { font-size: clamp(18px, 1.6vw, 21px); color: var(--ink-2); max-width: 520px; margin: 0 0 30px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+.trust { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 28px; font-size: 15px; color: var(--muted); font-weight: 500; }
+.trust span { display: inline-flex; align-items: center; gap: 7px; }
+.trust svg { width: 18px; height: 18px; color: var(--green); }
+
+/* Phones */
+.phone { position: relative; border-radius: 40px; padding: 9px; background: #101214; box-shadow: var(--phone-shadow), inset 0 0 0 2px #2A2E33; aspect-ratio: 1080 / 2400; }
+.phone img { width: 100%; height: 100%; border-radius: 32px; object-fit: cover; }
+.stage { position: relative; height: clamp(520px, 52vw, 640px); }
+.stage .phone { position: absolute; width: clamp(220px, 21vw, 290px); }
+.stage .p1 { left: 8%; top: 40px; transform: rotate(-7deg); z-index: 1; }
+.stage .p2 { right: 4%; top: 0; transform: rotate(5deg); z-index: 2; }
+.sticker { position: absolute; z-index: 3; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 16px; background: var(--card); box-shadow: var(--shadow), inset 0 0 0 1.5px var(--line); font-weight: 700; font-size: 15px; white-space: nowrap; animation: float 5s ease-in-out infinite; }
+.sticker i { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; color: #fff; font-style: normal; font-weight: 800; flex: none; }
+.sticker small { display: block; font-weight: 500; color: var(--muted); font-size: 13px; }
+.s1 { left: -2%; bottom: 14%; animation-delay: -1s; }
+.s2 { right: -2%; top: 52%; animation-delay: -2.5s; }
+.s3 { left: 36%; top: -10px; animation-delay: -4s; }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-12px) rotate(1deg); } }
+@media (max-width: 900px) {
+  .stage { height: 520px; max-width: 460px; width: 100%; margin: 0 auto; }
+  .stage .phone { width: 210px; }
+  .s3 { left: 22%; }
+}
+@media (max-width: 420px) { .stage { height: 460px; } .stage .phone { width: 180px; } .sticker { font-size: 13.5px; padding: 10px 12px; } }
+
+/* Pill strip */
+.strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 0 var(--pad); margin: 0 auto clamp(70px, 10vw, 120px); max-width: 1100px; }
+.pill { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px 12px 12px; border-radius: 999px; background: var(--card); box-shadow: 0 3px 0 var(--line), inset 0 0 0 1.5px var(--line); font-weight: 600; font-size: 15.5px; transition: transform .25s; }
+.pill:hover { transform: translateY(-3px) rotate(-1deg); }
+.pill i { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: 16px; }
+
+/* Feature rows */
+.feature { padding: clamp(30px, 5vw, 60px) 0; }
+.feature .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(30px, 6vw, 90px); align-items: center; }
+.feature.flip .text { order: 2; }
+@media (max-width: 900px) { .feature .wrap { grid-template-columns: minmax(0, 1fr); } .feature.flip .text { order: 0; } }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--c); }
+.kicker::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--c); }
+.feature h2 { font-size: clamp(34px, 4.4vw, 56px); line-height: 1.04; font-weight: 800; margin: 14px 0 16px; }
+.feature p { color: var(--ink-2); font-size: 18.5px; margin: 0 0 24px; max-width: 480px; }
+.ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.ticks li { display: flex; gap: 12px; align-items: flex-start; font-weight: 600; }
+.ticks li::before { content: "✓"; flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; background: var(--c-soft); color: var(--c); font-weight: 800; font-size: 14px; }
+.panel { position: relative; border-radius: 36px; background: var(--c-soft); padding: clamp(28px, 4vw, 48px) 20px; display: flex; justify-content: center; gap: 22px; overflow: hidden; transition: transform .3s ease-out; }
+.panel::before { content: ""; position: absolute; inset: 0; background: conic-gradient(transparent 25%, rgba(255, 255, 255, .22) 0 50%, transparent 0 75%, rgba(255, 255, 255, .22) 0) 0 0 / 64px 64px; opacity: .6; }
+.panel .phone { width: min(260px, 44%); flex: none; }
+.panel .phone.back { transform: translateY(34px) rotate(3deg); }
+.panel .tag { position: absolute; z-index: 3; left: 22px; bottom: 22px; white-space: nowrap; padding: 10px 14px; border-radius: 14px; background: var(--card); box-shadow: var(--shadow); font-weight: 700; font-size: 14.5px; display: flex; gap: 8px; align-items: center; animation: float 6s ease-in-out infinite; }
+.panel .tag b { color: var(--c); }
+
+/* Bento */
+.more { padding: clamp(70px, 10vw, 120px) 0 clamp(40px, 6vw, 70px); }
+.head { text-align: center; max-width: 680px; margin: 0 auto clamp(36px, 5vw, 56px); }
+.head h2 { font-size: clamp(36px, 5vw, 60px); line-height: 1.03; font-weight: 800; }
+.head p { color: var(--ink-2); font-size: 18.5px; margin: 14px 0 0; }
+.bento { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 980px) { .bento { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+@media (max-width: 620px) { .bento { grid-template-columns: minmax(0, 1fr); } }
+.tile { position: relative; overflow: hidden; border-radius: 28px; padding: 26px 26px 0; background: var(--c-soft); display: flex; flex-direction: column; min-height: 440px; transition: transform .35s cubic-bezier(.2, .8, .2, 1); }
+.tile:hover { transform: translateY(-6px) rotate(-.4deg); }
+.tile h3 { font-size: 26px; font-weight: 800; line-height: 1.1; }
+.tile p { color: var(--ink-2); margin: 8px 0 0; font-size: 16px; }
+.tile .shot { margin: 24px auto 0; width: 74%; border-radius: 26px 26px 0 0; padding: 8px 8px 0; background: #101214; box-shadow: var(--phone-shadow); flex: 1; overflow: hidden; }
+.tile .shot img { border-radius: 19px 19px 0 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.tile.small { min-height: 0; padding-bottom: 26px; }
+.tile .em { font-size: 40px; line-height: 1; margin-bottom: 14px; }
+
+/* Try a puzzle */
+.try { padding: clamp(70px, 10vw, 120px) 0; }
+.try .box { border-radius: 40px; background: var(--card); box-shadow: var(--shadow), inset 0 0 0 1.5px var(--line); padding: clamp(24px, 4vw, 56px); display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+@media (max-width: 900px) { .try .box { grid-template-columns: minmax(0, 1fr); } }
+.try h2 { font-size: clamp(34px, 4.4vw, 54px); font-weight: 800; line-height: 1.04; margin: 14px 0 12px; }
+.try .lead { color: var(--ink-2); font-size: 18px; margin: 0 0 24px; }
+.plist { display: grid; gap: 10px; }
+.pitem { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 14px 16px; border-radius: 16px; border: 0; background: var(--bg); box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink); font: 600 16px var(--body); cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s; }
+.pitem:hover { transform: translateX(4px); }
+.pitem[aria-current="true"] { background: var(--green-soft); box-shadow: inset 0 0 0 2px var(--green-hi); }
+.pitem .n { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--card); font-weight: 800; color: var(--muted); box-shadow: inset 0 0 0 1.5px var(--line); }
+.pitem[aria-current="true"] .n { background: var(--green-hi); color: #fff; box-shadow: none; }
+.pitem .meta { flex: 1; }
+.pitem small { display: block; color: var(--muted); font-weight: 500; font-size: 13.5px; }
+.pitem .tick { opacity: 0; color: var(--green); font-size: 20px; font-weight: 800; transition: opacity .3s; }
+.pitem.solved .tick { opacity: 1; }
+.pbar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 15px; color: var(--ink-2); }
+.pbar .turn { width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px #C9C3B3; }
+.pbar b { color: var(--ink); }
+.sound { margin-left: auto; display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border-radius: 12px; border: 0; background: var(--bg); box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink-2); font: 600 14px var(--body); cursor: pointer; }
+.sound svg { width: 17px; height: 17px; }
+.sound .on { display: none; }
+.sound[aria-pressed="true"] { background: var(--green-hi); color: #fff; box-shadow: none; }
+.sound[aria-pressed="true"] .on { display: block; } .sound[aria-pressed="true"] .off { display: none; }
+.pboard { position: relative; aspect-ratio: 1; border-radius: 16px; overflow: hidden; touch-action: none; user-select: none; cursor: pointer; box-shadow: 0 6px 0 #5E7E43, 0 30px 50px -20px rgba(40, 60, 20, .45); }
+.pboard.shake { animation: shake .42s; }
+@keyframes shake { 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
 .sq { position: absolute; width: 12.5%; height: 12.5%; }
 .sq.l { background: var(--light-sq); } .sq.d { background: var(--dark-sq); }
 .sq.hl { box-shadow: inset 0 0 0 999px rgba(255, 220, 60, .42); }
-.pc { position: absolute; width: 12.5%; height: 12.5%; transition: transform .42s cubic-bezier(.3, .7, .2, 1), opacity .3s; will-change: transform; }
-.pc img { width: 100%; height: 100%; padding: 4%; filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .25)); }
+.sq.sel { box-shadow: inset 0 0 0 999px rgba(129, 182, 76, .6); }
+.sq.hint { animation: hintpulse 1.1s ease-in-out 3; }
+@keyframes hintpulse { 50% { box-shadow: inset 0 0 0 999px rgba(255, 176, 32, .75); } }
+.pc { position: absolute; width: 12.5%; height: 12.5%; transition: transform .4s cubic-bezier(.3, .7, .2, 1), opacity .3s; z-index: 1; }
+.pc img { width: 100%; height: 100%; padding: 4%; filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .22)); pointer-events: none; }
 .pc.gone { opacity: 0; }
-.badge { position: absolute; width: 12.5%; height: 12.5%; pointer-events: none; z-index: 3; }
-.badge b { position: absolute; top: -14%; right: -14%; width: 46%; height: 46%; border-radius: 50%; display: grid; place-items: center; font: 800 clamp(10px, 1.3vw, 15px)/1 var(--sans); color: #fff; box-shadow: 0 4px 12px rgba(0, 0, 0, .35); animation: pop .45s cubic-bezier(.2, 1.6, .4, 1); }
-@keyframes pop { from { transform: scale(0); } }
-.coach { position: absolute; left: 26px; right: 0; bottom: -26px; transform: translateY(100%); display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: rgba(35, 40, 45, .86); backdrop-filter: blur(12px); border: 1px solid var(--line); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .7); transition: opacity .35s, transform .45s cubic-bezier(.2, .8, .2, 1); }
-.coach.swap { opacity: 0; transform: translateY(calc(100% + 8px)); }
-.coach .av { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 18px; }
-.coach .t { font-weight: 700; font-size: 16px; }
-.coach .t small { font: 500 13px var(--mono); color: var(--muted); margin-left: 6px; }
-.coach .s { color: var(--muted); font-size: 14.5px; margin-top: 2px; }
-.moves { min-width: 0; display: flex; gap: 6px; margin: 0 0 14px 26px; font: 500 13px var(--mono); color: var(--muted); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 18%); white-space: nowrap; justify-content: flex-end; }
-.moves span { padding: 4px 8px; border-radius: 6px; transition: background .3s, color .3s; flex: none; }
-.moves span.cur { background: rgba(129, 182, 76, .18); color: var(--green-2); }
-.game-cap { margin: 0 0 10px 26px; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 12px; }
-.game-cap .t { flex: 1; }
-.sound { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px 7px 10px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 255, 255, .04); color: var(--muted); font: 600 13px var(--sans); cursor: pointer; transition: color .2s, background .2s, border-color .2s; }
-.sound:hover { color: var(--text); border-color: rgba(255, 255, 255, .25); }
-.sound svg { width: 16px; height: 16px; }
-.sound .on { display: none; }
-.sound[aria-pressed="true"] { color: #0E1A05; background: var(--green); border-color: var(--green); }
-.sound[aria-pressed="true"] .on { display: block; } .sound[aria-pressed="true"] .off { display: none; }
-.game-cap b { color: var(--text); font-weight: 600; }
-@media (max-width: 980px) {
-  .hero .inner { grid-template-columns: minmax(0, 1fr); }
-  .stage { margin-bottom: 120px; }
-  .board { transform: none; }
-}
-
-/* ── Marquee ─────────────────────────────────────── */
-.marquee { position: relative; overflow: hidden; background: var(--green); color: #12200A; padding: 22px 0; transform: rotate(-1.6deg) scale(1.03); margin: 10px 0 40px; }
-.marquee .track { display: flex; width: max-content; gap: 48px; animation: slide 38s linear infinite; font: 800 clamp(26px, 3.2vw, 46px)/1 var(--sans); letter-spacing: -.03em; text-transform: uppercase; }
-.marquee .track span { display: flex; align-items: center; gap: 48px; }
-.marquee .track span::after { content: "✦"; font-size: .6em; opacity: .55; }
-.marquee .track em { font: italic 400 1.15em var(--serif); text-transform: none; letter-spacing: -.01em; }
-@keyframes slide { to { transform: translateX(-50%); } }
-
-/* ── Sections ────────────────────────────────────── */
-section { position: relative; padding: clamp(80px, 12vw, 160px) 0; }
-h2 { margin: 18px 0 0; font-size: clamp(40px, 6vw, 88px); line-height: .98; letter-spacing: -.04em; font-weight: 800; }
-h2 .serif { color: var(--green-2); }
-.intro { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: clamp(48px, 7vw, 96px); }
-.intro p { color: var(--muted); font-size: 19px; max-width: 520px; margin: 0; justify-self: end; }
-@media (max-width: 860px) { .intro { grid-template-columns: 1fr; } .intro p { justify-self: start; } }
-
-/* Story: sticky phone */
-.story { display: grid; grid-template-columns: 1fr minmax(280px, 400px); gap: clamp(40px, 8vw, 140px); }
-.chapters { display: flex; flex-direction: column; }
-.chapter { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--line); padding: 40px 0; opacity: .28; transition: opacity .5s; }
-.chapter.active { opacity: 1; }
-.chapter .num { font: 500 15px var(--mono); color: var(--green); }
-.chapter h3 { margin: 14px 0 16px; font-size: clamp(34px, 4.4vw, 64px); line-height: 1; letter-spacing: -.035em; font-weight: 800; }
-.chapter h3 .serif { color: var(--green-2); }
-.chapter p { margin: 0; color: var(--muted); font-size: 19px; max-width: 560px; }
-.chapter ul { list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
-.chapter li { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); font-size: 14.5px; color: var(--text); background: rgba(255, 255, 255, .03); }
-.chapter .mobile-shot { display: none; }
-.sticky { position: sticky; top: 12vh; height: 76vh; display: flex; align-items: center; justify-content: center; }
-.device { position: relative; width: 100%; max-width: 360px; aspect-ratio: 1080 / 2160; border-radius: 46px; padding: 11px; background: #0A0C0E; box-shadow: 0 50px 120px -40px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .08), inset 0 0 0 2px #26292E; }
-.device .screen { position: relative; width: 100%; height: 100%; border-radius: 36px; overflow: hidden; background: #1B1F24; }
-.device .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity .6s, transform .9s cubic-bezier(.2, .8, .2, 1); }
-.device .screen img.on { opacity: 1; transform: none; }
-.device::after { content: ""; position: absolute; inset: -30%; z-index: -1; background: radial-gradient(circle, rgba(129, 182, 76, .18), transparent 60%); }
-@media (max-width: 900px) {
-  .story { grid-template-columns: 1fr; }
-  .sticky { display: none; }
-  .chapter { min-height: 0; opacity: 1; padding: 56px 0; }
-  .chapter .mobile-shot { display: block; width: 72%; max-width: 300px; margin-top: 36px; border-radius: 32px; padding: 8px; background: #0A0C0E; box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .9); }
-  .chapter .mobile-shot img { border-radius: 25px; }
-}
-
-/* ── New: bento ──────────────────────────────────── */
-.light { background: var(--paper); color: #16191C; }
-.light .label { color: var(--green-deep); }
-.light h2 .serif { color: var(--green-deep); }
-.light .intro p { color: #5B5F63; }
-.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
-.tile { position: relative; overflow: hidden; border-radius: 28px; padding: clamp(24px, 3vw, 40px); background: #fff; box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 30px 60px -40px rgba(0, 0, 0, .35); min-height: 380px; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
-.tile:hover { transform: translateY(-6px); }
-.tile h3 { margin: 0 0 10px; font-size: clamp(26px, 2.6vw, 38px); letter-spacing: -.03em; line-height: 1.02; font-weight: 800; }
-.tile p { margin: 0; color: #5B5F63; font-size: 16.5px; max-width: 420px; }
-.tile .demo { margin-top: auto; padding-top: 28px; }
-.t-960 { grid-column: span 7; background: #1E2A14; color: #F2F1EC; }
-.t-960 p { color: #B9C2AE; }
-.t-voice { grid-column: span 5; background: #EFE9FF; }
-.t-mirror { grid-column: span 5; background: #FFF4DE; }
-.t-year { grid-column: span 7; background: #E3F2F1; }
-@media (max-width: 960px) { .bento > * { grid-column: span 12 !important; } }
-.rank { display: grid; grid-template-columns: repeat(8, 1fr); border-radius: 12px; overflow: hidden; max-width: 560px; }
-.rank div { aspect-ratio: 1; display: grid; place-items: center; }
-.rank div:nth-child(odd) { background: var(--light-sq); } .rank div:nth-child(even) { background: var(--dark-sq); }
-.rank img { width: 82%; transition: transform .5s cubic-bezier(.3, 1.4, .5, 1), opacity .3s; }
-.rank img.flip { transform: translateY(-30%) scale(.6); opacity: 0; }
-.pos960 { margin-top: 12px; font: 500 13px var(--mono); color: #B9C2AE; }
-.voice-ui { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 18px; background: #fff; box-shadow: 0 10px 30px -15px rgba(70, 40, 160, .4); max-width: 420px; }
-.mic { flex: none; width: 44px; height: 44px; border-radius: 50%; background: #8E6CEF; display: grid; place-items: center; }
-.mic svg { width: 22px; height: 22px; color: #fff; }
-.typed { font: 600 20px var(--mono); color: #2A1F4F; min-height: 1.3em; }
-.typed::after { content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 3px; vertical-align: -3px; background: #8E6CEF; animation: blink 1s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-.wave { display: flex; gap: 4px; align-items: center; height: 40px; margin-top: 18px; }
-.wave i { width: 5px; border-radius: 3px; background: #8E6CEF; opacity: .75; animation: wave 1.1s ease-in-out infinite; }
-@keyframes wave { 0%, 100% { height: 8px; } 50% { height: 38px; } }
-.mirror { display: flex; align-items: center; gap: 22px; }
-.mirror .side { flex: 1; text-align: center; padding: 18px 10px; border-radius: 18px; background: #fff; font-size: 14px; color: #5B5F63; }
-.mirror .side img { width: 64px; margin: 0 auto 8px; }
-.mirror .side b { display: block; color: #16191C; font-size: 15px; }
-.mirror .vs { font: italic 400 34px var(--serif); color: #C58B12; }
-.mirror .bookline { margin-top: 16px; font: 500 14px var(--mono); color: #7A5A12; }
-.bars { display: flex; align-items: flex-end; gap: 8px; height: 170px; }
-.bars i { flex: 1; border-radius: 8px 8px 3px 3px; background: #20A39E; height: 6%; transition: height 1.2s cubic-bezier(.2, .8, .2, 1); }
-.bars i.peak { background: #F2B33D; }
-.months { display: flex; gap: 8px; margin-top: 8px; font: 500 12px var(--mono); color: #5B5F63; }
-.months span { flex: 1; text-align: center; }
-.yearline { display: flex; gap: 28px; margin-top: 18px; }
-.yearline b { display: block; font-size: 30px; letter-spacing: -.03em; }
-.yearline span { font-size: 13px; color: #5B5F63; }
-
-/* ── Numbers ─────────────────────────────────────── */
-.numbers { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.numbers div { padding: clamp(36px, 5vw, 64px) var(--pad); border-left: 1px solid var(--line); }
-.numbers div:first-child { border-left: 0; }
-.numbers b { display: block; font-size: clamp(48px, 7vw, 104px); line-height: 1; letter-spacing: -.05em; font-weight: 800; }
-.numbers b .serif { color: var(--green-2); }
-.numbers > div > span { display: block; margin-top: 12px; color: var(--muted); font-size: 16px; }
-@media (max-width: 860px) { .numbers { grid-template-columns: 1fr 1fr; } .numbers div:nth-child(3) { border-left: 0; } .numbers div:nth-child(n+3) { border-top: 1px solid var(--line); } }
-
-/* ── Screens marquee ─────────────────────────────── */
-.screens { padding-top: 0; overflow: hidden; }
-.reel { display: flex; gap: 28px; width: max-content; animation: slide 70s linear infinite; padding: 20px 0 30px; }
-.reel:hover { animation-play-state: paused; }
-.reel figure { margin: 0; width: clamp(200px, 19vw, 270px); flex: none; }
-.reel .frame { border-radius: 34px; padding: 9px; background: #0A0C0E; box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .9), 0 0 0 1px rgba(255, 255, 255, .07); transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
-.reel figure:nth-child(even) .frame { transform: translateY(36px); }
-.reel figure:hover .frame { transform: translateY(-8px) scale(1.02); }
-.reel img { border-radius: 26px; }
-.reel figcaption { margin-top: 18px; font-size: 15px; font-weight: 600; text-align: center; color: var(--muted); }
-.reel figure:nth-child(even) figcaption { margin-top: 54px; }
-
-/* ── Privacy ─────────────────────────────────────── */
-.privacy { background: var(--ink-2); border-top: 1px solid var(--line); }
-.privacy .big { font-size: clamp(38px, 5.6vw, 84px); line-height: 1.02; letter-spacing: -.04em; font-weight: 800; max-width: 1200px; margin: 18px 0 64px; }
-.privacy .big .serif { color: var(--green-2); }
-.privacy .big .dim { color: #4A4F55; transition: color .6s; }
-.privacy .big.lit .dim { color: var(--text); }
-.pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--line); }
-.pgrid div { padding: 36px 32px 0 0; }
-.pgrid b { display: block; font-size: 20px; margin-bottom: 8px; }
-.pgrid p { margin: 0; color: var(--muted); font-size: 16px; }
-.pgrid a { color: var(--green-2); }
-@media (max-width: 860px) { .pgrid { grid-template-columns: 1fr; } }
-
-/* ── FAQ ─────────────────────────────────────────── */
-.faq { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(40px, 8vw, 120px); }
-@media (max-width: 900px) { .faq { grid-template-columns: 1fr; } }
-details { border-top: 1px solid var(--line); }
-details:last-child { border-bottom: 1px solid var(--line); }
-summary { list-style: none; cursor: pointer; padding: 26px 0; display: flex; justify-content: space-between; gap: 20px; font-size: clamp(19px, 1.6vw, 23px); font-weight: 600; letter-spacing: -.01em; }
-summary::-webkit-details-marker { display: none; }
-summary i { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--line); position: relative; transition: transform .35s, background .35s; }
-summary i::before, summary i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: var(--text); transform: translate(-50%, -50%); }
-summary i::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .35s; }
-details[open] summary i { background: var(--green); border-color: var(--green); }
-details[open] summary i::after { transform: translate(-50%, -50%) rotate(0); }
-details .a { color: var(--muted); padding: 0 50px 28px 0; margin: 0; font-size: 17px; animation: fade .4s; }
-@keyframes fade { from { opacity: 0; transform: translateY(-6px); } }
-
-/* ── Final CTA ───────────────────────────────────── */
-.final { position: relative; overflow: hidden; background: var(--green); color: #0F1B06; text-align: center; padding: clamp(100px, 14vw, 200px) 0; isolation: isolate; }
-.final::before { content: ""; position: absolute; inset: -100px; z-index: -1; opacity: .12; background: conic-gradient(#0F1B06 25%, transparent 0 50%, #0F1B06 0 75%, transparent 0) 0 0 / 140px 140px; animation: drift 50s linear infinite reverse; }
-.final h2 { font-size: clamp(52px, 9vw, 150px); margin: 0 auto; max-width: 1200px; }
-.final h2 .serif { color: #0F1B06; }
-.final p { font-size: 20px; max-width: 560px; margin: 26px auto 40px; color: #23401A; }
-.final .btn { background: #0F1B06; color: var(--green-2); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .6); }
-
-footer { padding: 48px 0 56px; color: var(--muted); font-size: 14.5px; }
-footer .inner { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 36px; }
-footer .links { display: flex; flex-wrap: wrap; gap: 24px; }
-footer .links a { text-decoration: none; }
-footer .links a:hover { color: var(--text); }
-footer .copy { margin-left: auto; }
-@media (max-width: 700px) { footer .copy { margin-left: 0; } }
-
-/* ── Reveal on scroll ────────────────────────────── */
-.rv { opacity: 0; transform: translateY(40px); transition: opacity .9s cubic-bezier(.2, .8, .2, 1), transform .9s cubic-bezier(.2, .8, .2, 1); transition-delay: var(--d, 0s); }
-.rv.in { opacity: 1; transform: none; }
-.split .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding: 0 .04em .16em; margin: 0 -.04em -.16em; }
-.split .w > span { display: inline-block; transform: translateY(105%); transition: transform 1s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i) * 60ms); }
-.split.in .w > span { transform: none; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .rv, .split .w > span { opacity: 1; transform: none; }
-}
-
-/* ── Your turn: playable puzzles ─────────────────── */
-.play { background: radial-gradient(1200px 600px at 80% 30%, rgba(129, 182, 76, .12), transparent 60%), var(--ink-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.play .grid2 { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 120px); align-items: center; }
-@media (max-width: 960px) { .play .grid2 { grid-template-columns: minmax(0, 1fr); } }
-.plist { display: grid; gap: 10px; margin-top: 36px; }
-.pitem { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; padding: 16px 18px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255, 255, 255, .02); color: var(--text); font: 600 16px var(--sans); cursor: pointer; transition: background .25s, border-color .25s, transform .25s; }
-.pitem:hover { background: rgba(255, 255, 255, .05); transform: translateX(4px); }
-.pitem[aria-current="true"] { border-color: var(--green); background: rgba(129, 182, 76, .1); }
-.pitem .n { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--ink-3); font: 700 14px var(--mono); color: var(--muted); }
-.pitem[aria-current="true"] .n { background: var(--green); color: #0E1A05; }
-.pitem .meta { flex: 1; }
-.pitem small { display: block; font: 500 13px var(--mono); color: var(--muted); margin-top: 2px; }
-.pitem .tick { opacity: 0; color: var(--green); font-size: 20px; transition: opacity .3s; }
-.pitem.solved .tick { opacity: 1; }
-.pboard-wrap { position: relative; width: min(560px, 100%); justify-self: center; }
-.ptop { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 15px; color: var(--muted); }
-.ptop .turn { width: 14px; height: 14px; border-radius: 50%; background: #F4F3EE; box-shadow: 0 0 0 2px rgba(255, 255, 255, .2); }
-.ptop b { color: var(--text); }
-.pboard { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; touch-action: none; user-select: none; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .06); cursor: pointer; }
-.pboard.shake { animation: shake .42s; }
-@keyframes shake { 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
-.pboard .sq.sel { box-shadow: inset 0 0 0 999px rgba(129, 182, 76, .55); }
-.pboard .sq.hint { animation: hintpulse 1.1s ease-in-out 3; }
-@keyframes hintpulse { 50% { box-shadow: inset 0 0 0 999px rgba(242, 179, 61, .75); } }
-.pboard .dot { position: absolute; width: 12.5%; height: 12.5%; display: grid; place-items: center; pointer-events: none; z-index: 2; }
-.pboard .dot::after { content: ""; width: 30%; height: 30%; border-radius: 50%; background: rgba(20, 30, 10, .28); }
-.pboard .dot.cap::after { width: 86%; height: 86%; background: none; border: 5px solid rgba(20, 30, 10, .28); }
-.pboard .pc.drag { z-index: 5; transition: none; filter: drop-shadow(0 12px 10px rgba(0, 0, 0, .35)); }
-.pcoach { margin-top: 18px; display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border-radius: 16px; background: var(--ink-3); border: 1px solid var(--line); min-height: 78px; transition: border-color .3s; }
-.pcoach.good { border-color: rgba(129, 182, 76, .6); }
-.pcoach.bad { border-color: rgba(224, 91, 75, .6); }
-.pcoach .av { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-weight: 800; color: #fff; background: #4A4F55; transition: background .3s; }
-.pcoach .t { font-weight: 700; }
-.pcoach .s { color: var(--muted); font-size: 15px; margin-top: 2px; }
+.pc.drag { z-index: 5; transition: none; }
+.dot { position: absolute; width: 12.5%; height: 12.5%; display: grid; place-items: center; pointer-events: none; z-index: 2; }
+.dot::after { content: ""; width: 30%; height: 30%; border-radius: 50%; background: rgba(20, 30, 10, .25); }
+.dot.cap::after { width: 86%; height: 86%; background: none; border: 5px solid rgba(20, 30, 10, .25); }
+.coach { margin-top: 18px; display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 18px; background: var(--bg); box-shadow: inset 0 0 0 1.5px var(--line); min-height: 76px; transition: box-shadow .3s; }
+.coach.good { box-shadow: inset 0 0 0 2px var(--green-hi); }
+.coach.bad { box-shadow: inset 0 0 0 2px var(--coral); }
+.coach .av { flex: none; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; font-weight: 800; color: #fff; background: #B9B3A3; transition: background .3s, transform .3s; }
+.coach.good .av, .coach.bad .av { transform: rotate(-6deg); }
+.coach .t { font-weight: 700; }
+.coach .s { color: var(--ink-2); font-size: 15px; }
 .pbtns { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-.pbtn { padding: 11px 18px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 600 15px var(--sans); cursor: pointer; transition: background .2s, border-color .2s; }
-.pbtn:hover { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .25); }
-.pbtn.primary { background: var(--green); border-color: var(--green); color: #0E1A05; }
+.pbtns .btn { padding: 11px 16px; font-size: 15px; border-radius: 12px; }
 .confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 6; }
 .confetti i { position: absolute; top: 45%; left: 50%; width: 10px; height: 14px; border-radius: 2px; animation: burst 1.3s cubic-bezier(.15, .7, .3, 1) forwards; }
 @keyframes burst { to { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; } }
 
-/* ── Polish: progress bar, spotlight ─────────────── */
-.progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 60; background: linear-gradient(90deg, var(--green), var(--green-2)); transform-origin: 0 50%; transform: scaleX(0); }
-.tile, .pgrid > div, .chapter li, .pitem { --mx: 50%; --my: 50%; }
-.tile::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s; background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, .55), transparent 45%); mix-blend-mode: soft-light; }
-.tile:hover::before { opacity: 1; }
-.t-960::before { background: radial-gradient(420px circle at var(--mx) var(--my), rgba(163, 209, 110, .28), transparent 45%); mix-blend-mode: normal; }
+/* Privacy + FAQ */
+.faq-sec { padding: 0 0 clamp(70px, 10vw, 120px); }
+.promise { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: clamp(50px, 7vw, 80px); }
+@media (max-width: 800px) { .promise { grid-template-columns: minmax(0, 1fr); } }
+.promise div { display: flex; gap: 14px; align-items: flex-start; padding: 22px; border-radius: 22px; background: var(--card); box-shadow: 0 3px 0 var(--line), inset 0 0 0 1.5px var(--line); }
+.promise i { flex: none; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; font-style: normal; font-size: 22px; background: var(--c-soft); }
+.promise b { display: block; font-size: 17px; }
+.promise span { color: var(--ink-2); font-size: 15px; }
+.faqs { max-width: 820px; margin: 0 auto; display: grid; gap: 12px; }
+details { border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--line); overflow: hidden; }
+summary { list-style: none; cursor: pointer; padding: 20px 22px; display: flex; justify-content: space-between; gap: 16px; font-weight: 700; font-size: 17.5px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; flex: none; width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; background: var(--green-soft); color: var(--green-dk); font-size: 20px; line-height: 1; transition: transform .3s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin: 0; padding: 0 22px 20px; color: var(--ink-2); }
+
+/* CTA */
+.cta { padding: 0 var(--pad) clamp(50px, 7vw, 80px); }
+.cta .box { position: relative; overflow: hidden; max-width: 1240px; margin: 0 auto; border-radius: 40px; padding: clamp(50px, 8vw, 96px) var(--pad); background: var(--green-hi); color: #fff; text-align: center; isolation: isolate; }
+.cta .box::before { content: ""; position: absolute; inset: -90px; z-index: -1; opacity: .14; background: conic-gradient(#fff 25%, transparent 0 50%, #fff 0 75%, transparent 0) 0 0 / 90px 90px; animation: drift 40s linear infinite; }
+@keyframes drift { to { transform: translate(90px, 90px); } }
+.cta h2 { font-size: clamp(38px, 6vw, 72px); font-weight: 800; line-height: 1; }
+.cta p { font-size: 19px; margin: 16px auto 30px; max-width: 520px; color: rgba(255, 255, 255, .92); }
+.cta .btn { background: #fff; color: var(--green-dk); box-shadow: 0 5px 0 #CFE3BA; }
+.cta .rook { position: absolute; right: 6%; bottom: -20px; width: 150px; opacity: .25; animation: float 7s ease-in-out infinite; }
+@media (max-width: 700px) { .cta .rook { display: none; } }
+footer { padding: 10px 0 44px; color: var(--muted); font-size: 14.5px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
+footer .links { display: flex; flex-wrap: wrap; gap: 22px; }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--ink); }
+footer .copy { margin-left: auto; }
+@media (max-width: 700px) { footer .copy { margin-left: 0; } }
+
+/* Reveal */
+.rv { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2, .8, .2, 1), transform .8s cubic-bezier(.2, .8, .2, 1); transition-delay: var(--d, 0s); }
+.rv.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv { opacity: 1; transform: none; }
+  .hl path { stroke-dashoffset: 0; }
+}
 </style>
 </head>
 <body>
 
-<div class="progress" id="progress" aria-hidden="true"></div>
 <nav id="nav">
-  <div class="inner">
+  <div class="wrap">
     <a class="logo" href="#top"><img src="icon-512.png" alt=""> Rookwise</a>
     <div class="links">
-      <a href="#story">The app</a>
+      <a href="#learn">Features</a>
+      <a href="#more">More</a>
       <a href="#try">Try a puzzle</a>
-      <a href="#new">What's new</a>
-      <a href="#privacy">Privacy</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a class="nav-cta" href="#join">Get early access</a>
+    <a class="btn btn-go" href="#join">Get early access</a>
   </div>
 </nav>
 
-<!-- ── Hero ── -->
 <header class="hero" id="top">
-  <div class="inner">
+  <div class="wrap">
     <div>
-      <div class="label rv">Chess coach · Android</div>
-      <h1 class="split" data-split>Your pocket <span class="serif">chess coach.</span></h1>
-      <p class="lead rv" style="--d:.35s">
-        <span class="rotator" aria-live="polite"><span class="on">Learn the rules from zero.</span><span>Review every game like a coach.</span><span>Turn your mistakes into puzzles.</span><span>Play a bot that plays like you.</span></span><br>
-        A strong engine runs <b>on your phone</b>. Free, no ads, works offline.
-      </p>
-      <div class="cta-row rv" style="--d:.5s">
-        <a class="btn btn-green" id="join" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">
+      <span class="badge rv">♞ <b>Free</b> · No ads · Works offline</span>
+      <h1 class="rv" style="--d:.08s">Get better at chess, <span class="hl">one game<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 14 C 50 4, 120 4, 196 12"/></svg></span> at a time.</h1>
+      <p class="sub rv" style="--d:.16s">Learn the rules, review every game like a coach, and turn your mistakes into puzzles. All on your phone.</p>
+      <div class="ctas rv" style="--d:.24s">
+        <a class="btn btn-go" id="join" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2c-.4.3-.6.8-.6 1.4v16.8c0 .6.2 1.1.6 1.4l9.6-9.8-9.6-9.8Zm10.6 10.8 2.6 2.6-11.3 6.5 8.7-9.1Zm0-2-8.7-9.1 11.3 6.5-2.6 2.6Zm3.9-1.6 3.1 1.8c.9.5.9 1.8 0 2.3l-3.1 1.8-2.9-2.9 2.9-3Z"/></svg>
           Join the early test
         </a>
-        <a class="btn btn-line" href="#story">Take the tour ↓</a>
+        <a class="btn btn-soft" href="#try">Try a puzzle</a>
       </div>
-      <div class="note rv" style="--d:.6s"><span class="dot"></span> Testing on Google Play now. Testers get it first, free.</div>
+      <div class="trust rv" style="--d:.32s">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>44 lessons</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Engine on your phone</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>14 languages</span>
+      </div>
     </div>
-
-    <div class="stage rv" style="--d:.2s" aria-label="A famous game replayed with the Rookwise coach">
-      <div class="game-cap"><span class="t"><b>The Opera Game</b> · Morphy, Paris 1858</span>
-        <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Board sound">
-          <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m23 9-6 6M17 9l6 6"/></svg>
-          <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
-          <span>Sound</span>
-        </button></div>
-      <div class="moves" id="moves"></div>
-      <div class="board-wrap">
-        <div class="evalbar"><i id="evalfill"></i></div>
-        <div class="board" id="board"></div>
-      </div>
-      <div class="coach" id="coach">
-        <div class="av" id="coach-av" style="background:#81B64C">♞</div>
-        <div><div class="t" id="coach-t">Every move, rated.</div><div class="s" id="coach-s">Watch the Rookwise coach call one of the most famous games ever played.</div></div>
-      </div>
+    <div class="stage rv" style="--d:.12s" aria-hidden="true">
+      <div class="phone p1" data-par="-18"><img src="img/app/home.jpg" alt=""></div>
+      <div class="phone p2" data-par="14"><img src="img/app/brilliant.jpg" alt=""></div>
+      <div class="sticker s1"><i style="background:#13B5A6">!!</i><span>Brilliant!<small>Bxb4, a sound sacrifice</small></span></div>
+      <div class="sticker s2"><i style="background:#FFB020">🔥</i><span>5 day streak<small>Daily puzzle solved</small></span></div>
+      <div class="sticker s3"><i style="background:#81B64C">★</i><span>Best move</span></div>
     </div>
   </div>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold mode</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
-    <span>44 lessons</span><span><em>game review</em></span><span>puzzles from your games</span><span><em>Chess960</em></span><span>blindfold mode</span><span><em>mirror bot</em></span><span>bot vs bot</span><span><em>14 languages</em></span><span>works offline</span>
-  </div>
+<div class="strip">
+  <span class="pill rv"><i style="background:var(--amber-soft)">🎓</i>Learn chess</span>
+  <span class="pill rv" style="--d:.05s"><i style="background:var(--sky-soft)">📈</i>Game review</span>
+  <span class="pill rv" style="--d:.1s"><i style="background:var(--teal-soft)">🧩</i>Puzzles</span>
+  <span class="pill rv" style="--d:.15s"><i style="background:var(--green-soft)">🤖</i>Play the bot</span>
+  <span class="pill rv" style="--d:.2s"><i style="background:var(--violet-soft)">🎲</i>Chess960</span>
+  <span class="pill rv" style="--d:.25s"><i style="background:var(--coral-soft)">📺</i>Bot vs Bot</span>
 </div>
 
-<!-- ── Story ── -->
-<section id="story">
-  <div class="inner">
-    <div class="intro">
-      <div>
-        <div class="label rv">The app</div>
-        <h2 class="split" data-split>From your first move <span class="serif">to your best game.</span></h2>
-      </div>
-      <p class="rv" style="--d:.2s">Five things Rookwise does for you, all on your phone and all free.</p>
+<section class="feature" id="learn" style="--c:#E08A00;--c-soft:var(--amber-soft)">
+  <div class="wrap">
+    <div class="text">
+      <span class="kicker rv">Learn</span>
+      <h2 class="rv" style="--d:.06s">Start from zero. Finish with checkmates.</h2>
+      <p class="rv" style="--d:.12s">Short lessons you play on the board, from how the pieces move to forks, pins and simple endgames.</p>
+      <ul class="ticks rv" style="--d:.18s"><li>44 lessons with stars and levels</li><li>Read aloud in your language</li><li>Practice rounds that mix what you learned</li></ul>
     </div>
-
-    <div class="story">
-      <div class="chapters">
-        <article class="chapter" data-shot="0">
-          <span class="num">01 — Learn</span>
-          <h3>Start from <span class="serif">zero.</span></h3>
-          <p>44 short lessons take you from how the pieces move to forks, famous mates and simple endgames. Practise on the board, earn stars, and climb from Pawn to King.</p>
-          <ul><li>Read aloud in your language</li><li>Practice rounds</li><li>Middlegame &amp; endgame units</li></ul>
-          <div class="mobile-shot"><img src="img/6-learn-course.jpg" alt="The Learn chess course" loading="lazy"></div>
-        </article>
-        <article class="chapter" data-shot="1">
-          <span class="num">02 — Review</span>
-          <h3>A coach for <span class="serif">every move.</span></h3>
-          <p>Import your Lichess and Chess.com games. Every move is rated from Brilliant to Blunder, with accuracy, key moments and the move that punishes each mistake.</p>
-          <ul><li>Game report</li><li>"Why is this bad?"</li><li>Retry your mistakes</li></ul>
-          <div class="mobile-shot"><img src="img/3-game-review.jpg" alt="Game review with key moments" loading="lazy"></div>
-        </article>
-        <article class="chapter" data-shot="2">
-          <span class="num">03 — Train</span>
-          <h3>Your mistakes, <span class="serif">now puzzles.</span></h3>
-          <p>Every blunder in your games becomes a puzzle, repeated until you've mastered it. Plus a daily puzzle, Puzzle Rush, an opening trainer built from your own lines and classic endgames.</p>
-          <ul><li>Daily streak &amp; widget</li><li>Opening explorer</li><li>12 famous traps</li></ul>
-          <div class="mobile-shot"><img src="img/4-lesson.jpg" alt="A lesson on forks" loading="lazy"></div>
-        </article>
-        <article class="chapter" data-shot="3">
-          <span class="num">04 — Play</span>
-          <h3>A bot that <span class="serif">teaches back.</span></h3>
-          <p>From beginner to around 3200, in four styles. Live hints, an evaluation bar and a coach that rates your moves while you play. Blunder check stops you before the bot punishes a slip.</p>
-          <ul><li>Chess960 &amp; odds</li><li>Blindfold &amp; read-aloud</li><li>Pass and play</li></ul>
-          <div class="mobile-shot"><img src="img/5-play-with-coach.jpg" alt="Playing the bot with the coach" loading="lazy"></div>
-        </article>
-        <article class="chapter" data-shot="4">
-          <span class="num">05 — Watch</span>
-          <h3>Bot vs Bot, <span class="serif">explained.</span></h3>
-          <p>Two Rookwise Bots, each with its own strength and style, play at your pace. Every move rated, the better one shown. Guess the best move before they play it.</p>
-          <ul><li>0.5 to 10 seconds a move</li><li>Pause &amp; step through</li><li>Live broadcasts too</li></ul>
-          <div class="mobile-shot"><img src="img/2-bot-vs-bot.jpg" alt="Bot vs Bot" loading="lazy"></div>
-        </article>
-      </div>
-      <div class="sticky" aria-hidden="true">
-        <div class="device"><div class="screen" id="screen">
-          <img class="on" src="img/6-learn-course.jpg" alt="">
-          <img src="img/3-game-review.jpg" alt="">
-          <img src="img/4-lesson.jpg" alt="">
-          <img src="img/5-play-with-coach.jpg" alt="">
-          <img src="img/2-bot-vs-bot.jpg" alt="">
-        </div></div>
-      </div>
+    <div class="panel rv tilt">
+      <div class="phone"><img src="img/app/lesson.jpg" alt="A lesson on how the knight moves" loading="lazy"></div>
+      <div class="phone back"><img src="img/app/course.jpg" alt="The Learn chess course" loading="lazy"></div>
+      <div class="tag">⭐ <b>Level 6: King</b></div>
     </div>
   </div>
 </section>
 
-<!-- ── Your turn ── -->
-<section class="play" id="try">
-  <div class="inner grid2">
-    <div>
-      <div class="label rv">Your turn</div>
-      <h2 class="split" data-split>Find the <span class="serif">winning move.</span></h2>
-      <p class="rv" style="--d:.15s;color:var(--muted);font-size:19px;max-width:520px;margin:22px 0 0">Four real puzzles, right here. Tap a piece, then its square (or drag it). This is how Rookwise turns the mistakes in your own games into training.</p>
-      <div class="plist rv" style="--d:.25s" id="plist"></div>
+<section class="feature flip" style="--c:#2F9BF0;--c-soft:var(--sky-soft)">
+  <div class="wrap">
+    <div class="text">
+      <span class="kicker rv">Review</span>
+      <h2 class="rv" style="--d:.06s">A coach for every move you make.</h2>
+      <p class="rv" style="--d:.12s">Import your Lichess and Chess.com games. Every move is rated, and you see the better one.</p>
+      <ul class="ticks rv" style="--d:.18s"><li>Brilliant to Blunder, with accuracy</li><li>"Why is this bad?" on the board</li><li>Key moments that decided the game</li></ul>
     </div>
-    <div class="pboard-wrap rv" style="--d:.15s">
-      <div class="ptop"><span class="turn"></span><span><b>White to move</b> · <span id="pgoal">mate in 2</span></span></div>
-      <div class="pboard" id="pboard" role="application" aria-label="Puzzle board"></div>
-      <div class="pcoach" id="pcoach" aria-live="polite"><div class="av" id="pav">?</div><div><div class="t" id="pt">Your move.</div><div class="s" id="ps">Look for checks first.</div></div></div>
-      <div class="pbtns"><button class="pbtn" id="phint" type="button">Hint</button><button class="pbtn" id="preset" type="button">Try again</button><button class="pbtn primary" id="pnext" type="button">Next puzzle →</button></div>
+    <div class="panel rv tilt">
+      <div class="phone"><img src="img/app/review.jpg" alt="Game review showing an inaccuracy and the better move" loading="lazy"></div>
+      <div class="phone back"><img src="img/app/brilliant.jpg" alt="A brilliant move in game review" loading="lazy"></div>
+      <div class="tag">?! <b>Inaccuracy</b> · Rd2 was best</div>
     </div>
   </div>
 </section>
 
-<!-- ── New ── -->
-<section class="light" id="new">
-  <div class="inner">
-    <div class="intro">
-      <div>
-        <div class="label rv">New in Rookwise</div>
-        <h2 class="split" data-split>Fresh ways <span class="serif">to play.</span></h2>
-      </div>
-      <p class="rv" style="--d:.2s">Four new modes for players who want something different from the same old game.</p>
+<section class="feature" style="--c:#0E9C8F;--c-soft:var(--teal-soft)">
+  <div class="wrap">
+    <div class="text">
+      <span class="kicker rv">Train</span>
+      <h2 class="rv" style="--d:.06s">Your mistakes become your puzzles.</h2>
+      <p class="rv" style="--d:.12s">Every blunder in your games turns into a puzzle, repeated until you've mastered it.</p>
+      <ul class="ticks rv" style="--d:.18s"><li>Daily puzzle with a streak</li><li>Puzzle Rush and puzzle themes</li><li>Opening trainer from your own lines</li></ul>
+    </div>
+    <div class="panel rv tilt">
+      <div class="phone"><img src="img/app/puzzles.jpg" alt="The Puzzles tab" loading="lazy"></div>
+      <div class="phone back"><img src="img/app/learn.jpg" alt="Drills in the Learn tab" loading="lazy"></div>
+      <div class="tag">🧩 <b>170 puzzles</b> waiting</div>
+    </div>
+  </div>
+</section>
+
+<section class="more" id="more">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="rv">More ways to play.</h2>
+      <p class="rv" style="--d:.08s">New modes for when you want something different.</p>
     </div>
     <div class="bento">
-      <article class="tile t-960 rv">
+      <article class="tile rv" style="--c-soft:var(--violet-soft)">
         <h3>Chess960</h3>
-        <p>A new start position every game: no opening theory, just chess. Castle by moving your king onto its rook. The bot and coach know the rules too.</p>
-        <div class="demo"><div class="rank" id="rank"></div><div class="pos960" id="pos960">Position 518 · the standard setup</div></div>
+        <p>A new start position every game. No opening theory, just chess.</p>
+        <div class="shot"><img src="img/app/chess960.jpg" alt="A Chess960 game against the bot" loading="lazy"></div>
       </article>
-      <article class="tile t-voice rv" style="--d:.1s">
-        <h3>Blindfold &amp; read-aloud</h3>
-        <p>Hide the pieces and play from memory. The bot's moves are read aloud, so you can follow the game without looking.</p>
-        <div class="demo">
-          <div class="voice-ui"><div class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></div><div class="typed" id="typed"></div></div>
-          <div class="wave" aria-hidden="true"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.05s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.35s"></i><i style="animation-delay:.08s"></i><i style="animation-delay:.28s"></i><i style="animation-delay:.18s"></i></div>
-        </div>
+      <article class="tile rv" style="--d:.06s;--c-soft:var(--coral-soft)">
+        <h3>Bot vs Bot</h3>
+        <p>Watch two bots play, every move rated, at your own pace.</p>
+        <div class="shot"><img src="img/app/watch.jpg" alt="Two bots playing, every move rated" loading="lazy"></div>
       </article>
-      <article class="tile t-mirror rv">
-        <h3>Mirror bot</h3>
-        <p>Play the one opponent who knows your openings best: you. It learns your lines from your own games and plays at your strength.</p>
-        <div class="demo">
-          <div class="mirror"><div class="side"><img src="img/pieces/wK.png" alt=""><b>You</b>1.e4 · Italian</div><div class="vs">vs</div><div class="side"><img src="img/pieces/bK.png" alt=""><b>Also you</b>your repertoire</div></div>
-          <div class="bookline" id="bookline">Book: 1.e4 e5 2.Nf3 Nc6 3.Bc4</div>
-        </div>
-      </article>
-      <article class="tile t-year rv" style="--d:.1s">
+      <article class="tile rv" style="--d:.12s;--c-soft:var(--amber-soft)">
         <h3>Your year in chess</h3>
-        <p>Games, score, accuracy, your favourite opening and best win, with a card to share.</p>
-        <div class="demo">
-          <div class="bars" id="bars"><i data-h="22"></i><i data-h="35"></i><i data-h="28"></i><i data-h="44"></i><i data-h="38"></i><i data-h="52"></i><i data-h="47"></i><i data-h="60"></i><i data-h="56"></i><i data-h="100" class="peak"></i><i data-h="70"></i><i data-h="64"></i></div>
-          <div class="months"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
-        </div>
+        <p>Games, score, accuracy and your best moments, ready to share.</p>
+        <div class="shot"><img src="img/app/year.jpg" alt="Year in chess summary" loading="lazy"></div>
+      </article>
+      <article class="tile small rv" style="--c-soft:var(--green-soft)">
+        <div class="em">🪞</div><h3>Mirror bot</h3>
+        <p>An opponent that plays your openings at your strength.</p>
+      </article>
+      <article class="tile small rv" style="--d:.06s;--c-soft:var(--sky-soft)">
+        <div class="em">🙈</div><h3>Blindfold</h3>
+        <p>Hide the pieces, play from memory, hear the bot's moves.</p>
+      </article>
+      <article class="tile small rv" style="--d:.12s;--c-soft:var(--teal-soft)">
+        <div class="em">⚖️</div><h3>Odds games</h3>
+        <p>The bot starts a piece down, so a stronger level is still winnable.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ── Numbers ── -->
-<div class="numbers">
-  <div class="rv"><b><span data-count="44">0</span></b><span>chess lessons</span></div>
-  <div class="rv" style="--d:.1s"><b>~<span data-count="3200">0</span></b><span>top bot strength</span></div>
-  <div class="rv" style="--d:.2s"><b><span class="serif">zero</span></b><span>ads, accounts or limits</span></div>
-  <div class="rv" style="--d:.3s"><b><span data-count="14">0</span></b><span>languages</span></div>
-</div>
-
-<!-- ── Screens ── -->
-<section class="screens" id="screens">
-  <div class="inner">
-    <div class="intro" style="margin-top:clamp(80px,12vw,160px)">
+<section class="try" id="try">
+  <div class="wrap">
+    <div class="box">
       <div>
-        <div class="label rv">A look inside</div>
-        <h2 class="split" data-split>Built to feel <span class="serif">good.</span></h2>
+        <span class="kicker rv" style="--c:var(--green-dk)">Your turn</span>
+        <h2 class="rv" style="--d:.06s">Find the winning move.</h2>
+        <p class="lead rv" style="--d:.12s">Four real puzzles. Tap a piece, then its square, or drag it.</p>
+        <div class="plist rv" style="--d:.18s" id="plist"></div>
       </div>
-      <p class="rv" style="--d:.2s">Dark and light themes, 11 boards, 10 piece sets and 7 accent colours. Hover to pause.</p>
-    </div>
-  </div>
-  <div class="reel" id="reel">
-    <figure><div class="frame"><img src="img/1-learn.jpg" alt="Learn tab" loading="lazy"></div><figcaption>Learn</figcaption></figure>
-    <figure><div class="frame"><img src="img/3-game-review.jpg" alt="Game review" loading="lazy"></div><figcaption>Game review</figcaption></figure>
-    <figure><div class="frame"><img src="img/5-play-with-coach.jpg" alt="Play with a coach" loading="lazy"></div><figcaption>Play with a coach</figcaption></figure>
-    <figure><div class="frame"><img src="img/4-lesson.jpg" alt="Lesson" loading="lazy"></div><figcaption>Lessons</figcaption></figure>
-    <figure><div class="frame"><img src="img/2-bot-vs-bot.jpg" alt="Bot vs Bot" loading="lazy"></div><figcaption>Bot vs Bot</figcaption></figure>
-    <figure><div class="frame"><img src="img/6-learn-course.jpg" alt="Course" loading="lazy"></div><figcaption>Your course</figcaption></figure>
-    <figure><div class="frame"><img src="img/7-analyze.jpg" alt="Analyze" loading="lazy"></div><figcaption>Analyze</figcaption></figure>
-    <figure><div class="frame"><img src="img/8-home.jpg" alt="Home" loading="lazy"></div><figcaption>Home</figcaption></figure>
-  </div>
-</section>
-
-<!-- ── Privacy ── -->
-<section class="privacy" id="privacy">
-  <div class="inner">
-    <div class="label rv">Private by design</div>
-    <p class="big" id="bigline">Your games <span class="dim">stay on</span> <span class="serif">your phone.</span> <span class="dim">No account. No ads. No server of ours holding your data.</span></p>
-    <div class="pgrid">
-      <div class="rv"><b>The engine is on the device</b><p>Analysis works offline. Games, puzzles and notes never leave your phone unless you back them up yourself.</p></div>
-      <div class="rv" style="--d:.1s"><b>Fair play built in</b><p>Rookwise is for learning and review. Engine help pauses while a live-play chess app is open.</p></div>
-      <div class="rv" style="--d:.2s"><b>Anonymous statistics</b><p>Which screens are used, never your games or accounts. On by default, one switch turns them off. <a href="privacy/">Privacy policy →</a></p></div>
+      <div class="rv" style="--d:.1s">
+        <div class="pbar"><span class="turn"></span><span><b>White to move</b> · <span id="pgoal">mate in 2</span></span>
+          <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Board sound">
+            <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m23 9-6 6M17 9l6 6"/></svg>
+            <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+            <span>Sound</span>
+          </button>
+        </div>
+        <div class="pboard" id="pboard" role="application" aria-label="Puzzle board"></div>
+        <div class="coach" id="pcoach" aria-live="polite"><div class="av" id="pav">?</div><div><div class="t" id="pt">Your move.</div><div class="s" id="ps">Look for checks first.</div></div></div>
+        <div class="pbtns"><button class="btn btn-soft" id="phint" type="button">💡 Hint</button><button class="btn btn-soft" id="preset" type="button">↺ Try again</button><button class="btn btn-go" id="pnext" type="button">Next puzzle →</button></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── FAQ ── -->
-<section id="faq">
-  <div class="inner faq">
-    <div>
-      <div class="label rv">Questions</div>
-      <h2 class="split" data-split>Good <span class="serif">to know.</span></h2>
+<section class="faq-sec" id="faq">
+  <div class="wrap">
+    <div class="promise">
+      <div class="rv" style="--c-soft:var(--green-soft)"><i>📱</i><span><b>Your games stay on your phone</b>The engine runs on the device, even offline.</span></div>
+      <div class="rv" style="--d:.06s;--c-soft:var(--sky-soft)"><i>🤝</i><span><b>Fair play built in</b>Engine help pauses while a live-play chess app is open.</span></div>
+      <div class="rv" style="--d:.12s;--c-soft:var(--amber-soft)"><i>🔒</i><span><b>No account, no ads</b>Anonymous stats only, one switch to turn off. <a href="privacy/">Privacy</a></span></div>
     </div>
-    <div class="rv">
-      <details open><summary>Is Rookwise free?<i></i></summary><p class="a">Yes. No ads, no subscriptions, no limits. Every feature is included.</p></details>
-      <details><summary>When can I get it?<i></i></summary><p class="a">Rookwise is in testing on Google Play. Tap "Join the early test" and send the email, and you'll get an invite before the public release.</p></details>
-      <details><summary>Does it work without internet?<i></i></summary><p class="a">Yes. Lessons, puzzles, game review, the bot and analysis all run on your phone. Importing games and live broadcasts need a connection.</p></details>
-      <details><summary>Does it work with Lichess and Chess.com?<i></i></summary><p class="a">Sign in to Lichess or link a Chess.com username, and your finished games are imported for review and turned into puzzles.</p></details>
-      <details><summary>Can it help me during an online game?<i></i></summary><p class="a">No, on purpose. Rookwise is for learning and reviewing finished games, and it never asks Lichess for access to games in progress.</p></details>
-      <details><summary>Is there an iPhone version?<i></i></summary><p class="a">Not yet. Rookwise launches on Android first.</p></details>
+    <div class="head"><h2 class="rv">Questions?</h2></div>
+    <div class="faqs rv">
+      <details open><summary>Is Rookwise free?</summary><p>Yes. No ads, no subscriptions and no limits. Every feature is included.</p></details>
+      <details><summary>When can I get it?</summary><p>Rookwise is in testing on Google Play. Tap "Join the early test" and you'll get an invite before the public launch.</p></details>
+      <details><summary>Does it work without internet?</summary><p>Yes. Lessons, puzzles, review, the bot and analysis all run on your phone. Importing games and live broadcasts need a connection.</p></details>
+      <details><summary>Does it work with Lichess and Chess.com?</summary><p>Sign in to Lichess or link a Chess.com username, and your finished games are imported for review and puzzles.</p></details>
+      <details><summary>Can it help me during an online game?</summary><p>No, on purpose. Rookwise is for learning and reviewing finished games.</p></details>
     </div>
   </div>
 </section>
 
-<!-- ── Final ── -->
-<section class="final">
-  <div class="inner">
-    <h2 class="split" data-split>Your move<span class="serif">.</span></h2>
-    <p class="rv">Join the early test on Google Play and help shape Rookwise before it launches.</p>
-    <a class="btn rv" style="--d:.15s" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">Join the early test →</a>
+<section class="cta">
+  <div class="box">
+    <h2 class="rv">Your move.</h2>
+    <p class="rv" style="--d:.08s">Join the early test on Google Play and help shape Rookwise before launch.</p>
+    <a class="btn rv" style="--d:.14s" href="mailto:rajkumar30598@gmail.com?subject=Rookwise%20early%20access&body=Hi!%20I%27d%20like%20to%20join%20the%20Rookwise%20test%20on%20Google%20Play.%20My%20Google%20account%20email%20is%3A%20">Join the early test →</a>
+    <img class="rook" src="img/pieces/wR.png" alt="">
   </div>
 </section>
 
 <footer>
-  <div class="inner">
-    <a class="logo" href="#top"><img src="icon-512.png" alt=""> Rookwise</a>
+  <div class="wrap">
+    <a class="logo" href="#top" style="font-size:18px"><img src="icon-512.png" alt="" style="width:28px;height:28px"> Rookwise</a>
     <div class="links">
       <a href="privacy/">Privacy policy</a>
       <a href="privacy/#delete">Delete your data</a>
@@ -633,155 +478,31 @@ footer .copy { margin-left: auto; }
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  /* Nav turns solid once you scroll. */
+  /* Nav shadow, reveal on scroll */
   const nav = $('#nav');
-  const onScroll = () => nav.classList.toggle('solid', scrollY > 40);
+  const onScroll = () => nav.classList.toggle('raised', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15, rootMargin: '0px 0px -5% 0px' });
+  $$('.rv').forEach((el) => io.observe(el));
 
-  /* Headlines rise word by word. */
-  $$('[data-split]').forEach((el) => {
-    let i = 0;
-    const walk = (node) => {
-      [...node.childNodes].forEach((child) => {
-        if (child.nodeType === 3) {
-          const frag = document.createDocumentFragment();
-          child.textContent.split(/(\s+)/).forEach((part) => {
-            if (!part) return;
-            if (/^\s+$/.test(part)) { frag.append(part); return; }
-            const w = document.createElement('span'); w.className = 'w';
-            const s = document.createElement('span'); s.textContent = part; s.style.setProperty('--i', i++);
-            w.append(s); frag.append(w);
-          });
-          child.replaceWith(frag);
-        } else if (child.nodeType === 1) walk(child);
-      });
-    };
-    walk(el); el.classList.add('split');
+  /* Hero phones drift apart a little as you scroll */
+  const par = $$('[data-par]');
+  if (!reduce) addEventListener('scroll', () => {
+    const y = Math.min(scrollY, 600);
+    par.forEach((p) => (p.style.translate = `0 ${(y * +p.dataset.par) / 100}px`));
+  }, { passive: true });
+
+  /* Feature panels tilt toward the cursor */
+  if (!reduce && matchMedia('(pointer: fine)').matches) $$('.tilt').forEach((el) => {
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      el.style.transform = `perspective(1200px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+    });
+    el.addEventListener('pointerleave', () => (el.style.transform = ''));
   });
 
-  /* Reveal on scroll; counters count up; the year bars grow. */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-      $$('[data-count]', e.target).forEach(countUp);
-      if (e.target.id === 'bars') growBars();
-    });
-  }, { threshold: .18, rootMargin: '0px 0px -6% 0px' });
-  $$('.rv, [data-split], .numbers > div, #bars').forEach((el) => io.observe(el));
-
-  function countUp(el) {
-    const target = +el.dataset.count;
-    if (reduce) { el.textContent = target; return; }
-    const t0 = performance.now(), dur = 1400;
-    const tick = (t) => {
-      const p = Math.min(1, (t - t0) / dur), eased = 1 - Math.pow(1 - p, 4);
-      el.textContent = Math.round(target * eased);
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-  function growBars() { $$('#bars i').forEach((b, k) => setTimeout(() => (b.style.height = b.dataset.h + '%'), k * 70)); }
-
-  /* Privacy line lights up when it's in view. */
-  new IntersectionObserver(([e]) => e.isIntersecting && $('#bigline').classList.add('lit'), { threshold: .6 }).observe($('#bigline'));
-
-  /* Rotating line in the hero. */
-  const rot = $$('.rotator span');
-  let r = 0;
-  if (!reduce) setInterval(() => {
-    rot[r].classList.remove('on'); rot[r].classList.add('off');
-    const prev = r; setTimeout(() => rot[prev].classList.remove('off'), 600);
-    r = (r + 1) % rot.length; rot[r].classList.add('on');
-  }, 2800);
-
-  /* Sticky phone follows the chapter in view. */
-  const shots = $$('#screen img'), chapters = $$('.chapter');
-  const cio = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      chapters.forEach((c) => c.classList.toggle('active', c === e.target));
-      shots.forEach((s, k) => s.classList.toggle('on', k === +e.target.dataset.shot));
-    });
-  }, { rootMargin: '-45% 0px -45% 0px' });
-  chapters.forEach((c) => cio.observe(c));
-
-  /* ── The Opera Game, replayed with coach callouts ── */
-  const GAME = [["e4","e2","e4","rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR"],["e5","e7","e5","rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR"],["Nf3","g1","f3","rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R"],["d6","d7","d6","rnbqkbnr/ppp2ppp/3p4/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R"],["d4","d2","d4","rnbqkbnr/ppp2ppp/3p4/4p3/3PP3/5N2/PPP2PPP/RNBQKB1R"],["Bg4","c8","g4","rn1qkbnr/ppp2ppp/3p4/4p3/3PP1b1/5N2/PPP2PPP/RNBQKB1R"],["dxe5","d4","e5","rn1qkbnr/ppp2ppp/3p4/4P3/4P1b1/5N2/PPP2PPP/RNBQKB1R"],["Bxf3","g4","f3","rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5b2/PPP2PPP/RNBQKB1R"],["Qxf3","d1","f3","rn1qkbnr/ppp2ppp/3p4/4P3/4P3/5Q2/PPP2PPP/RNB1KB1R"],["dxe5","d6","e5","rn1qkbnr/ppp2ppp/8/4p3/4P3/5Q2/PPP2PPP/RNB1KB1R"],["Bc4","f1","c4","rn1qkbnr/ppp2ppp/8/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R"],["Nf6","g8","f6","rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/5Q2/PPP2PPP/RNB1K2R"],["Qb3","f3","b3","rn1qkb1r/ppp2ppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R"],["Qe7","d8","e7","rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1Q6/PPP2PPP/RNB1K2R"],["Nc3","b1","c3","rn2kb1r/ppp1qppp/5n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R"],["c6","c7","c6","rn2kb1r/pp2qppp/2p2n2/4p3/2B1P3/1QN5/PPP2PPP/R1B1K2R"],["Bg5","c1","g5","rn2kb1r/pp2qppp/2p2n2/4p1B1/2B1P3/1QN5/PPP2PPP/R3K2R"],["b5","b7","b5","rn2kb1r/p3qppp/2p2n2/1p2p1B1/2B1P3/1QN5/PPP2PPP/R3K2R"],["Nxb5","c3","b5","rn2kb1r/p3qppp/2p2n2/1N2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R"],["cxb5","c6","b5","rn2kb1r/p3qppp/5n2/1p2p1B1/2B1P3/1Q6/PPP2PPP/R3K2R"],["Bxb5+","c4","b5","rn2kb1r/p3qppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R"],["Nbd7","b8","d7","r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/R3K2R"],["O-O-O","e1","c1","r3kb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R"],["Rd8","a8","d8","3rkb1r/p2nqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR3R"],["Rxd7","d1","d7","3rkb1r/p2Rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R"],["Rxd7","d8","d7","4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2K4R"],["Rd1","h1","d1","4kb1r/p2rqppp/5n2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Qe6","e7","e6","4kb1r/p2r1ppp/4qn2/1B2p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Bxd7+","b5","d7","4kb1r/p2B1ppp/4qn2/4p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Nxd7","f6","d7","4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4"],["Qb8+","b3","b8","1Q2kb1r/p2n1ppp/4q3/4p1B1/4P3/8/PPP2PPP/2KR4"],["Nxb8","d7","b8","1n2kb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2KR4"],["Rd8#","d1","d8","1n1Rkb1r/p4ppp/4q3/4p1B1/4P3/8/PPP2PPP/2K5"]];
-  // Coach callouts at the moments that decided the game; eval is White's share of the bar.
-  const CALLS = {
-    0: ['#A3A3A3', 'Book', '1. e4', 'An open game. Rookwise knows the opening by name.'],
-    8: ['#A3A3A3', 'Book', '5. Qxf3', 'Philidor Defence: Black gave up the bishop pair early.'],
-    12: ['#81B64C', 'Best', '7. Qb3', 'Double attack on b7 and f7. Black is already in trouble.'],
-    18: ['#1BADA6', 'Great', '10. Nxb5', 'A knight for two pawns to rip the queenside open.'],
-    22: ['#81B64C', 'Best', '12. O-O-O', 'Every white piece joins the attack.'],
-    24: ['#1BADA6', 'Great', '13. Rxd7', 'Rook for knight: the pin on d7 is everything.'],
-    30: ['#26C2A3', 'Brilliant !!', '16. Qb8+', 'The queen sacrifice. The knight has to take…'],
-    32: ['#E05B4B', 'Checkmate', '17. Rd8#', 'Morphy finishes with his last two pieces. Rookwise rates every move like this.'],
-  };
-  const EVAL = [52,52,54,55,58,56,60,59,62,61,64,63,70,68,72,71,74,75,80,78,84,83,86,85,90,88,92,91,95,94,99,99,100];
-  const BADGE = { 18: ['!', '#1BADA6'], 24: ['!', '#1BADA6'], 30: ['!!', '#26C2A3'], 32: ['#', '#E05B4B'] };
-
-  const board = $('#board'), movesEl = $('#moves'), evalFill = $('#evalfill'), coach = $('#coach');
-  const files = 'abcdefgh';
-  const at = (sq) => ({ x: files.indexOf(sq[0]) * 100, y: (8 - +sq[1]) * 100 });
-  for (let r = 0; r < 8; r++) for (let f = 0; f < 8; f++) {
-    const d = document.createElement('div');
-    d.className = 'sq ' + ((r + f) % 2 ? 'd' : 'l');
-    d.style.left = f * 12.5 + '%'; d.style.top = r * 12.5 + '%';
-    d.dataset.sq = files[f] + (8 - r);
-    board.append(d);
-  }
-  let pieces = new Map();
-  function draw(fen) {
-    pieces.forEach((el) => el.remove()); pieces = new Map();
-    fen.split('/').forEach((row, r) => {
-      let f = 0;
-      for (const ch of row) {
-        if (/\d/.test(ch)) { f += +ch; continue; }
-        const sq = files[f] + (8 - r);
-        const el = document.createElement('div'); el.className = 'pc';
-        const color = ch === ch.toUpperCase() ? 'w' : 'b';
-        el.innerHTML = `<img src="img/pieces/${color}${ch.toUpperCase()}.png" alt="">`;
-        const p = at(sq); el.style.transform = `translate(${p.x}%, ${p.y}%)`;
-        board.append(el); pieces.set(sq, el); f++;
-      }
-    });
-  }
-  function highlight(from, to) {
-    $$('.sq.hl', board).forEach((s) => s.classList.remove('hl'));
-    if (from) [from, to].forEach((sq) => $(`.sq[data-sq="${sq}"]`, board).classList.add('hl'));
-  }
-  function badge(sq, mark) {
-    $$('.badge', board).forEach((b) => b.remove());
-    if (!mark) return;
-    const b = document.createElement('div'); b.className = 'badge';
-    const p = at(sq); b.style.transform = `translate(${p.x}%, ${p.y}%)`;
-    b.innerHTML = `<b style="background:${mark[1]}">${mark[0]}</b>`; board.append(b);
-  }
-  function say(call) {
-    coach.classList.add('swap');
-    setTimeout(() => {
-      $('#coach-av').style.background = call[0];
-      $('#coach-av').textContent = call[1] === 'Checkmate' ? '#' : call[1].startsWith('Brilliant') ? '!!' : call[1] === 'Great' ? '!' : call[1] === 'Book' ? '♞' : '★';
-      $('#coach-t').innerHTML = `${call[1]} <small>${call[2]}</small>`;
-      $('#coach-s').textContent = call[3];
-      coach.classList.remove('swap');
-    }, 300);
-  }
-  function renderMoves(ply) {
-    movesEl.innerHTML = '';
-    GAME.slice(Math.max(0, ply - 7), ply + 1).forEach((m, k, arr) => {
-      const idx = Math.max(0, ply - 7) + k;
-      const s = document.createElement('span');
-      s.textContent = (idx % 2 === 0 ? `${idx / 2 + 1}. ` : '') + m[0];
-      if (k === arr.length - 1) s.className = 'cur';
-      movesEl.append(s);
-    });
-  }
-
-  /* ── Board sounds, synthesized: a wooden tap per move (no audio files) ── */
+  /* ── Wooden board sounds, synthesized (no audio files) ── */
   const sound = (() => {
     let ctx = null, noise = null, on = false;
     try { on = localStorage.getItem('rw-sound') === '1'; } catch {}
@@ -793,29 +514,23 @@ footer .copy { margin-left: auto; }
         for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
       }
       if (ctx.state === 'suspended') ctx.resume();
-      return ctx;
     };
-    // One piece set down on a wooden board: a filtered click for the contact, a low
-    // resonant "thock" for the board's body, both gone within about a tenth of a second.
     function knock(t, { pitch = 1, gain = 1, bright = 1 } = {}) {
-      const c = ctx, out = c.createGain();
-      out.gain.value = 0.9 * gain; out.connect(c.destination);
+      const c = ctx, out = c.createGain(); out.gain.value = 0.9 * gain; out.connect(c.destination);
       const n = c.createBufferSource(); n.buffer = noise;
       const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1800 * bright * pitch; bp.Q.value = 1.4;
       const ng = c.createGain();
       ng.gain.setValueAtTime(0.0001, t); ng.gain.exponentialRampToValueAtTime(0.55, t + 0.002); ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
       n.connect(bp).connect(ng).connect(out); n.start(t); n.stop(t + 0.06);
       [[210, 0.6, 0.11], [470, 0.28, 0.07], [1150, 0.12, 0.04]].forEach(([f, g, len]) => {
-        const o = c.createOscillator(), og = c.createGain();
-        o.type = 'sine';
+        const o = c.createOscillator(), og = c.createGain(); o.type = 'sine';
         o.frequency.setValueAtTime(f * pitch * 1.18, t); o.frequency.exponentialRampToValueAtTime(f * pitch, t + 0.02);
         og.gain.setValueAtTime(0.0001, t); og.gain.exponentialRampToValueAtTime(g, t + 0.003); og.gain.exponentialRampToValueAtTime(0.0001, t + len);
         o.connect(og).connect(out); o.start(t); o.stop(t + len + 0.02);
       });
     }
     function ping(t, f, g = 0.12, len = 0.35) {
-      const c = ctx, o = c.createOscillator(), og = c.createGain();
-      o.type = 'triangle'; o.frequency.value = f;
+      const c = ctx, o = c.createOscillator(), og = c.createGain(); o.type = 'triangle'; o.frequency.value = f;
       og.gain.setValueAtTime(0.0001, t); og.gain.exponentialRampToValueAtTime(g, t + 0.01); og.gain.exponentialRampToValueAtTime(0.0001, t + len);
       o.connect(og).connect(c.destination); o.start(t); o.stop(t + len + 0.05);
     }
@@ -828,147 +543,53 @@ footer .copy { margin-left: auto; }
     };
     return {
       get on() { return on; },
-      set(value) {
-        on = value;
-        try { localStorage.setItem('rw-sound', on ? '1' : '0'); } catch {}
-        if (on) { ensure(); kinds.move(ctx.currentTime + 0.02); }
-      },
-      play(kind) {
-        if (!on) return;
-        try { ensure(); if (kinds[kind]) kinds[kind](ctx.currentTime + 0.005); } catch {}
-      },
+      set(v) { on = v; try { localStorage.setItem('rw-sound', on ? '1' : '0'); } catch {} if (on) { ensure(); kinds.move(ctx.currentTime + 0.02); } },
+      play(kind) { if (!on) return; try { ensure(); if (kinds[kind]) kinds[kind](ctx.currentTime + 0.005); } catch {} },
     };
   })();
-  // Browsers start audio only after a tap: unlock it on the first one if sound was left on.
-  const unlock = () => { if (sound.on) sound.play('none'); removeEventListener('pointerdown', unlock); removeEventListener('keydown', unlock); };
-  addEventListener('pointerdown', unlock); addEventListener('keydown', unlock);
+  const unlock = () => { if (sound.on) sound.play('none'); removeEventListener('pointerdown', unlock); };
+  addEventListener('pointerdown', unlock);
   const soundBtn = $('#sound');
   const showSound = () => soundBtn.setAttribute('aria-pressed', String(sound.on));
   showSound();
   soundBtn.addEventListener('click', () => { sound.set(!sound.on); showSound(); });
-  const soundFor = (san, captured) =>
-    san.endsWith('#') ? 'mate' : san.startsWith('O-O') ? 'castle' : san.endsWith('+') ? 'check' : captured ? 'capture' : 'move';
+  const soundFor = (san, captured) => san.endsWith('#') ? 'mate' : san.startsWith('O-O') ? 'castle' : san.endsWith('+') ? 'check' : captured ? 'capture' : 'move';
 
-  const START = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
-  let ply = -1, timer;
-  function step() {
-    ply++;
-    if (ply >= GAME.length) { ply = -1; draw(START); highlight(); badge(); evalFill.style.height = '50%'; movesEl.innerHTML = ''; timer = setTimeout(step, 1200); return; }
-    const [san, from, to, fen] = GAME[ply];
-    const mover = pieces.get(from), victim = pieces.get(to);
-    if (victim && victim !== mover) victim.classList.add('gone');
-    if (mover) { const p = at(to); mover.style.transform = `translate(${p.x}%, ${p.y}%)`; mover.style.zIndex = 2; }
-    if (san === 'O-O-O') { const rook = pieces.get('a1'); if (rook) { const p = at('d1'); rook.style.transform = `translate(${p.x}%, ${p.y}%)`; } }
-    highlight(from, to); renderMoves(ply);
-    // The sound lands with the piece, as in the app.
-    setTimeout(() => sound.play(soundFor(san, !!victim && victim !== mover)), 380);
-    evalFill.style.height = EVAL[ply] + '%';
-    setTimeout(() => { draw(fen); badge(to, BADGE[ply]); }, 450);
-    if (CALLS[ply]) say(CALLS[ply]);
-    const pause = ply === GAME.length - 1 ? 5200 : CALLS[ply] ? 2300 : 900;
-    timer = setTimeout(step, pause);
-  }
-  draw(START);
-  if (reduce) { ply = GAME.length - 1; draw(GAME[ply][3]); highlight('d1', 'd8'); badge('d8', BADGE[32]); evalFill.style.height = '100%'; renderMoves(ply); say(CALLS[32]); }
-  else {
-    // Only play while the board is on screen.
-    let running = false;
-    new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !running) { running = true; timer = setTimeout(step, 900); }
-      else if (!e.isIntersecting && running) { running = false; clearTimeout(timer); }
-    }).observe(board);
-  }
-
-  /* ── Chess960: a new back rank every few seconds ── */
-  function rank960(n) {
-    const rank = Array(8).fill(null); let x = n;
-    rank[(x % 4) * 2 + 1] = 'B'; x = Math.floor(x / 4);
-    rank[(x % 4) * 2] = 'B'; x = Math.floor(x / 4);
-    const empty = () => rank.map((p, i) => (p ? -1 : i)).filter((i) => i >= 0);
-    rank[empty()[x % 6]] = 'Q'; x = Math.floor(x / 6);
-    const KN = ['NN---','N-N--','N--N-','N---N','-NN--','-N-N-','-N--N','--NN-','--N-N','---NN'][x];
-    empty().forEach((sq, i) => { if (KN[i] === 'N') rank[sq] = 'N'; });
-    const e = empty(); rank[e[0]] = 'R'; rank[e[1]] = 'K'; rank[e[2]] = 'R';
-    return rank;
-  }
-  const rankEl = $('#rank');
-  for (let i = 0; i < 8; i++) { const d = document.createElement('div'); d.innerHTML = '<img alt="">'; rankEl.append(d); }
-  const setRank = (n) => {
-    $$('img', rankEl).forEach((img, i) => {
-      const p = rank960(n)[i];
-      img.classList.add('flip');
-      setTimeout(() => { img.src = `img/pieces/w${p}.png`; img.classList.remove('flip'); }, 200 + i * 60);
-    });
-    $('#pos960').textContent = n === 518 ? 'Position 518 · the standard setup' : `Position ${n} of 960`;
-  };
-  setRank(518);
-  if (!reduce) setInterval(() => setRank(Math.floor(Math.random() * 960)), 3200);
-
-  /* ── Read-aloud: the bot's moves, as the phone's voice says them ── */
-  const phrases = ['Knight takes e5', 'Queen h5, check', 'Castles kingside', 'Bishop takes c6', 'Rook d8, checkmate'];
-  const typed = $('#typed'); let ph = 0;
-  function speak() {
-    const text = phrases[ph++ % phrases.length]; let i = 0;
-    typed.textContent = '';
-    const t = setInterval(() => { typed.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(t); setTimeout(speak, 1700); } }, 70);
-  }
-  if (reduce) typed.textContent = phrases[0]; else speak();
-
-  /* ── Mirror bot: your repertoire, line by line ── */
-  const lines = ['Book: 1.e4 e5 2.Nf3 Nc6 3.Bc4', 'Book: 1.e4 c5 2.Nf3 d6 3.d4', 'Book: 1.d4 d5 2.c4 e6 3.Nc3', 'Out of book · now at your level'];
-  let li = 0;
-  if (!reduce) setInterval(() => {
-    const el = $('#bookline'); el.style.opacity = 0;
-    setTimeout(() => { el.textContent = lines[++li % lines.length]; el.style.opacity = 1; }, 300);
-  }, 2600);
-  $('#bookline').style.transition = 'opacity .3s';
-
-  /* ── Your turn: playable puzzles (chess.js checks every move) ── */
+  /* ── Playable puzzles (chess.js checks every move) ── */
+  const files = 'abcdefgh';
+  const at = (sq) => ({ x: files.indexOf(sq[0]) * 100, y: (8 - +sq[1]) * 100 });
   const PUZZLES = [
-    { name: 'Morphy, Paris 1858', goal: 'mate in 2', fen: '4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 0 16', line: ['b3b8', 'd7b8', 'd1d8'], hint: 'Your queen can give check, even if it can be taken.', win: 'The queen sacrifice from the Opera Game.' },
-    { name: 'Back-rank mate', goal: 'mate in 1', fen: '6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1', line: ['d1d8'], hint: 'The black king is boxed in by its own pawns.', win: 'The king had no escape square: a back-rank mate.' },
-    { name: 'Smothered mate', goal: 'mate in 1', fen: '6rk/6pp/8/6N1/8/8/8/6K1 w - - 0 1', line: ['g5f7'], hint: 'Only the knight can reach a king surrounded by its own pieces.', win: 'Smothered: the king is trapped by its own pieces.' },
+    { name: 'Morphy, Paris 1858', goal: 'mate in 2', fen: '4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR4 w k - 0 16', line: ['b3b8', 'd7b8', 'd1d8'], hint: 'Your queen can give check, even if it can be taken.', win: 'The queen sacrifice from the famous Opera Game.' },
+    { name: 'Back-rank mate', goal: 'mate in 1', fen: '6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1', line: ['d1d8'], hint: 'The black king is boxed in by its own pawns.', win: 'No escape square: a back-rank mate.' },
+    { name: 'Smothered mate', goal: 'mate in 1', fen: '6rk/6pp/8/6N1/8/8/8/6K1 w - - 0 1', line: ['g5f7'], hint: 'Only the knight can reach a king surrounded by its own pieces.', win: 'Smothered by its own pieces.' },
     { name: "Légal's mate", goal: 'mate in 2', fen: 'r2qkbnr/ppp2ppp/2np4/4N3/2B1P3/2N4P/PPPP1PP1/R1BbK2R w KQkq - 0 7', line: ['c4f7', 'e8e7', 'c3d5'], hint: 'Start with a check on f7.', win: 'Légal’s mate: the queen was a decoy.' },
   ];
   const pboard = $('#pboard'), plist = $('#plist');
   let pIndex = 0, pGame = null, pStep = 0, pBusy = false, pSel = null, pDrag = null;
-  const solved = new Set();
   for (let r = 0; r < 8; r++) for (let f = 0; f < 8; f++) {
-    const d = document.createElement('div');
-    d.className = 'sq ' + ((r + f) % 2 ? 'd' : 'l');
-    d.style.left = f * 12.5 + '%'; d.style.top = r * 12.5 + '%';
-    d.dataset.sq = files[f] + (8 - r);
-    pboard.append(d);
+    const d = document.createElement('div'); d.className = 'sq ' + ((r + f) % 2 ? 'd' : 'l');
+    d.style.left = f * 12.5 + '%'; d.style.top = r * 12.5 + '%'; d.dataset.sq = files[f] + (8 - r); pboard.append(d);
   }
   let pPieces = new Map();
   function pDraw() {
-    pPieces.forEach((el) => el.remove()); pPieces = new Map();
-    $$('.dot', pboard).forEach((d) => d.remove());
+    pPieces.forEach((el) => el.remove()); pPieces = new Map(); $$('.dot', pboard).forEach((d) => d.remove());
     pGame.board().forEach((row, r) => row.forEach((cell, f) => {
       if (!cell) return;
-      const sq = files[f] + (8 - r);
-      const el = document.createElement('div'); el.className = 'pc';
+      const sq = files[f] + (8 - r), el = document.createElement('div'); el.className = 'pc';
       el.innerHTML = `<img src="img/pieces/${cell.color}${cell.type.toUpperCase()}.png" alt="" draggable="false">`;
-      const p = at(sq); el.style.transform = `translate(${p.x}%, ${p.y}%)`;
-      pboard.append(el); pPieces.set(sq, el);
+      const p = at(sq); el.style.transform = `translate(${p.x}%, ${p.y}%)`; pboard.append(el); pPieces.set(sq, el);
     }));
   }
-  function pMark(cls, squares) {
-    $$('.sq.' + cls, pboard).forEach((s) => s.classList.remove(cls));
-    squares.forEach((sq) => $(`.sq[data-sq="${sq}"]`, pboard).classList.add(cls));
-  }
+  const pMark = (cls, sqs) => { $$('.sq.' + cls, pboard).forEach((s) => s.classList.remove(cls)); sqs.forEach((sq) => $(`.sq[data-sq="${sq}"]`, pboard).classList.add(cls)); };
   function pSay(kind, title, text) {
     const c = $('#pcoach'), av = $('#pav');
-    c.classList.toggle('good', kind === 'good' || kind === 'win');
-    c.classList.toggle('bad', kind === 'bad');
-    av.style.background = kind === 'win' ? '#26C2A3' : kind === 'good' ? '#81B64C' : kind === 'bad' ? '#E05B4B' : '#4A4F55';
-    av.textContent = kind === 'win' ? '!!' : kind === 'good' ? '★' : kind === 'bad' ? '?' : '?';
+    c.classList.toggle('good', kind === 'good' || kind === 'win'); c.classList.toggle('bad', kind === 'bad');
+    av.style.background = kind === 'win' ? '#13B5A6' : kind === 'good' ? '#81B64C' : kind === 'bad' ? '#FF6B57' : '#B9B3A3';
+    av.textContent = kind === 'win' ? '!!' : kind === 'good' ? '★' : '?';
     $('#pt').textContent = title; $('#ps').textContent = text;
   }
   function pSelect(sq) {
-    pSel = sq;
-    $$('.dot', pboard).forEach((d) => d.remove());
-    pMark('sel', sq ? [sq] : []);
+    pSel = sq; $$('.dot', pboard).forEach((d) => d.remove()); pMark('sel', sq ? [sq] : []);
     if (!sq) return;
     pGame.moves({ square: sq, verbose: true }).forEach((m) => {
       const d = document.createElement('div'); d.className = 'dot' + (m.captured ? ' cap' : '');
@@ -977,52 +598,42 @@ footer .copy { margin-left: auto; }
   }
   function load(i) {
     pIndex = i; pStep = 0; pBusy = false; pSel = null;
-    const pz = PUZZLES[i];
-    pGame = new Chess(pz.fen);
+    const pz = PUZZLES[i]; pGame = new Chess(pz.fen);
     pDraw(); pMark('hl', []); pMark('sel', []); pMark('hint', []);
     $('#pgoal').textContent = pz.goal;
     pSay('idle', `${pz.name} · ${pz.goal}`, 'White to move. Look for checks first.');
     $$('.pitem', plist).forEach((b, k) => b.setAttribute('aria-current', String(k === i)));
   }
-  function animate(from, to) {
-    const mover = pPieces.get(from); const victim = pPieces.get(to);
+  function slide(from, to) {
+    const mover = pPieces.get(from), victim = pPieces.get(to);
     if (victim && victim !== mover) victim.classList.add('gone');
     if (mover) { const p = at(to); mover.classList.remove('drag'); mover.style.transform = `translate(${p.x}%, ${p.y}%)`; mover.style.zIndex = 2; }
   }
-  function tryMove(from, to) {
+  function attempt(from, to) {
     if (pBusy) return false;
     const pz = PUZZLES[pIndex];
     const legal = pGame.moves({ square: from, verbose: true }).find((m) => m.to === to);
     if (!legal) return false;
-    const want = pz.line[pStep];
     pSelect(null);
-    if (from + to !== want.slice(0, 4)) {
-      pBusy = true;
-      animate(from, to); sound.play(legal.captured ? 'capture' : 'move');
+    if (from + to !== pz.line[pStep].slice(0, 4)) {
+      pBusy = true; slide(from, to); sound.play(legal.captured ? 'capture' : 'move');
       pSay('bad', `${legal.san} isn't the one`, 'There’s a stronger move here. Try again.');
-      setTimeout(() => { pboard.classList.add('shake'); }, 300);
+      setTimeout(() => pboard.classList.add('shake'), 300);
       setTimeout(() => { pboard.classList.remove('shake'); pDraw(); pBusy = false; }, 800);
       return true;
     }
     const m = pGame.move({ from, to, promotion: 'q' });
-    animate(from, to); pMark('hl', [from, to]);
-    sound.play(soundFor(m.san, !!m.captured));
-    pStep++;
+    slide(from, to); pMark('hl', [from, to]); sound.play(soundFor(m.san, !!m.captured)); pStep++;
     if (pStep >= pz.line.length) {
-      solved.add(pIndex); $$('.pitem', plist)[pIndex].classList.add('solved');
-      pSay('win', `Brilliant!! ${m.san}`, pz.win + ' Rookwise makes puzzles like this from your own games.');
-      setTimeout(() => { pDraw(); confetti(); }, 430);
-      pBusy = true;
-      return true;
+      $$('.pitem', plist)[pIndex].classList.add('solved');
+      pSay('win', `Brilliant!! ${m.san}`, pz.win);
+      setTimeout(() => { pDraw(); confetti(); }, 430); pBusy = true; return true;
     }
-    pSay('good', `Best ★ ${m.san}`, 'Now Black has only one reply…');
-    pBusy = true;
+    pSay('good', `Best ★ ${m.san}`, 'Now Black has only one reply…'); pBusy = true;
     setTimeout(() => {
       pDraw();
-      const reply = pz.line[pStep];
-      const r = pGame.move({ from: reply.slice(0, 2), to: reply.slice(2, 4), promotion: 'q' });
-      animate(r.from, r.to); pMark('hl', [r.from, r.to]); sound.play(soundFor(r.san, !!r.captured));
-      pStep++;
+      const reply = pz.line[pStep], r = pGame.move({ from: reply.slice(0, 2), to: reply.slice(2, 4), promotion: 'q' });
+      slide(r.from, r.to); pMark('hl', [r.from, r.to]); sound.play(soundFor(r.san, !!r.captured)); pStep++;
       setTimeout(() => { pDraw(); pBusy = false; pSay('good', `${r.san}. Your move.`, 'Finish it.'); }, 450);
     }, 900);
     return true;
@@ -1030,33 +641,24 @@ footer .copy { margin-left: auto; }
   function confetti() {
     if (reduce) return;
     const box = document.createElement('div'); box.className = 'confetti';
-    const colours = ['#81B64C', '#A3D16E', '#F2B33D', '#EEEED2', '#26C2A3'];
-    for (let i = 0; i < 46; i++) {
-      const c = document.createElement('i');
-      c.style.background = colours[i % colours.length];
-      c.style.setProperty('--x', (Math.random() * 520 - 260) + 'px');
-      c.style.setProperty('--y', (Math.random() * -380 + 120) + 'px');
-      c.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg');
-      c.style.animationDelay = Math.random() * .12 + 's';
-      box.append(c);
+    const cols = ['#81B64C', '#FFB020', '#2F9BF0', '#13B5A6', '#FF6B57', '#8B6CF0'];
+    for (let i = 0; i < 50; i++) {
+      const c = document.createElement('i'); c.style.background = cols[i % cols.length];
+      c.style.setProperty('--x', (Math.random() * 520 - 260) + 'px'); c.style.setProperty('--y', (Math.random() * -380 + 120) + 'px');
+      c.style.setProperty('--r', (Math.random() * 720 - 360) + 'deg'); c.style.animationDelay = Math.random() * .12 + 's'; box.append(c);
     }
     pboard.append(box); setTimeout(() => box.remove(), 1600);
   }
   const squareAt = (x, y) => {
-    const r = pboard.getBoundingClientRect();
-    const f = Math.floor(((x - r.left) / r.width) * 8), rk = Math.floor(((y - r.top) / r.height) * 8);
+    const r = pboard.getBoundingClientRect(), f = Math.floor(((x - r.left) / r.width) * 8), rk = Math.floor(((y - r.top) / r.height) * 8);
     return f < 0 || f > 7 || rk < 0 || rk > 7 ? null : files[f] + (8 - rk);
   };
   pboard.addEventListener('pointerdown', (e) => {
     if (pBusy || !pGame) return;
     const sq = squareAt(e.clientX, e.clientY); if (!sq) return;
     const piece = pGame.get(sq);
-    if (pSel && pSel !== sq && (!piece || piece.color !== pGame.turn())) { if (!tryMove(pSel, sq)) pSelect(null); return; }
-    if (piece && piece.color === pGame.turn()) {
-      pSelect(sq);
-      pDrag = { sq, el: pPieces.get(sq), moved: false };
-      pboard.setPointerCapture(e.pointerId);
-    }
+    if (pSel && pSel !== sq && (!piece || piece.color !== pGame.turn())) { if (!attempt(pSel, sq)) pSelect(null); return; }
+    if (piece && piece.color === pGame.turn()) { pSelect(sq); pDrag = { sq, el: pPieces.get(sq), moved: false }; try { pboard.setPointerCapture(e.pointerId); } catch {} }
   });
   pboard.addEventListener('pointermove', (e) => {
     if (!pDrag) return;
@@ -1066,16 +668,11 @@ footer .copy { margin-left: auto; }
   });
   pboard.addEventListener('pointerup', (e) => {
     if (!pDrag) return;
-    const d = pDrag; pDrag = null;
-    if (!d.moved) return;
+    const d = pDrag; pDrag = null; if (!d.moved) return;
     const to = squareAt(e.clientX, e.clientY);
-    if (!to || to === d.sq || !tryMove(d.sq, to)) { d.el.classList.remove('drag'); const p = at(d.sq); d.el.style.transform = `translate(${p.x}%, ${p.y}%)`; }
+    if (!to || to === d.sq || !attempt(d.sq, to)) { d.el.classList.remove('drag'); const p = at(d.sq); d.el.style.transform = `translate(${p.x}%, ${p.y}%)`; }
   });
-  $('#phint').addEventListener('click', () => {
-    const pz = PUZZLES[pIndex]; if (pStep >= pz.line.length) return;
-    pMark('hint', [pz.line[pStep].slice(0, 2)]);
-    pSay('idle', 'Hint', pz.hint);
-  });
+  $('#phint').addEventListener('click', () => { const pz = PUZZLES[pIndex]; if (pStep >= pz.line.length) return; pMark('hint', [pz.line[pStep].slice(0, 2)]); pSay('idle', 'Hint', pz.hint); });
   $('#preset').addEventListener('click', () => load(pIndex));
   $('#pnext').addEventListener('click', () => load((pIndex + 1) % PUZZLES.length));
   PUZZLES.forEach((pz, i) => {
@@ -1084,25 +681,6 @@ footer .copy { margin-left: auto; }
     b.addEventListener('click', () => load(i)); plist.append(b);
   });
   if (window.Chess) load(0); else pSay('bad', 'Puzzles need JavaScript', 'Reload the page to try them.');
-
-  /* ── Polish: reading progress, card spotlight, magnetic buttons ── */
-  const bar = $('#progress');
-  const onProgress = () => { const max = document.documentElement.scrollHeight - innerHeight; bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`; };
-  addEventListener('scroll', onProgress, { passive: true }); onProgress();
-  $$('.tile').forEach((el) => el.addEventListener('pointermove', (e) => {
-    const r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', e.clientX - r.left + 'px'); el.style.setProperty('--my', e.clientY - r.top + 'px');
-  }));
-  if (!reduce && matchMedia('(pointer: fine)').matches) $$('.btn-green, .nav-cta, .final .btn').forEach((b) => {
-    b.addEventListener('pointermove', (e) => {
-      const r = b.getBoundingClientRect();
-      b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px, ${(e.clientY - r.top - r.height / 2) * .28}px)`;
-    });
-    b.addEventListener('pointerleave', () => (b.style.transform = ''));
-  });
-
-  /* Reel loops seamlessly: duplicate its frames once. */
-  const reel = $('#reel'); [...reel.children].forEach((f) => reel.append(f.cloneNode(true)));
 })();
 </script>
 </body>
